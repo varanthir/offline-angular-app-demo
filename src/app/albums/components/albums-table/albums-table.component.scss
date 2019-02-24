@@ -1,0 +1,16 @@
+.table {
+  width: 100%;
+  
+  &__row:hover {
+    background: #f5f5f5;
+    cursor: pointer;
+  }
+
+  &__is-saved-icon {
+    color: gray;
+
+    &--saved {
+      color: green;
+    }
+  }
+}

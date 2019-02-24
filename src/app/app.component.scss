@@ -1,0 +1,19 @@
+@import "src/theme/base";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.mat-toolbar__title {
+  padding-left: 8px;
+}
+
+.mat-sidenav-container {
+  flex: 1;
+}
+
+.mat-sidenav-content__padding-wrapper {
+  padding: $main-padding;
+}
