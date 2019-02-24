@@ -1,19 +1,21 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser'
+import { NgModule } from '@angular/core'
 import {
   MatButtonModule,
   MatSidenavModule,
   MatIconModule,
   MatToolbarModule,
   MatListModule,
-} from '@angular/material';
+} from '@angular/material'
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NotFoundComponent } from './components/not-found/not-found.component';
+import { AppRoutingModule } from './app-routing.module'
+import { AppComponent } from './app.component'
+import { ServiceWorkerModule } from '@angular/service-worker'
+import { environment } from '../environments/environment'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { NotFoundComponent } from './components/not-found/not-found.component'
+import { StoreModule } from '@ngrx/store'
+import { appReducer } from './reducers'
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     MatSidenavModule,
     MatToolbarModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    StoreModule.forRoot(appReducer),
   ],
   providers: [],
   bootstrap: [AppComponent]

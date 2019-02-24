@@ -2,7 +2,7 @@
   <button mat-icon-button (click)="sidenav.toggle()">
     <mat-icon>menu</mat-icon>
   </button>
-  <h1 class="mat-toolbar__title">Offline Demo</h1>
+  <h1 class="mat-toolbar__title">Offline Demo [ {{ onlineStatus$ | async }} ]</h1>
 </mat-toolbar>
 
 <mat-sidenav-container class="mat-sidenav-container">
