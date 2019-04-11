@@ -7,7 +7,9 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "clear-seed": "rm -f tools/albums/*[0-9].* && rm -f tools/pictures/*[0-9].* && rm -f tools/thumbnails/*[0-9].*",
+    "seed": "ts-node -P tools/tsconfig.json tools/seed.ts"
   },
   "private": true,
   "dependencies": {
@@ -24,7 +26,11 @@
     "@angular/router": "~7.2.0",
     "@angular/service-worker": "~7.2.0",
     "@ngrx/store": "^7.2.0",
+    "@types/axios": "^0.14.0",
+    "axios": "^0.18.0",
+    "concurrently": "^4.1.0",
     "core-js": "^2.5.4",
+    "nodemon": "^1.18.10",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"

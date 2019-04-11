@@ -1,5 +1,9 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+/tools/albums/*.json
+/tools/pictures/*.jpeg
+/tools/thumbnails/*.jpeg
+
 # compiled output
 /dist
 /tmp

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 
 class AlbumElement {
@@ -15,7 +15,8 @@ const ELEMENT_DATA: AlbumElement[] = Array.from({ length: 10 }, (v, i) => i + 1)
 @Component({
   selector: 'app-albums-table',
   templateUrl: './albums-table.component.html',
-  styleUrls: ['./albums-table.component.scss']
+  styleUrls: ['./albums-table.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AlbumsTableComponent {
   displayedColumns: string[] = ['name', 'imagesCount', 'isSaved'];
