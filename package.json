@@ -9,7 +9,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "clear-seed": "rm -f tools/albums/*[0-9].* && rm -f tools/pictures/*[0-9].* && rm -f tools/thumbnails/*[0-9].*",
-    "seed": "ts-node -P tools/tsconfig.json tools/seed.ts"
+    "seed": "ts-node -P tools/tsconfig.json tools/seed.ts",
+    "api": "ts-node -P tools/tsconfig.json tools/api.ts"
   },
   "private": true,
   "dependencies": {
@@ -40,10 +41,12 @@
     "@angular/cli": "~7.3.3",
     "@angular/compiler-cli": "~7.2.0",
     "@angular/language-service": "~7.2.0",
+    "@types/express": "^4.16.1",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "codelyzer": "~4.5.0",
+    "express": "^4.16.4",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~4.0.0",
