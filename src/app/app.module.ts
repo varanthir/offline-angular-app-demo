@@ -15,7 +15,9 @@ import { environment } from '../environments/environment'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { NotFoundComponent } from './components/not-found/not-found.component'
 import { StoreModule } from '@ngrx/store'
-import { appReducer } from './reducers'
+import { StoreDevtoolsModule } from '@ngrx/store-devtools'
+import { appReducer } from './state/reducer'
+import { EffectsModule } from '@ngrx/effects'
 
 @NgModule({
   declarations: [
@@ -33,6 +35,11 @@ import { appReducer } from './reducers'
     MatToolbarModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     StoreModule.forRoot(appReducer),
+    environment.production ? [] : StoreDevtoolsModule.instrument({
+      maxAge: 50,
+      name: 'Album Viewer',
+    }),
+    EffectsModule.forRoot([]),
   ],
   providers: [],
   bootstrap: [AppComponent]

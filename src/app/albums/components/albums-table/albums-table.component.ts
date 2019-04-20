@@ -1,16 +1,6 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
-
-class AlbumElement {
-  constructor(
-    public readonly name: string,
-    public readonly imagesCount: number,
-    public readonly isSaved: boolean,
-  ) {}
-}
-
-const ELEMENT_DATA: AlbumElement[] = Array.from({ length: 10 }, (v, i) => i + 1)
-  .map(val => new AlbumElement(`Album album album ${val}`, val, val % 2 === 0));
+import { Album } from 'app/albums/state/dto/album';
 
 @Component({
   selector: 'app-albums-table',
@@ -19,6 +9,10 @@ const ELEMENT_DATA: AlbumElement[] = Array.from({ length: 10 }, (v, i) => i + 1)
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AlbumsTableComponent {
-  displayedColumns: string[] = ['name', 'imagesCount', 'isSaved'];
-  dataSource = new MatTableDataSource<AlbumElement>(ELEMENT_DATA);
+  @Input() public set albums(newAlbums: Album[]) {
+    this.dataSource.data = newAlbums
+  }
+
+  public readonly columns: string[] = ['name', 'imagesCount', 'isSaved']
+  public readonly dataSource = new MatTableDataSource<Album>()
 }

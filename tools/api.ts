@@ -24,8 +24,11 @@ const port = 3000
 const server = express()
 
 server.use((req, res, next) => {
-  next()
-  console.log(`${req.method} ${req.url} => ${res.statusCode} [${req.ip}, ${req.hostname}]`)
+  // Simulate delay
+  setTimeout(() => {
+    next()
+    console.log(`${req.method} ${req.url} => ${res.statusCode} [${req.ip}, ${req.hostname}]`)
+  }, 500)
 })
 
 server.get('/', (req, res) => {

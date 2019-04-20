@@ -2,7 +2,6 @@
   width: 100%;
   
   &__cell-album-name:hover {
-    background: #f5f5f5;
     cursor: pointer;
   }
 
@@ -20,5 +19,9 @@
     &--saved {
       color: green;
     }
+  }
+
+  &__row:hover {
+    background: #f5f5f5;
   }
 }

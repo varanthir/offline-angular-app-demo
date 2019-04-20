@@ -1,8 +1,9 @@
 import { Component, ApplicationRef, OnDestroy, ChangeDetectionStrategy } from '@angular/core'
-import { AppState, getOnlineState } from './reducers'
 import { Store } from '@ngrx/store'
-import { map } from 'rxjs/operators'
+import { map, debounceTime } from 'rxjs/operators'
 import { Subscription } from 'rxjs';
+import { getOnlineState } from './state/offline/selectors';
+import { AppState } from './state/reducer';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,7 @@ export class AppComponent implements OnDestroy {
     map(isOnline => isOnline ? 'online' : 'offline'))
 
   private readonly isStableSub: Subscription = this.appRef.isStable.pipe(
-    //
+    debounceTime(200)
   ).subscribe(isStable => {
     console.log('# Stable:', isStable)
   })
