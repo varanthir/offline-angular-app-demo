@@ -19,7 +19,7 @@ export class GetAlbumsSuccessAction implements Action {
 }
 
 export class GetAlbumsErrorAction implements Action {
-  public readonly type = AlbumsActions.GET_ALBUMS_SUCCESS
+  public readonly type = AlbumsActions.GET_ALBUMS_ERROR
 
   constructor(public readonly error: Error) {}
 }

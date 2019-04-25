@@ -1,3 +1,5 @@
+// tslint:disable:no-string-literal
+
 import * as fs from 'fs'
 import * as path from 'path'
 import * as express from 'express'
@@ -11,6 +13,10 @@ interface Album {
   id: number,
   name: string,
   pictures: Picture[],
+}
+
+function random(): number {
+  return Math.round(Math.random() * 500) + 1
 }
 
 const albumsPath = path.resolve(__dirname, 'albums', `data.json`)
@@ -28,7 +34,7 @@ server.use((req, res, next) => {
   setTimeout(() => {
     next()
     console.log(`${req.method} ${req.url} => ${res.statusCode} [${req.ip}, ${req.hostname}]`)
-  }, 500)
+  }, 500 + random())
 })
 
 server.get('/', (req, res) => {

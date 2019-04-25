@@ -1,0 +1,36 @@
+@keyframes progress {
+  from {
+    background-position-x: 0;
+  }
+
+  to {
+    background-position-x: 140px;
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.container--top-progress {
+  position: relative;
+
+  &::before {
+    animation: 1s linear 0s infinite progress, 0.2s linear 0s 1 appear;
+    background-image: repeating-linear-gradient(to top left, lightpink, lightpink 5px, white 5px, white 10px);
+    background-size: 14px 14px;
+    content: " ";
+    display: block;
+    height: 5px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width:  100%;
+  }
+}

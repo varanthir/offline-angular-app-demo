@@ -2,7 +2,11 @@
 
 <app-albums-table
   *ngIf="albums$ | async as albums"
-  [albums]="albums">
+  [albums]="albums"
+  [isPending]="isAlbumsPending$ | async">
+  <!-- [isPending]="true"> -->
 </app-albums-table>
 
-<mat-spinner *ngIf="!(albums$ | async)"></mat-spinner>
+<div *ngIf="isEmptyAlbumsPending$ | async" class="loader">
+  <mat-spinner></mat-spinner>
+</div>

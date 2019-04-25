@@ -1,4 +1,8 @@
-<table mat-table [dataSource]="dataSource" class="table mat-elevation-z1">
+<table
+  mat-table
+  [dataSource]="dataSource"
+  [class.container--top-progress]="isPending"
+  class="table mat-elevation-z1">
 
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>Name</th>

@@ -13,6 +13,8 @@ export class AlbumsTableComponent {
     this.dataSource.data = newAlbums
   }
 
+  @Input() public isPending = false;
+
   public readonly columns: string[] = ['name', 'imagesCount', 'isSaved']
   public readonly dataSource = new MatTableDataSource<Album>()
 }
