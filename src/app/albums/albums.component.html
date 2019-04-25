@@ -1,5 +1,9 @@
 <h2 class="mat-h2">Albums</h2>
 
+<p *ngIf="isAlbumsError$ | async">
+  Something went wrong <button mat-button type="button" (click)="getAlbums()">Try again</button>
+</p>
+
 <app-albums-table
   *ngIf="albums$ | async as albums"
   [albums]="albums"

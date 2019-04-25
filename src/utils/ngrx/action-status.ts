@@ -7,3 +7,4 @@ export enum ActionStatus {
 }
 
 export const isPending = map((status: ActionStatus | null) => status === ActionStatus.Pending)
+export const isError = map((status: ActionStatus | null) => status === ActionStatus.Error)
