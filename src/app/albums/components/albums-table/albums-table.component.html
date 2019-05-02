@@ -1,12 +1,12 @@
 <table
   mat-table
   [dataSource]="dataSource"
-  [class.container--top-progress]="isPending"
+  [class.app-container--top-progress]="isPending"
   class="table mat-elevation-z1">
 
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>Name</th>
-    <td mat-cell *matCellDef="let album" class="table__cell-album-name">{{ album.name }}</td>
+    <td mat-cell *matCellDef="let album" class="table__cell-album-name" [routerLink]="album.id">{{ album.name }}</td>
   </ng-container>
 
   <ng-container matColumnDef="imagesCount">

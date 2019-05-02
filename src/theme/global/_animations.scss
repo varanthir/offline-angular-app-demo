@@ -18,7 +18,7 @@
   }
 }
 
-.container--top-progress {
+.app-container--top-progress {
   position: relative;
 
   &::before {
@@ -33,4 +33,10 @@
     top: 0;
     width:  100%;
   }
+}
+
+.app-loader {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }

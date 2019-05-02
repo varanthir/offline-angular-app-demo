@@ -1,0 +1,28 @@
+@import "src/theme/base";
+
+$thumbnail-width: 320px;
+$thumbnail-height: 180px;
+$thumbnail-margin-bottom: 30px;
+$thumbnail-margin-horizontal: 5px;
+
+.thumbnails {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 0 (-$thumbnail-margin-horizontal) (-$thumbnail-margin-bottom);
+
+  &__thumbnail {
+    background-color: rgba(#000, 0.1);
+    border-radius: $main-border-radius;
+    flex-shrink: 1;
+    height: $thumbnail-height;
+    margin: 0 $thumbnail-margin-horizontal $thumbnail-margin-bottom;
+    object-fit: contain;
+    width: $thumbnail-width;
+  }
+
+  &__empty {
+    margin-right: 10px;
+    width: $thumbnail-width;
+  }
+}

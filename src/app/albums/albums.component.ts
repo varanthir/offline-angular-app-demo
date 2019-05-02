@@ -10,7 +10,7 @@ import { isPending, isError } from 'utils/ngrx/action-status';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AlbumsComponent implements OnInit {
-  public readonly albums$ = this.albumsFacade.albums$.pipe(filter(albums => albums !== null))
+  public readonly albums$ = this.albumsFacade.albums$
   public readonly isAlbumsPending$ = this.albumsFacade.albumsStatus$.pipe(isPending)
   public readonly isEmptyAlbumsPending$ = this.albumsFacade.emptyAlbumsPending$
   public readonly isAlbumsError$ = this.albumsFacade.albumsStatus$.pipe(isError)

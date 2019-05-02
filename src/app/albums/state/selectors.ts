@@ -22,3 +22,13 @@ export const getEmptyAlbumsPending = createSelector(
   getAlbumsState,
   ({ list, listStatus }) => list === null && listStatus === ActionStatus.Pending
 )
+
+export const getAlbum = createSelector(
+  getAlbumsState,
+  ({ selected }) => selected
+)
+
+export const getAlbumStatus = createSelector(
+  getAlbumsState,
+  ({ selectedStatus }) => selectedStatus
+)

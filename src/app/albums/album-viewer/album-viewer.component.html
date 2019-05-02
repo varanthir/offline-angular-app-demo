@@ -1,0 +1,17 @@
+<h2 class="mat-h2">{{ (album$ | async)?.name }}</h2>
+
+<p *ngIf="isAlbumError$ | async">
+  Something went wrong <button mat-button type="button" (click)="getAlbum()">Try again</button>
+</p>
+
+<div *ngIf="album$ | async as album" class="thumbnails">
+  <img
+    *ngFor="let picture of album.pictures; trackBy: trackById"
+    [src]="'/api/thumbnails/' + picture.id"
+    class="thumbnails__thumbnail">
+  <div *ngFor="let a of [1,2,3,4,5]" class="thumbnails__empty"></div>
+</div>
+
+<div *ngIf="isAlbumPending$ | async" class="app-loader">
+  <mat-spinner></mat-spinner>
+</div>
