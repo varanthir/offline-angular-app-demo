@@ -18,6 +18,7 @@ import { StoreModule } from '@ngrx/store'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { appReducer } from './state/reducer'
 import { EffectsModule } from '@ngrx/effects'
+import { AppStateModule } from './state/app-state.module';
 
 @NgModule({
   declarations: [
@@ -34,12 +35,7 @@ import { EffectsModule } from '@ngrx/effects'
     MatSidenavModule,
     MatToolbarModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    StoreModule.forRoot(appReducer),
-    environment.production ? [] : StoreDevtoolsModule.instrument({
-      maxAge: 50,
-      name: 'Album Viewer',
-    }),
-    EffectsModule.forRoot([]),
+    AppStateModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

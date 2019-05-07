@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core'
+import { Component, OnDestroy, ViewChild } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { AlbumsFacadeService } from '../state/facade.service'
 import { first, switchMap } from 'rxjs/operators'
@@ -6,6 +6,8 @@ import { Subscription } from 'rxjs'
 import { isError, isPending } from 'utils/ngrx/action-status'
 import { Picture } from '../state/dto/picture'
 import { AlbumViewerParams } from './album-viewer-params'
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { CdkPortal } from '@angular/cdk/portal';
 
 @Component({
   selector: 'app-album-viewer',
@@ -13,6 +15,10 @@ import { AlbumViewerParams } from './album-viewer-params'
   styleUrls: ['./album-viewer.component.scss']
 })
 export class AlbumViewerComponent implements OnDestroy {
+  @ViewChild(CdkPortal) private readonly cdkPortal: CdkPortal
+  private overlayRef: OverlayRef | null = null
+  public selectedPictureIndex: number | null = null
+ 
   public readonly isAlbumPending$ = this.albumsFacade.albumStatus$.pipe(isPending)
   public readonly isAlbumError$ = this.albumsFacade.albumStatus$.pipe(isError)
   public readonly params = new AlbumViewerParams(this.router)
@@ -25,6 +31,7 @@ export class AlbumViewerComponent implements OnDestroy {
   constructor(
     private readonly albumsFacade: AlbumsFacadeService,
     private readonly router: ActivatedRoute,
+    private readonly overlay: Overlay,
   ) {}
 
   public ngOnDestroy(): void {
@@ -39,5 +46,28 @@ export class AlbumViewerComponent implements OnDestroy {
 
   public trackById(index: number, picture: Picture) {
     return picture.id
+  }
+
+  public showPictureViewer(pictureIndex: number): void {
+    this.hidePictureViewer()
+
+    this.overlayRef = this.overlay.create({
+      width: '100vw',
+      height: '100vh',
+      hasBackdrop: true,
+    })
+    this.overlayRef.attach(this.cdkPortal)
+    this.selectedPictureIndex = pictureIndex
+
+    console.log('showPictureViewer', this.selectedPictureIndex)
+  }
+
+  public hidePictureViewer(): void {
+    if (this.overlayRef) {
+      this.overlayRef.detach()
+      this.overlayRef.dispose()
+      this.overlayRef = null
+      this.selectedPictureIndex = null
+    }
   }
 }

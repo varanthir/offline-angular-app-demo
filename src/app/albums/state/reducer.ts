@@ -1,6 +1,5 @@
-import { Action } from '@ngrx/store'
 import { Album } from './dto/album'
-import { AlbumsActions, GetAlbumsSuccessAction, GetAlbumSuccessAction } from './actions'
+import { AlbumsActionsTypes, AlbumsActions } from './actions'
 import { ActionStatus } from 'utils/ngrx/action-status'
 
 export type AlbumsState = {
@@ -17,41 +16,41 @@ const initialState: AlbumsState = {
   selectedStatus: null,
 }
 
-export function albumsReducer(state = initialState, action: Action): AlbumsState {
+export function albumsReducer(state = initialState, action: AlbumsActions): AlbumsState {
   switch (action.type) {
-    case AlbumsActions.GET_ALBUMS:
+    case AlbumsActionsTypes.GET_ALBUMS:
       return {
         ...state,
         listStatus: ActionStatus.Pending,
       }
 
-    case AlbumsActions.GET_ALBUMS_SUCCESS:
+    case AlbumsActionsTypes.GET_ALBUMS_SUCCESS:
       return {
         ...state,
-        list: (action as GetAlbumsSuccessAction).payload.albums,
+        list: action.payload.albums,
         listStatus: ActionStatus.Success,
       }
 
-    case AlbumsActions.GET_ALBUMS_ERROR:
+    case AlbumsActionsTypes.GET_ALBUMS_ERROR:
       return {
         ...state,
         listStatus: ActionStatus.Error,
       }
 
-    case AlbumsActions.GET_ALBUM:
+    case AlbumsActionsTypes.GET_ALBUM:
       return {
         ...state,
         selectedStatus: ActionStatus.Pending,
       }
 
-    case AlbumsActions.GET_ALBUM_SUCCESS:
+    case AlbumsActionsTypes.GET_ALBUM_SUCCESS:
       return {
         ...state,
-        selected: (action as GetAlbumSuccessAction).payload.album,
+        selected: action.payload.album,
         selectedStatus: ActionStatus.Success,
       }
 
-    case AlbumsActions.GET_ALBUM_ERROR:
+    case AlbumsActionsTypes.GET_ALBUM_ERROR:
       return {
         ...state,
         selectedStatus: ActionStatus.Error,

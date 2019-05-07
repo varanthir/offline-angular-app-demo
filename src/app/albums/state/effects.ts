@@ -4,9 +4,9 @@ import { Actions, Effect, ofType } from '@ngrx/effects'
 import { Observable, of } from 'rxjs'
 import {
   AlbumsActions,
+  AlbumsActionsTypes,
   GetAlbumsSuccessAction,
   GetAlbumsErrorAction,
-  GetAlbumAction,
   GetAlbumSuccessAction,
   GetAlbumErrorAction,
 } from './actions'
@@ -18,7 +18,7 @@ export class AlbumsEffects {
 
   @Effect()
   public readonly getAlbums$: Observable<Action> = this.actions$.pipe(
-    ofType(AlbumsActions.GET_ALBUMS),
+    ofType(AlbumsActionsTypes.GET_ALBUMS),
     switchMap(() => this.albumsDao.getAlbums().pipe(
       map(albums => new GetAlbumsSuccessAction({ albums })),
       catchError((error: Error) => of(new GetAlbumsErrorAction(error)))
@@ -27,8 +27,8 @@ export class AlbumsEffects {
 
   @Effect()
   public readonly getAlbum$: Observable<Action> = this.actions$.pipe(
-    ofType(AlbumsActions.GET_ALBUM),
-    map(({ payload }: GetAlbumAction) => payload),
+    ofType(AlbumsActionsTypes.GET_ALBUM),
+    map(action => action.payload),
     switchMap(({ albumId }) => this.albumsDao.getAlbum(albumId).pipe(
       map(album => new GetAlbumSuccessAction({ album })),
       catchError((error: Error) => of(new GetAlbumErrorAction(error)))
@@ -36,7 +36,7 @@ export class AlbumsEffects {
   )
 
   constructor(
-    private readonly actions$: Actions,
+    private readonly actions$: Actions<AlbumsActions>,
     private readonly albumsDao: AlbumsDaoService,
   ) {}
 }

@@ -6,8 +6,9 @@
 
 <div *ngIf="album$ | async as album" class="thumbnails">
   <img
-    *ngFor="let picture of album.pictures; trackBy: trackById"
+    *ngFor="let picture of album.pictures; let pictureIndex=index; trackBy: trackById"
     [src]="'/api/thumbnails/' + picture.id"
+    (click)="showPictureViewer(pictureIndex)"
     class="thumbnails__thumbnail">
   <div *ngFor="let a of [1,2,3,4,5]" class="thumbnails__empty"></div>
 </div>
@@ -15,3 +16,10 @@
 <div *ngIf="isAlbumPending$ | async" class="app-loader">
   <mat-spinner></mat-spinner>
 </div>
+
+<app-picture-viewer
+  *cdkPortal
+  [pictures]="(album$ | async)?.pictures"
+  [selectedIndex]="selectedPictureIndex"
+  (close)="hidePictureViewer()">
+</app-picture-viewer>

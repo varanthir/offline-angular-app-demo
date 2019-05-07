@@ -7,12 +7,16 @@ import { AlbumsTableComponent } from './components/albums-table/albums-table.com
 import { MatTableModule, MatIconModule, MatButtonModule, MatTooltipModule, MatProgressSpinnerModule } from '@angular/material'
 import { AlbumsStateModule } from './state/state.module'
 import { AlbumViewerComponent } from './album-viewer/album-viewer.component';
+import { PictureViewerComponent } from './components/picture-viewer/picture-viewer.component';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { PortalModule } from '@angular/cdk/portal';
 
 @NgModule({
   declarations: [
     AlbumsComponent,
     AlbumsTableComponent,
     AlbumViewerComponent,
+    PictureViewerComponent,
   ],
   imports: [
     AlbumsRoutingModule,
@@ -23,6 +27,8 @@ import { AlbumViewerComponent } from './album-viewer/album-viewer.component';
     MatProgressSpinnerModule,
     MatTableModule,
     MatTooltipModule,
+    OverlayModule,
+    PortalModule,
   ]
 })
 export class AlbumsModule {}

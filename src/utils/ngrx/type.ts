@@ -1,10 +1,14 @@
 const types = new Set<string>()
 
-export function type(name: string): string {
-  if (types.has(name)) {
-    throw new Error(`Action '${name}' already exists!`)
-  }
+export function checkTypes(actionTypes: { [actionTypeKey: string]: string }): void {
+  Object.keys(actionTypes).forEach(actionTypeKey => {
+    const actionType = actionTypes[actionTypeKey]
+    console.log(`${actionTypeKey}: ${actionType}`)
 
-  types.add(name)
-  return name
+    if (types.has(actionType)) {
+      throw new Error(`Action '${actionType}' already exists!`)
+    }
+
+    types.add(actionType)
+  })
 }
