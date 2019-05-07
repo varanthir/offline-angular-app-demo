@@ -7,7 +7,7 @@ import {
   getAlbumsStatus,
   getAlbumStatus,
   getEmptyAlbumsPending,
-} from './selectors';
+} from './index';
 import { GetAlbumsAction, GetAlbumAction } from './actions';
 import { filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';

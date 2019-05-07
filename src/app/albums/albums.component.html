@@ -5,8 +5,8 @@
 </p>
 
 <app-albums-table
-  *ngIf="albums$ | async as albums"
-  [albums]="albums"
+  *ngIf="hasAlbums$ | async"
+  [albums]="albums$ | async"
   [isPending]="isAlbumsPending$ | async">
 </app-albums-table>
 

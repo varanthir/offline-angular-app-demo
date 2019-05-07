@@ -13,7 +13,7 @@
   <div *ngFor="let a of [1,2,3,4,5]" class="thumbnails__empty"></div>
 </div>
 
-<div *ngIf="isAlbumPending$ | async" class="app-loader">
+<div *ngIf="(isAlbumPending$ | async) && !(album$ | async)" class="app-loader">
   <mat-spinner></mat-spinner>
 </div>
 

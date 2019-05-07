@@ -1,59 +1,59 @@
+import { createEntityAdapter, EntityState } from '@ngrx/entity';
 import { Album } from './dto/album'
 import { AlbumsActionsTypes, AlbumsActions } from './actions'
 import { ActionStatus } from 'utils/ngrx/action-status'
 
-export type AlbumsState = {
-  list: Album[] | null,
-  listStatus: ActionStatus | null,
-  selected: Album | null,
-  selectedStatus: ActionStatus | null,
+export interface AlbumsState extends EntityState<Album> {
+  albumsStatus: ActionStatus | null,
+  selectedAlbumId: number | null,
+  selectedAlbumIdStatus: ActionStatus | null,
 }
 
-const initialState: AlbumsState = {
-  list: null,
-  listStatus: null,
-  selected: null,
-  selectedStatus: null,
-}
+export const adapter = createEntityAdapter<Album>();
+
+const initialState: AlbumsState = adapter.getInitialState({
+  albumsStatus: null,
+  selectedAlbumId: null,
+  selectedAlbumIdStatus: null,
+})
 
 export function albumsReducer(state = initialState, action: AlbumsActions): AlbumsState {
   switch (action.type) {
     case AlbumsActionsTypes.GET_ALBUMS:
       return {
         ...state,
-        listStatus: ActionStatus.Pending,
+        albumsStatus: ActionStatus.Pending,
       }
 
     case AlbumsActionsTypes.GET_ALBUMS_SUCCESS:
       return {
-        ...state,
-        list: action.payload.albums,
-        listStatus: ActionStatus.Success,
+        ...adapter.addAll(action.payload.albums, state),
+        albumsStatus: ActionStatus.Success,
       }
 
     case AlbumsActionsTypes.GET_ALBUMS_ERROR:
       return {
         ...state,
-        listStatus: ActionStatus.Error,
+        albumsStatus: ActionStatus.Error,
       }
 
     case AlbumsActionsTypes.GET_ALBUM:
       return {
         ...state,
-        selectedStatus: ActionStatus.Pending,
+        selectedAlbumId: action.payload.albumId,
+        selectedAlbumIdStatus: ActionStatus.Pending,
       }
 
     case AlbumsActionsTypes.GET_ALBUM_SUCCESS:
       return {
-        ...state,
-        selected: action.payload.album,
-        selectedStatus: ActionStatus.Success,
+        ...adapter.upsertOne(action.payload.album, state),
+        selectedAlbumIdStatus: ActionStatus.Success,
       }
 
     case AlbumsActionsTypes.GET_ALBUM_ERROR:
       return {
         ...state,
-        selectedStatus: ActionStatus.Error,
+        selectedAlbumIdStatus: ActionStatus.Error,
       }
 
     default: {
@@ -61,3 +61,8 @@ export function albumsReducer(state = initialState, action: AlbumsActions): Albu
     }
   }
 }
+
+export const getAlbumsStatus = (state: AlbumsState) => state.albumsStatus
+export const getSelectedAlbumId = (state: AlbumsState) => state.selectedAlbumId
+export const getSelectedAlbumIdStatus = (state: AlbumsState) => state.selectedAlbumIdStatus
+export const { selectAll: getAllAlbums, selectEntities: getAlbumEntities } = adapter.getSelectors()

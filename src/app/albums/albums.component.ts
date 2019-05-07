@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
 import { AlbumsFacadeService } from './state/facade.service'
-import { filter } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { isPending, isError } from 'utils/ngrx/action-status';
 
 @Component({
@@ -11,6 +11,7 @@ import { isPending, isError } from 'utils/ngrx/action-status';
 })
 export class AlbumsComponent implements OnInit {
   public readonly albums$ = this.albumsFacade.albums$
+  public readonly hasAlbums$ = this.albums$.pipe(map(albums => albums.length > 0))
   public readonly isAlbumsPending$ = this.albumsFacade.albumsStatus$.pipe(isPending)
   public readonly isEmptyAlbumsPending$ = this.albumsFacade.emptyAlbumsPending$
   public readonly isAlbumsError$ = this.albumsFacade.albumsStatus$.pipe(isError)

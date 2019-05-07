@@ -6,11 +6,12 @@ import { EffectsModule } from '@ngrx/effects';
 import { AlbumsEffects } from './effects';
 import { AlbumsFacadeService } from './facade.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ALBUMS_STATE_KEY } from '.';
 
 @NgModule({
   imports: [
     HttpClientModule,
-    StoreModule.forFeature('albums', albumsReducer),
+    StoreModule.forFeature(ALBUMS_STATE_KEY, albumsReducer),
     EffectsModule.forFeature([AlbumsEffects]),
   ],
   providers: [
