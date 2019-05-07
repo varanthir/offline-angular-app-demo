@@ -1,21 +1,80 @@
 :host {
-  background-color: rgba(red, 0.1);
+  background-color: rgba(black, 0.75);
   width: 100%;
   display: flex;
   flex-direction: column;
   position: relative;
 }
 
-.close {
+.button-close,
+.button-previous,
+.button-next {
+  cursor: pointer;
   position: absolute;
+
+  .mat-icon {
+    font-size: 32px;
+    height: 32px;
+    text-shadow: -4px -4px 10px white, 4px -4px 10px white, 4px 4px 10px white, -4px 4px 10px white;
+    width: 32px;
+  }
+}
+
+.button-close {
   top: 10px;
   right: 10px;
 }
 
+.button-previous,
+.button-next {
+  top: calc(50% - 50px);
+
+  &::before {
+    content: " ";
+    display: block;
+    height: calc(100vh - 200px);
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40vw;
+  }
+
+  &:hover::before {
+    background-color: rgba(black, 0.2);
+  }
+}
+
+.button-previous {
+  left: 0;
+}
+
+.button-next {
+  right: 0;
+
+  &::before {
+    right: 0;
+  }
+}
+
 .picture {
   flex-grow: 1;
+  height: calc(100vh - 120px);
+  margin: 10px;
+  object-fit: contain;
 }
 
 .thumbnails {
+  display: flex;
   height: 100px;
+  overflow-x: auto;
+
+  &__thumbnail {
+    cursor: pointer;
+    object-fit: contain;
+    width: auto;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
 }

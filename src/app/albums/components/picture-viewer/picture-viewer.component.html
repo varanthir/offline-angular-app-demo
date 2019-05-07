@@ -1,5 +1,24 @@
-<button class="close" type="button" (click)="close.emit()">CLOSE</button>
+<button mat-icon-button class="button-close" type="button" (click)="close.emit()">
+  <mat-icon>close</mat-icon>
+</button>
+
+<button *ngIf="selectedIndex > 0" mat-icon-button class="button-previous" type="button"
+  (click)="selectIndex.emit(selectedIndex - 1)">
+  <mat-icon>chevron_left</mat-icon>
+</button>
+
+<button *ngIf="selectedIndex < pictures.length - 1" mat-icon-button class="button-next" type="button"
+(click)="selectIndex.emit(selectedIndex + 1)">
+  <mat-icon>chevron_right</mat-icon>
+</button>
+
 <img class="picture" [src]="src">
-<div class="thumbnails">
-  SRC=[ {{ src }} ] INDEX=[ {{ selectedIndex }} ]
+<div class="thumbnails" #thumbnails>
+  <img
+    *ngFor="let picture of pictures; let pictureIndex=index; trackBy: trackById"
+    [src]="'/api/thumbnails/' + picture.id"
+    [ngStyle]="thumbnailStyles"
+    (click)="selectIndex.emit(pictureIndex)"
+    (load)="refreshThumbnailStyles()"
+    class="thumbnails__thumbnail">
 </div>

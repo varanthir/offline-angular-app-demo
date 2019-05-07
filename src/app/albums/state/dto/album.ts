@@ -1,14 +1,14 @@
-import { Picture } from './picture';
+import { Picture, PictureObject } from './picture';
 
 export type AlbumObject =  Readonly<{
   id: number,
   name: string,
-  pictures: Picture[],
+  pictures: PictureObject[],
 }>
 
 export class Album {
   public static fromObject({ id, name, pictures }: AlbumObject): Album {
-    return new Album(id, name, pictures)
+    return new Album(id, name, pictures.map(Picture.fromObject))
   }
 
   constructor(

@@ -14,11 +14,16 @@ $thumbnail-margin-horizontal: 5px;
   &__thumbnail {
     background-color: rgba(#000, 0.1);
     border-radius: $main-border-radius;
+    cursor: pointer;
     flex-shrink: 1;
     height: $thumbnail-height;
     margin: 0 $thumbnail-margin-horizontal $thumbnail-margin-bottom;
     object-fit: contain;
     width: $thumbnail-width;
+
+    &:hover {
+      opacity: 0.9;
+    }
   }
 
   &__empty {

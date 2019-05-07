@@ -6,6 +6,7 @@ import { AlbumViewerComponent } from './album-viewer/album-viewer.component'
 const routes: Routes = [
   { path: '', component: AlbumsComponent },
   { path: ':albumId', component: AlbumViewerComponent },
+  { path: '**', redirectTo: '/not-found' },
 ];
 
 @NgModule({

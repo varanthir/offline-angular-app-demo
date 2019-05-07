@@ -21,5 +21,6 @@
   *cdkPortal
   [pictures]="(album$ | async)?.pictures"
   [selectedIndex]="selectedPictureIndex"
+  (selectIndex)="selectedPictureIndex = $event"
   (close)="hidePictureViewer()">
 </app-picture-viewer>
