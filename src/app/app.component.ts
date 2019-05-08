@@ -25,6 +25,10 @@ export class AppComponent implements OnDestroy {
     console.log('# Stable:', isStable)
   })
 
+  public get startOpened(): boolean {
+    return !this.screen.isMobile
+  }
+
   constructor(
     private readonly appRef: ApplicationRef,
     private readonly screen: ScreenService,

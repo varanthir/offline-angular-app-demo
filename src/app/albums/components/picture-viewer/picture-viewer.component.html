@@ -2,13 +2,21 @@
   <mat-icon>close</mat-icon>
 </button>
 
-<button *ngIf="selectedIndex > 0" mat-icon-button class="button-previous" type="button"
-  (click)="selectIndex.emit(selectedIndex - 1)">
+<button
+  *ngIf="showPreviousButton"
+  mat-icon-button
+  class="button-previous"
+  type="button"
+  (click)="showPreviousImage()">
   <mat-icon>chevron_left</mat-icon>
 </button>
 
-<button *ngIf="selectedIndex < pictures.length - 1" mat-icon-button class="button-next" type="button"
-(click)="selectIndex.emit(selectedIndex + 1)">
+<button
+  *ngIf="showNextButton"
+  mat-icon-button
+  class="button-next"
+  type="button"
+  (click)="showNextImage()">
   <mat-icon>chevron_right</mat-icon>
 </button>
 

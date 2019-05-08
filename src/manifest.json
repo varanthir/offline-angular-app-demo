@@ -1,8 +1,8 @@
 {
-  "name": "offline-demo",
-  "short_name": "offline-demo",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "name": "Album Viewer Demo",
+  "short_name": "Album Viewer",
+  "theme_color": "#3f51b5",
+  "background_color": "#3f51b5",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",

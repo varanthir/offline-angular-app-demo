@@ -6,8 +6,8 @@ import { Subscription } from 'rxjs'
 import { isError, isPending } from 'utils/ngrx/action-status'
 import { Picture } from '../state/dto/picture'
 import { AlbumViewerParams } from './album-viewer-params'
-import { Overlay, OverlayRef } from '@angular/cdk/overlay';
-import { CdkPortal } from '@angular/cdk/portal';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay'
+import { CdkPortal } from '@angular/cdk/portal'
 
 @Component({
   selector: 'app-album-viewer',
@@ -58,8 +58,6 @@ export class AlbumViewerComponent implements OnDestroy {
     })
     this.overlayRef.attach(this.cdkPortal)
     this.selectedPictureIndex = pictureIndex
-
-    console.log('showPictureViewer', this.selectedPictureIndex)
   }
 
   public hidePictureViewer(): void {

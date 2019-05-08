@@ -10,7 +10,8 @@
     "e2e": "ng e2e",
     "clear-seed": "rm -f tools/albums/data.json && rm -f tools/pictures/*[0-9].* && rm -f tools/thumbnails/*[0-9].*",
     "seed": "ts-node -P tools/tsconfig.json tools/seed.ts",
-    "api": "ts-node -P tools/tsconfig.json tools/api.ts"
+    "api": "ts-node -P tools/tsconfig.json tools/api.ts",
+    "serve-static": "http-server -p 8080 -c-1 dist -P http://localhost:3000"
   },
   "private": true,
   "dependencies": {
@@ -50,6 +51,7 @@
     "@types/node": "~8.9.4",
     "codelyzer": "~4.5.0",
     "express": "^4.16.4",
+    "http-server": "^0.11.1",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~4.0.0",

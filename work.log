@@ -1,3 +1,4 @@
+Afterwork timelog:
 2019-04-10  1h    [tools] Seed
 2019-04-11  1h    [BE]    Api
 2019-04-20  1h    [FE]    Ablums state
@@ -5,3 +6,18 @@
 2019-04-25  2h    [FE]    Album viewer
 2019-05-01  30m   [FE]    Album viewer
 2019-05-02  2h    [FE]    Picture viewer
+
+
+Selective PWA checklist:
+[x] Responsive
+[X] Load app shell offline (SW)
+[x] Metadata (manifest.json)
+[x] Fast first load
+[ ] Cross browser
+   [ ] Picture viewer thumbnails on smartphone
+[ ] Page transitions don't feel like they block on the network
+[x] Each page has a URL
+[ ] The Add to Home Screen prompt is intercepted
+[ ] Site appropriately informs the user when they're offline
+
+My experience of using Angular 7:

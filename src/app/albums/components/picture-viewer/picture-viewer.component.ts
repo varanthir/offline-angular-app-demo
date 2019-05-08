@@ -14,7 +14,6 @@ export class PictureViewerComponent {
 
   @Input() public set selectedIndex(selectedIndex: number | null) {
     this._selectedIndex = selectedIndex
-
     if (selectedIndex) {
       this.scrollThumbnailIntoView(selectedIndex)
     }
@@ -37,6 +36,26 @@ export class PictureViewerComponent {
     }
     const pictureId = this.pictures[this.selectedIndex].id
     return `api/pictures/${pictureId}`
+  }
+
+  public get showPreviousButton(): boolean {
+    return this.selectedIndex !== null && this.selectedIndex > 0
+  }
+
+  public get showNextButton(): boolean {
+    return this.selectedIndex !== null && this.selectedIndex < this.pictures.length - 1
+  }
+
+  public showPreviousImage(): void {
+    if (this.selectedIndex !== null) {
+      this.selectIndex.emit(this.selectedIndex - 1)
+    }
+  }
+
+  public showNextImage(): void {
+    if (this.selectedIndex !== null) {
+      this.selectIndex.emit(this.selectedIndex + 1)
+    }
   }
 
   public refreshThumbnailStyles(): void {

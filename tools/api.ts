@@ -41,11 +41,11 @@ server.get('/', (req, res) => {
   res.send({ message: 'Hello world!' })
 })
 
-server.get('/albums', (req, res) => {
+server.get('/api/albums', (req, res) => {
   res.send(albumsArray)
 })
 
-server.get('/albums/:albumId', (req, res) => {
+server.get('/api/albums/:albumId', (req, res) => {
   const albumId = Number(req.params['albumId'])
   const album = albumsDict[albumId]
   if (album) {
@@ -55,13 +55,13 @@ server.get('/albums/:albumId', (req, res) => {
   }
 })
 
-server.get('/pictures/:pictureId', (req, res, next) => {
+server.get('/api/pictures/:pictureId', (req, res, next) => {
   const pictureId = req.params['pictureId']
   const picturePath = path.resolve(__dirname, 'pictures', `${pictureId}.jpeg`)
   res.sendFile(picturePath)
 })
 
-server.get('/thumbnails/:thumbnailId', (req, res, next) => {
+server.get('/api/thumbnails/:thumbnailId', (req, res, next) => {
   const thumbnailId = req.params['thumbnailId']
   const thumbnailPath = path.resolve(__dirname, 'thumbnails', `${thumbnailId}.jpeg`)
   res.sendFile(thumbnailPath)
