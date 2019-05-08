@@ -71,10 +71,18 @@
   &__thumbnail {
     cursor: pointer;
     object-fit: contain;
+    position: relative;
     width: auto;
 
     &:hover {
       opacity: 0.9;
+    }
+
+    &--selected {
+      border: 3px solid rgba(green, 0.7);
+      filter: brightness(1.1) saturate(1.5);
+      object-fit: cover;
+      z-index: 1;
     }
   }
 }

@@ -16,9 +16,12 @@
 <div class="thumbnails" #thumbnails>
   <img
     *ngFor="let picture of pictures; let pictureIndex=index; trackBy: trackById"
+    attr.data-id="{{ picture.id }}"
+    class="thumbnails__thumbnail"
+    [class.thumbnails__thumbnail--selected]="pictureIndex === selectedIndex"
     [src]="'/api/thumbnails/' + picture.id"
     [ngStyle]="thumbnailStyles"
     (click)="selectIndex.emit(pictureIndex)"
     (load)="refreshThumbnailStyles()"
-    class="thumbnails__thumbnail">
+    >
 </div>

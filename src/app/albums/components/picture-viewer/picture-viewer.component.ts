@@ -9,7 +9,20 @@ import { Picture } from 'app/albums/state/dto/picture';
 })
 export class PictureViewerComponent {
   @Input() public pictures: Picture[]
-  @Input() public selectedIndex: number | null = null
+
+  private _selectedIndex: number | null = null;
+
+  @Input() public set selectedIndex(selectedIndex: number | null) {
+    this._selectedIndex = selectedIndex
+
+    if (selectedIndex) {
+      this.scrollThumbnailIntoView(selectedIndex)
+    }
+  }
+
+  public get selectedIndex(): number | null {
+    return this._selectedIndex
+  }
 
   @Output() public readonly selectIndex = new EventEmitter<number>()
   @Output() public readonly close = new EventEmitter<void>()
@@ -38,5 +51,14 @@ export class PictureViewerComponent {
 
   public trackById(index: number, picture: Picture) {
     return picture.id
+  }
+
+  private scrollThumbnailIntoView(thumbnailIndex: number): void {
+    const thumbnailId = this.pictures[thumbnailIndex].id
+    const selector = `img.thumbnails__thumbnail[data-id='${thumbnailId}']`
+    const thumbnailEl = document.querySelector(selector)
+    if (thumbnailEl) {
+      thumbnailEl.scrollIntoView({ behavior: 'smooth', inline: 'center' })
+    }
   }
 }
