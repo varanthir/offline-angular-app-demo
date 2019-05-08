@@ -14,11 +14,8 @@ import { ServiceWorkerModule } from '@angular/service-worker'
 import { environment } from '../environments/environment'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { NotFoundComponent } from './components/not-found/not-found.component'
-import { StoreModule } from '@ngrx/store'
-import { StoreDevtoolsModule } from '@ngrx/store-devtools'
-import { appReducer } from './state/reducer'
-import { EffectsModule } from '@ngrx/effects'
 import { AppStateModule } from './state/app-state.module';
+import { ScreenService } from './services/screen.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +34,7 @@ import { AppStateModule } from './state/app-state.module';
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     AppStateModule,
   ],
-  providers: [],
+  providers: [ScreenService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
