@@ -144,6 +144,9 @@
   },
   "defaultProject": "offline-demo",
   "cli": {
-    "packageManager": "yarn"
+    "packageManager": "yarn",
+    "warnings": {
+      "typescriptMismatch": false
+    }
   }
 }
