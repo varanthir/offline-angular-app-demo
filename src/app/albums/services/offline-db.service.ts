@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
-// import { openDB, IDBPDatabase } from 'idb'
-import { openDB, IDBPDatabase } from 'idb/with-async-ittr.js'
+import { openDB, IDBPDatabase } from 'idb'
+// import { openDB, IDBPDatabase } from 'idb/with-async-ittr.js'
 
 @Injectable()
 export class OfflineDbService {
