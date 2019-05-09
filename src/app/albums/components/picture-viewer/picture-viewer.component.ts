@@ -10,7 +10,7 @@ import { Picture } from 'app/albums/state/dto/picture';
 export class PictureViewerComponent {
   @Input() public pictures: Picture[]
 
-  private _selectedIndex: number | null = null;
+  private _selectedIndex: number | null = null
 
   @Input() public set selectedIndex(selectedIndex: number | null) {
     this._selectedIndex = selectedIndex

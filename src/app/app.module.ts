@@ -15,9 +15,9 @@ import { ServiceWorkerModule } from '@angular/service-worker'
 import { environment } from '../environments/environment'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { NotFoundComponent } from './components/not-found/not-found.component'
-import { AppStateModule } from './state/app-state.module';
-import { ScreenService } from './services/screen.service';
-import { ConnectionService } from './services/connection.service';
+import { AppStateModule } from './state/app-state.module'
+import { ScreenService } from './services/screen.service'
+import { ConnectionService } from './services/connection.service'
 
 @NgModule({
   declarations: [

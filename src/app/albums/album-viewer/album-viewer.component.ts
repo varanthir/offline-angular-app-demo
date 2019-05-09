@@ -18,7 +18,7 @@ export class AlbumViewerComponent implements OnDestroy {
   @ViewChild(CdkPortal) private readonly cdkPortal: CdkPortal
   private overlayRef: OverlayRef | null = null
   public selectedPictureIndex: number | null = null
- 
+
   public readonly isAlbumPending$ = this.albumsFacade.albumStatus$.pipe(isPending)
   public readonly isAlbumError$ = this.albumsFacade.albumStatus$.pipe(isError)
   public readonly params = new AlbumViewerParams(this.router)

@@ -10,12 +10,15 @@ import { AlbumViewerComponent } from './album-viewer/album-viewer.component';
 import { PictureViewerComponent } from './components/picture-viewer/picture-viewer.component';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
+import { OfflineDbService } from './services/offline-db.service';
+import { FailedActionComponent } from './components/failed-action/failed-action.component';
 
 @NgModule({
   declarations: [
     AlbumsComponent,
     AlbumsTableComponent,
     AlbumViewerComponent,
+    FailedActionComponent,
     PictureViewerComponent,
   ],
   imports: [
@@ -29,6 +32,7 @@ import { PortalModule } from '@angular/cdk/portal';
     MatTooltipModule,
     OverlayModule,
     PortalModule,
-  ]
+  ],
+  providers: [OfflineDbService]
 })
 export class AlbumsModule {}

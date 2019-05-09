@@ -1,8 +1,6 @@
 <h2 class="mat-h2">{{ (album$ | async)?.name }}</h2>
 
-<p *ngIf="isAlbumError$ | async">
-  Something went wrong <button mat-button type="button" (click)="getAlbum()">Try again</button>
-</p>
+<p app-failed-action *ngIf="isAlbumError$ | async" (tryAgain)="getAlbum()"></p>
 
 <div *ngIf="album$ | async as album" class="thumbnails">
   <img
