@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
-import { AlbumsFacadeService } from './state/facade.service'
-import { map } from 'rxjs/operators';
-import { isPending, isError } from 'utils/ngrx/action-status';
+import { AlbumsFacadeService } from './state/facades/albums-facade.service'
+import { map } from 'rxjs/operators'
+import { isPending, isError } from 'utils/ngrx/action-status'
 
 @Component({
   selector: 'app-albums',

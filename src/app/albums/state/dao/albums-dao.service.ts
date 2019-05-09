@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { environment } from 'environments/environment'
-import { Album, AlbumObject } from './dto/album';
+import { Album, AlbumObject } from '../dto/album';
 import { mapArray } from 'utils/rxjs/map-array';
 
 @Injectable()

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, ViewChild } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
-import { AlbumsFacadeService } from '../state/facade.service'
+import { AlbumsFacadeService } from '../state/facades/albums-facade.service'
 import { first, switchMap } from 'rxjs/operators'
 import { Subscription } from 'rxjs'
 import { isError, isPending } from 'utils/ngrx/action-status'

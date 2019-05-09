@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store'
-import * as fromAlbums from './reducer';
+import * as fromAlbums from './reducers/albums.reducer';
 import { ActionStatus } from 'utils/ngrx/action-status';
 
 export const ALBUMS_STATE_KEY = 'albums'

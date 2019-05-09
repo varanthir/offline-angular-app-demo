@@ -7,11 +7,11 @@ import {
   getAlbumsStatus,
   getAlbumStatus,
   getEmptyAlbumsPending,
-} from './index';
-import { GetAlbumsAction, GetAlbumAction } from './actions';
+} from '../index';
+import { GetAlbumsAction, GetAlbumAction } from '../actions/albums.actions';
 import { filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { Album } from './dto/album';
+import { Album } from '../dto/album';
 
 @Injectable()
 export class AlbumsFacadeService {

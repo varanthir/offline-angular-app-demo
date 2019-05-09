@@ -9,8 +9,8 @@ import {
   GetAlbumsErrorAction,
   GetAlbumSuccessAction,
   GetAlbumErrorAction,
-} from './actions'
-import { AlbumsDaoService } from './dao.service'
+} from '../actions/albums.actions'
+import { AlbumsDaoService } from '../dao/albums-dao.service'
 import { catchError, map, switchMap } from 'rxjs/operators'
 
 @Injectable()

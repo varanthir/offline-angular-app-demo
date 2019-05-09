@@ -1,6 +1,6 @@
 import { createEntityAdapter, EntityState } from '@ngrx/entity';
-import { Album } from './dto/album'
-import { AlbumsActionsTypes, AlbumsActions } from './actions'
+import { Album } from '../dto/album'
+import { AlbumsActionsTypes, AlbumsActions } from '../actions/albums.actions'
 import { ActionStatus } from 'utils/ngrx/action-status'
 
 export interface AlbumsState extends EntityState<Album> {

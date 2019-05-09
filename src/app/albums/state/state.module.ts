@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core'
-import { AlbumsDaoService } from './dao.service'
+import { AlbumsDaoService } from './dao/albums-dao.service'
 import { StoreModule } from '@ngrx/store';
-import { albumsReducer } from './reducer';
+import { albumsReducer } from './reducers/albums.reducer';
 import { EffectsModule } from '@ngrx/effects';
-import { AlbumsEffects } from './effects';
-import { AlbumsFacadeService } from './facade.service';
+import { AlbumsEffects } from './effects/albums.effects';
+import { AlbumsFacadeService } from './facades/albums-facade.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ALBUMS_STATE_KEY } from './index';
 
