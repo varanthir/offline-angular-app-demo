@@ -1,6 +1,6 @@
-import { createEntityAdapter, EntityState } from '@ngrx/entity';
-import { Album } from '../dto/album'
-import { AlbumsActionsTypes, AlbumsActions } from '../actions/albums.actions'
+import { createEntityAdapter, EntityState } from '@ngrx/entity'
+import { Album } from './dto/album'
+import { AlbumsActionsTypes, AlbumsActions } from './albums.actions'
 import { ActionStatus } from 'utils/ngrx/action-status'
 
 export interface AlbumsState extends EntityState<Album> {
@@ -9,7 +9,7 @@ export interface AlbumsState extends EntityState<Album> {
   selectedAlbumIdStatus: ActionStatus | null,
 }
 
-export const adapter = createEntityAdapter<Album>();
+export const adapter = createEntityAdapter<Album>()
 
 const initialState: AlbumsState = adapter.getInitialState({
   albumsStatus: null,

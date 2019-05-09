@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { openDB, IDBPDatabase, DBSchema } from 'idb'
-import { Album } from '../state/dto/album';
+import { Album } from '../state/albums/dto/album';
 
 export enum StoreName {
   Albums = 'albums',

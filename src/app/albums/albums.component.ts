@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
-import { AlbumsFacadeService } from './state/facades/albums-facade.service'
+import { AlbumsFacadeService } from './state/albums/albums.facade'
 import { map } from 'rxjs/operators'
 import { isPending, isError } from 'utils/ngrx/action-status'
 

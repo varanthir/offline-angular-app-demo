@@ -1,4 +1,4 @@
-import { Picture, PictureObject } from './picture';
+import { Picture, PictureObject } from './picture'
 
 export type AlbumObject =  Readonly<{
   id: number,

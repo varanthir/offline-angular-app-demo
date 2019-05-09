@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Injectable } from '@angular/core'
+import { Store, select } from '@ngrx/store'
 import {
   AlbumsAppState,
   getAlbum,
@@ -7,11 +7,11 @@ import {
   getAlbumsStatus,
   getAlbumStatus,
   getEmptyAlbumsPending,
-} from '../index';
-import { GetAlbumsAction, GetAlbumAction } from '../actions/albums.actions';
-import { filter } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { Album } from '../dto/album';
+} from '../index'
+import { GetAlbumsAction, GetAlbumAction } from './albums.actions'
+import { filter } from 'rxjs/operators'
+import { Observable } from 'rxjs'
+import { Album } from './dto/album'
 
 @Injectable()
 export class AlbumsFacadeService {

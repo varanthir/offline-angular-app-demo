@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store'
-import { Album } from '../dto/album'
-import { checkTypes } from 'utils/ngrx/check-types';
+import { Album } from './dto/album'
+import { checkTypes } from 'utils/ngrx/check-types'
 
 export enum AlbumsActionsTypes {
   GET_ALBUMS = '[Albums] GET_ALBUMS',
@@ -52,4 +52,3 @@ export type AlbumsActions
   | GetAlbumAction
   | GetAlbumSuccessAction
   | GetAlbumErrorAction
-  ;
