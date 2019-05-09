@@ -1,10 +1,9 @@
 import { Component, ApplicationRef, OnDestroy, ChangeDetectionStrategy } from '@angular/core'
-import { Store } from '@ngrx/store'
-import { map, debounceTime } from 'rxjs/operators'
+import { map, debounceTime, skip } from 'rxjs/operators'
 import { Subscription } from 'rxjs';
-import { getOnlineState } from './state/offline/selectors';
-import { AppState } from './state/reducer';
 import { ScreenService } from './services/screen.service';
+import { ConnectionService } from './services/connection.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-root',
@@ -13,11 +12,18 @@ import { ScreenService } from './services/screen.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnDestroy {
-  public readonly onlineStatus$ = this.store.select(getOnlineState).pipe(
-    map(isOnline => isOnline ? 'online' : 'offline'))
-
   public readonly menuMode$ = this.screen.isMobile$.pipe(
     map(isMobile => isMobile ? 'over' : 'side'))
+
+  public readonly connectivityIcon$ = this.connection.isOnline$.pipe(
+    map(isOnline => isOnline ? 'wifi' : 'wifi_off'))
+
+  private readonly notifyConnectivitySub: Subscription = this.connection.isOnline$.pipe(
+    skip(1),
+    map(isOnline => isOnline ? 'Connection is back' : 'App is offline'))
+    .subscribe(message => {
+      this.snackbar.open(message, undefined, { duration: 3000 })
+    })
 
   private readonly isStableSub: Subscription = this.appRef.isStable.pipe(
     debounceTime(200)
@@ -31,11 +37,13 @@ export class AppComponent implements OnDestroy {
 
   constructor(
     private readonly appRef: ApplicationRef,
+    private readonly connection: ConnectionService,
     private readonly screen: ScreenService,
-    private readonly store: Store<AppState>,
+    private readonly snackbar: MatSnackBar,
   ) {}
 
   public ngOnDestroy(): void {
+    this.notifyConnectivitySub.unsubscribe()
     this.isStableSub.unsubscribe()
   }
 }

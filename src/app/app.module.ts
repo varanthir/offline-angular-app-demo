@@ -6,6 +6,7 @@ import {
   MatIconModule,
   MatToolbarModule,
   MatListModule,
+  MatSnackBarModule,
 } from '@angular/material'
 
 import { AppRoutingModule } from './app-routing.module'
@@ -16,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { NotFoundComponent } from './components/not-found/not-found.component'
 import { AppStateModule } from './state/app-state.module';
 import { ScreenService } from './services/screen.service';
+import { ConnectionService } from './services/connection.service';
 
 @NgModule({
   declarations: [
@@ -30,11 +32,15 @@ import { ScreenService } from './services/screen.service';
     MatIconModule,
     MatListModule,
     MatSidenavModule,
+    MatSnackBarModule,
     MatToolbarModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     AppStateModule,
   ],
-  providers: [ScreenService],
+  providers: [
+    ConnectionService,
+    ScreenService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

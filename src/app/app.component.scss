@@ -6,6 +6,10 @@
   height: 100vh;
 }
 
+.divider {
+  flex-grow: 1;
+}
+
 .mat-toolbar__title {
   padding-left: 8px;
 }
