@@ -1,22 +1,28 @@
 import { Injectable } from '@angular/core'
 import { openDB, IDBPDatabase, DBSchema } from 'idb'
 import { Album } from '../state/albums/dto/album';
+import { ArrayBufferBlob } from 'utils/rxjs/to-array-buffer-file';
 
 export enum StoreName {
   Albums = 'albums',
+  AlbumsFinished = 'albums-finished',
   Pictures = 'pictures',
   Thumbnails = 'thumbnails',
 }
 
-export interface ArrayBufferBlob {
-  arrayBuffer: ArrayBuffer,
-  type: string,
+export interface AlbumFinished {
+  id: number,
+  isFinished: boolean,
 }
 
 interface AlbumViewerDb extends DBSchema {
   [StoreName.Albums]: {
     key: number,
     value: Album,
+  },
+  [StoreName.AlbumsFinished]: {
+    value: AlbumFinished,
+    key: number,
   },
   [StoreName.Pictures]: {
     value: ArrayBufferBlob,
@@ -47,6 +53,7 @@ export class AlbumViewerDbService {
         switch (oldVersion) {
           case 0:
             db.createObjectStore(StoreName.Albums, { keyPath: 'id' })
+            db.createObjectStore(StoreName.AlbumsFinished, { keyPath: 'id' })
             db.createObjectStore(StoreName.Pictures)
             db.createObjectStore(StoreName.Thumbnails)
         }

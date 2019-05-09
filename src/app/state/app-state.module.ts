@@ -8,7 +8,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 @NgModule({
   imports: [
     StoreModule.forRoot(appReducer),
-    environment.production ? [] : StoreDevtoolsModule.instrument({ maxAge: 50, name: 'Album Viewer' }),
+    environment.production ? [] : StoreDevtoolsModule.instrument({ maxAge: 300, name: 'Album Viewer' }),
     EffectsModule.forRoot([]),
   ],
 })

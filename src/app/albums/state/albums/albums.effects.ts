@@ -10,8 +10,8 @@ import {
   GetAlbumSuccessAction,
   GetAlbumErrorAction,
 } from './albums.actions'
-import { AlbumsDaoService } from './albums.dao'
 import { catchError, map, switchMap } from 'rxjs/operators'
+import { AlbumsDaoService } from '../dao/albums.dao';
 
 @Injectable()
 export class AlbumsEffects {
