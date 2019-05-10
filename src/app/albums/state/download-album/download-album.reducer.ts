@@ -6,13 +6,11 @@ import { Album } from '../dto/album'
 type DownloadPicture = {
   id: number,
   progress: number,
-  status: ActionStatus,
 }
 
 const getInitialDownloadPicture = (id: number): DownloadPicture => ({
   id,
   progress: 0,
-  status: ActionStatus.Pending,
 })
 
 export type DownloadAlbumState = {
@@ -63,20 +61,6 @@ export function downloadAlbumReducer(state = initialState, action: DownloadAlbum
     case DownloadAlbumActionsTypes.DOWNLOAD_THUMBNAIL_PROGRESS: {
       const { pictureId: id, progress } = action.payload
       const thumbnails = thumbnailsAdapter.updateOne({ id, changes: { progress } }, state.thumbnails)
-
-      return { ...state, thumbnails }
-    }
-
-    case DownloadAlbumActionsTypes.DOWNLOAD_PICTURE_SUCCESS: {
-      const { pictureId: id } = action.payload
-      const pictures = picturesAdapter.updateOne({ id, changes: { status: ActionStatus.Success } }, state.pictures)
-
-      return { ...state, pictures }
-    }
-
-    case DownloadAlbumActionsTypes.DOWNLOAD_THUMBNAIL_SUCCESS: {
-      const { pictureId: id } = action.payload
-      const thumbnails = picturesAdapter.updateOne({ id, changes: { status: ActionStatus.Success } }, state.thumbnails)
 
       return { ...state, thumbnails }
     }
