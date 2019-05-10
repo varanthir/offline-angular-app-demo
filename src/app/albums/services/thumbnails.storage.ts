@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { AlbumViewerDbService, StoreName } from './album-viewer-db.service'
 import { from, Observable } from 'rxjs'
-import { ArrayBufferBlob } from 'utils/rxjs/to-array-buffer-file';
+import { ArrayBufferBlob } from 'utils/rxjs/to-array-buffer-blob'
 
 @Injectable()
 export class ThumbnailsStorageService {

@@ -24,11 +24,11 @@ import {
 } from './download-album.actions'
 import { AlbumsDaoService } from '../dao/albums.dao'
 import { AlbumsStorageService } from 'app/albums/services/albums.storage'
-import { trackProgress } from 'utils/rxjs/track-progress';
-import { toArrayBufferBlob } from 'utils/rxjs/to-array-buffer-file';
-import { PicturesStorageService } from 'app/albums/services/pictures.storage';
-import { ThumbnailsStorageService } from 'app/albums/services/thumbnails.storage';
-import { AlbumsFinishedStorageService } from 'app/albums/services/albums-finished.storage';
+import { trackProgress } from 'utils/rxjs/track-progress'
+import { toArrayBufferBlob } from 'utils/rxjs/to-array-buffer-blob'
+import { PicturesStorageService } from 'app/albums/services/pictures.storage'
+import { ThumbnailsStorageService } from 'app/albums/services/thumbnails.storage'
+import { AlbumsFinishedStorageService } from 'app/albums/services/albums-finished.storage'
 
 @Injectable()
 export class DownloadAlbumEffects {
