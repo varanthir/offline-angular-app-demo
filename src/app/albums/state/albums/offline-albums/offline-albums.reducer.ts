@@ -9,7 +9,7 @@ export interface OfflineAlbumsState extends EntityState<Album> {
   selectedAlbumIdStatus: ActionStatus | null,
 }
 
-const offlineAlbumsAdapter = createEntityAdapter<Album>()
+const offlineAlbumsAdapter = createEntityAdapter<Album>({ selectId: album => album.id })
 
 const initialState: OfflineAlbumsState = offlineAlbumsAdapter.getInitialState({
   albumsStatus: null,
@@ -65,4 +65,4 @@ export function offlineAlbumsReducer(state = initialState, action: OfflineAlbums
 export const getAlbumsStatus = (state: OfflineAlbumsState) => state.albumsStatus
 export const getSelectedAlbumId = (state: OfflineAlbumsState) => state.selectedAlbumId
 export const getSelectedAlbumIdStatus = (state: OfflineAlbumsState) => state.selectedAlbumIdStatus
-export const { selectAll: getAllAlbums, selectEntities: getAlbumEntities } = offlineAlbumsAdapter.getSelectors()
+export const { selectAll, selectEntities, selectIds } = offlineAlbumsAdapter.getSelectors()

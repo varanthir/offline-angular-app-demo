@@ -17,6 +17,7 @@ import { OnlineAlbumsEffects } from './albums/online-albums/online-albums.effect
 import { OnlineAlbumsFacadeService } from './albums/online-albums/online-albums.facade';
 import { OfflineAlbumsFacadeService } from './albums/offline-albums/offline-albums.facade';
 import { OfflineAlbumsEffects } from './albums/offline-albums/offline-albums.effects';
+import { AlbumsFacadeService } from './albums/albums.facade';
 
 @NgModule({
   imports: [
@@ -31,6 +32,7 @@ import { OfflineAlbumsEffects } from './albums/offline-albums/offline-albums.eff
   ],
   providers: [
     AlbumsDaoService,
+    AlbumsFacadeService,
     AlbumsFinishedStorageService,
     AlbumsStorageService,
     AlbumViewerDbService,

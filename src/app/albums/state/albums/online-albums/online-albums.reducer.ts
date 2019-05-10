@@ -65,4 +65,4 @@ export function onlineAlbumsReducer(state = initialState, action: OnlineAlbumsAc
 export const getAlbumsStatus = (state: OnlineAlbumsState) => state.albumsStatus
 export const getSelectedAlbumId = (state: OnlineAlbumsState) => state.selectedAlbumId
 export const getSelectedAlbumIdStatus = (state: OnlineAlbumsState) => state.selectedAlbumIdStatus
-export const { selectAll: getAllAlbums, selectEntities: getAlbumEntities } = onlineAlbumsAdapter.getSelectors()
+export const { selectAll, selectEntities, selectIds } = onlineAlbumsAdapter.getSelectors()

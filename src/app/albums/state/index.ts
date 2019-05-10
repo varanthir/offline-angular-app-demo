@@ -1,6 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store'
 import * as fromAlbums from './albums/albums.reducer'
 import * as fromOnlineAlbums from './albums/online-albums/online-albums.reducer'
+import * as fromOfflineAlbums from './albums/offline-albums/offline-albums.reducer'
 import * as fromDownloadAlbum from './download-album/download-album.reducer'
 import { ActionStatus } from 'utils/ngrx/action-status'
 
@@ -17,34 +18,49 @@ export const getDownloadAlbumState =  createFeatureSelector<AlbumsAppState, from
 
 
 // albums.online
-export const getOnlineAlbums = createSelector(
+export const getOnlineAlbumsState = createSelector(
   getAlbumsState,
   state => state.online
 )
 
 export const getAlbums = createSelector(
-  getOnlineAlbums,
-  fromOnlineAlbums.getAllAlbums
+  getOnlineAlbumsState,
+  fromOnlineAlbums.selectAll
+)
+
+export const getOnlineAlbums = createSelector(
+  getOnlineAlbumsState,
+  fromOnlineAlbums.selectAll
+)
+
+export const getOnlineAlbumIds = createSelector(
+  getOnlineAlbumsState,
+  fromOnlineAlbums.selectIds
+)
+
+export const getOnlineAlbumEntities = createSelector(
+  getOnlineAlbumsState,
+  fromOnlineAlbums.selectEntities
 )
 
 export const getAlbumEntities = createSelector(
-  getOnlineAlbums,
-  fromOnlineAlbums.getAlbumEntities
+  getOnlineAlbumsState,
+  fromOnlineAlbums.selectEntities
 )
 
 export const getAlbumsStatus = createSelector(
-  getOnlineAlbums,
+  getOnlineAlbumsState,
   ({ albumsStatus }) => albumsStatus
 )
 
 export const getEmptyAlbumsPending = createSelector(
-  getOnlineAlbums,
+  getOnlineAlbumsState,
   getAlbums,
   ({ albumsStatus }, albums) => albums.length === 0 && albumsStatus === ActionStatus.Pending
 )
 
 export const getSelectedAlbumId = createSelector(
-  getOnlineAlbums,
+  getOnlineAlbumsState,
   fromOnlineAlbums.getSelectedAlbumId
 )
 
@@ -54,9 +70,65 @@ export const getAlbum = createSelector(
   (albumEntities, selectedAlbumId) => selectedAlbumId && albumEntities[selectedAlbumId] || null
 )
 
+export const getOnlineAlbum = createSelector(
+  getAlbumEntities,
+  getSelectedAlbumId,
+  (albumEntities, selectedAlbumId) => selectedAlbumId && albumEntities[selectedAlbumId] || null
+)
+
 export const getAlbumStatus = createSelector(
-  getOnlineAlbums,
+  getOnlineAlbumsState,
   fromOnlineAlbums.getSelectedAlbumIdStatus
+)
+
+export const getOnlineAlbumStatus = createSelector(
+  getOnlineAlbumsState,
+  fromOnlineAlbums.getSelectedAlbumIdStatus
+)
+
+
+// albums.offline
+export const getOfflineAlbumsState = createSelector(
+  getAlbumsState,
+  state => state.offline
+)
+
+export const getOfflineAlbumIds = createSelector(
+  getOnlineAlbumsState,
+  fromOfflineAlbums.selectIds
+)
+
+export const getOfflineAlbumEntities = createSelector(
+  getOfflineAlbumsState,
+  fromOfflineAlbums.selectEntities
+)
+
+export const getSelectedOfflineAlbumId = createSelector(
+  getOfflineAlbumsState,
+  fromOnlineAlbums.getSelectedAlbumId
+)
+
+export const getOfflineAlbum = createSelector(
+  getOfflineAlbumEntities,
+  getSelectedOfflineAlbumId,
+  (albumEntities, selectedAlbumId) => selectedAlbumId && albumEntities[selectedAlbumId] || null
+)
+
+export const getOfflineAlbumStatus = createSelector(
+  getOfflineAlbumsState,
+  fromOfflineAlbums.getSelectedAlbumIdStatus
+)
+
+
+// albums
+export const _getAlbums = createSelector(
+  getOnlineAlbumIds,
+  getOfflineAlbumIds,
+  getOnlineAlbumEntities,
+  getOfflineAlbumEntities,
+  (onlineIds, offlineIds, onlineEntities, offlineEntities) => {
+    //
+  }
 )
 
 
