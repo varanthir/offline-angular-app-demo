@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { openDB, IDBPDatabase, DBSchema } from 'idb'
-import { Album } from '../state/albums/dto/album'
 import { ArrayBufferBlob } from 'utils/rxjs/to-array-buffer-blob'
+import { Album } from '../dto/album'
 
 export enum StoreName {
   Albums = 'albums',

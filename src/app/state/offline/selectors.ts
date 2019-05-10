@@ -1,5 +1,5 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { AppState } from '../reducer';
+import { createFeatureSelector, createSelector } from '@ngrx/store'
+import { AppState } from '../reducer'
 
 export const getOfflineState =  createFeatureSelector<AppState, boolean>('offline')
 

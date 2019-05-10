@@ -1,7 +1,7 @@
 import { createEntityAdapter, EntityState } from '@ngrx/entity'
 import { ActionStatus, CancelledActionStatus } from 'utils/ngrx/action-status'
-import { DownloadAlbumActions, DownloadAlbumActionsTypes } from './download-album.actions';
-import { Album } from '../albums/dto/album';
+import { DownloadAlbumActions, DownloadAlbumActionsTypes } from './download-album.actions'
+import { Album } from '../dto/album'
 
 type DownloadPicture = {
   id: number,

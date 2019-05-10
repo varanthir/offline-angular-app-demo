@@ -4,10 +4,10 @@ import { AlbumsFacadeService } from '../state/albums/albums.facade'
 import { first, switchMap } from 'rxjs/operators'
 import { Subscription } from 'rxjs'
 import { mapIsPending, mapIsError } from 'utils/ngrx/action-status'
-import { Picture } from '../state/albums/dto/picture'
 import { AlbumViewerParams } from './album-viewer-params'
 import { Overlay, OverlayRef } from '@angular/cdk/overlay'
 import { CdkPortal } from '@angular/cdk/portal'
+import { Picture } from '../state/dto/picture'
 
 @Component({
   selector: 'app-album-viewer',

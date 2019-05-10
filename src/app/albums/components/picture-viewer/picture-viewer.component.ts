@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
-import { Picture } from 'app/albums/state/albums/dto/picture';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core'
+import { Picture } from 'app/albums/state/dto/picture'
 
 @Component({
   selector: 'app-picture-viewer',

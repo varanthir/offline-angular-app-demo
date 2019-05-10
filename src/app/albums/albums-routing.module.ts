@@ -7,7 +7,7 @@ const routes: Routes = [
   { path: '', component: AlbumsComponent },
   { path: ':albumId', component: AlbumViewerComponent },
   { path: '**', redirectTo: '/not-found' },
-];
+]
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

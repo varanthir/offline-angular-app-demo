@@ -1,5 +1,5 @@
-import { ActivatedRoute } from '@angular/router';
-import { map, filter } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router'
+import { map, filter } from 'rxjs/operators'
 
 export class AlbumViewerParams {
   public readonly albumId$ = this.router.paramMap.pipe(

@@ -1,8 +1,8 @@
-import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
-import { Album } from 'app/albums/state/albums/dto/album';
-import { ScreenService } from 'app/services/screen.service';
-import { map } from 'rxjs/operators';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core'
+import { MatTableDataSource } from '@angular/material'
+import { Album } from 'app/albums/state/dto/album'
+import { ScreenService } from 'app/services/screen.service'
+import { map } from 'rxjs/operators'
 
 @Component({
   selector: 'app-albums-table',
@@ -11,7 +11,7 @@ import { map } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AlbumsTableComponent {
-  @Input() public isPending = false;
+  @Input() public isPending = false
   @Input() public set albums(newAlbums: Album[]) {
     this.dataSource.data = newAlbums
   }

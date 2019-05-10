@@ -1,9 +1,9 @@
 import { Component, ApplicationRef, OnDestroy, ChangeDetectionStrategy } from '@angular/core'
 import { map, debounceTime, skip } from 'rxjs/operators'
-import { Subscription } from 'rxjs';
-import { ScreenService } from './services/screen.service';
-import { ConnectionService } from './services/connection.service';
-import { MatSnackBar } from '@angular/material';
+import { Subscription } from 'rxjs'
+import { ScreenService } from './services/screen.service'
+import { ConnectionService } from './services/connection.service'
+import { MatSnackBar } from '@angular/material'
 
 @Component({
   selector: 'app-root',

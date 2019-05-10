@@ -6,10 +6,15 @@ import { AlbumsEffects } from './albums/albums.effects'
 import { AlbumsFacadeService } from './albums/albums.facade'
 import { HttpClientModule } from '@angular/common/http'
 import { ALBUMS_STATE_KEY, DOWNLOAD_ALBUM_STATE_KEY } from './index'
-import { AlbumsDaoService } from './dao/albums.dao';
-import { DownloadAlbumFacadeService } from './download-album/download-album.facade';
-import { DownloadAlbumEffects } from './download-album/download-album.effects';
-import { downloadAlbumReducer } from './download-album/download-album.reducer';
+import { AlbumsDaoService } from './dao/albums.dao'
+import { DownloadAlbumFacadeService } from './download-album/download-album.facade'
+import { DownloadAlbumEffects } from './download-album/download-album.effects'
+import { downloadAlbumReducer } from './download-album/download-album.reducer'
+import { AlbumsFinishedStorageService } from './dao/albums-finished.storage'
+import { AlbumsStorageService } from './dao/albums.storage'
+import { AlbumViewerDbService } from './dao/album-viewer-db.service'
+import { PicturesStorageService } from './dao/pictures.storage'
+import { ThumbnailsStorageService } from './dao/thumbnails.storage'
 
 @NgModule({
   imports: [
@@ -24,7 +29,12 @@ import { downloadAlbumReducer } from './download-album/download-album.reducer';
   providers: [
     AlbumsDaoService,
     AlbumsFacadeService,
+    AlbumsFinishedStorageService,
+    AlbumsStorageService,
+    AlbumViewerDbService,
     DownloadAlbumFacadeService,
+    PicturesStorageService,
+    ThumbnailsStorageService,
   ]
 })
 export class AlbumsStateModule {}

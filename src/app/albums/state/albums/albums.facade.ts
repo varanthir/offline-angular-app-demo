@@ -11,7 +11,7 @@ import {
 import { GetAlbumsAction, GetAlbumAction } from './albums.actions'
 import { filter } from 'rxjs/operators'
 import { Observable } from 'rxjs'
-import { Album } from './dto/album'
+import { Album } from '../dto/album'
 
 @Injectable()
 export class AlbumsFacadeService {

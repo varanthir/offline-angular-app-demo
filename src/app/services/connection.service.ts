@@ -11,7 +11,7 @@ export class ConnectionService {
   )
 
   public readonly isOnline$: Observable<boolean> = this.connectivityChange$.pipe(
-    map(() => this.isOnline));
+    map(() => this.isOnline))
 
   public get isOnline(): boolean {
     return navigator.onLine

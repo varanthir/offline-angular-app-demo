@@ -3,8 +3,8 @@ import { Store, select } from '@ngrx/store'
 import {
   AlbumsAppState, getDownloadAlbumStatus, getDownloadAlbumProgress, getDownloadAlbumEntity,
 } from '../index'
-import { DownloadAlbumAction, DownloadAlbumCancelAction, DownloadAlbumClearAction } from './download-album.actions';
-import { Album } from '../albums/dto/album';
+import { DownloadAlbumAction, DownloadAlbumCancelAction, DownloadAlbumClearAction } from './download-album.actions'
+import { Album } from '../dto/album'
 
 @Injectable()
 export class DownloadAlbumFacadeService {

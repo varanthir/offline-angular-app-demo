@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
-import { AlbumViewerDbService, StoreName } from './album-viewer-db.service'
-import { Album } from '../state/albums/dto/album'
 import { from, Observable } from 'rxjs'
+import { AlbumViewerDbService, StoreName } from './album-viewer-db.service'
+import { Album } from '../dto/album'
 
 @Injectable()
 export class AlbumsStorageService {

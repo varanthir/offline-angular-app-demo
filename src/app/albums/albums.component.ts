@@ -2,10 +2,10 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
 import { AlbumsFacadeService } from './state/albums/albums.facade'
 import { map } from 'rxjs/operators'
 import { mapIsPending, mapIsError } from 'utils/ngrx/action-status'
-import { DownloadAlbumFacadeService } from './state/download-album/download-album.facade';
-import { Album } from './state/albums/dto/album';
-import { MatDialog } from '@angular/material';
-import { DownloadAlbumModalComponent } from './components/download-album-modal/download-album-modal.component';
+import { DownloadAlbumFacadeService } from './state/download-album/download-album.facade'
+import { Album } from './state/dto/album'
+import { MatDialog } from '@angular/material'
+import { DownloadAlbumModalComponent } from './components/download-album-modal/download-album-modal.component'
 
 @Component({
   selector: 'app-albums',

@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store'
 import { checkTypes } from 'utils/ngrx/check-types'
-import { Album } from '../albums/dto/album';
+import { Album } from '../dto/album'
 
 export enum DownloadAlbumActionsTypes {
   DOWNLOAD_ALBUM = '[Download Album] DOWNLOAD_ALBUM',
