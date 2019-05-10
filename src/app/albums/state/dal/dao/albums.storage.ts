@@ -23,8 +23,10 @@ export class AlbumsStorageService {
   }
 
   public set(album: Album): Observable<number> {
+    const offlineAlbum = Album.fromObject({ ...album, isOffline: true })
+
     return from(this.albumViewerDb.db
-      .then(db => db.put(StoreName.Albums, album)))
+      .then(db => db.put(StoreName.Albums, offlineAlbum)))
   }
 
   public delete(albumId: number): Observable<void> {

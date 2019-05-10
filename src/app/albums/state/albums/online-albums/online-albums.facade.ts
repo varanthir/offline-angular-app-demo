@@ -7,14 +7,14 @@ import {
   getAlbumsStatus,
   getAlbumStatus,
   getEmptyAlbumsPending,
-} from '../index'
-import { GetAlbumsAction, GetAlbumAction } from './albums.actions'
+} from '../../index'
+import { GetOnlineAlbumsAction, GetOnlineAlbumAction } from './online-albums.actions'
 import { filter } from 'rxjs/operators'
 import { Observable } from 'rxjs'
-import { Album } from '../dal/dto/album'
+import { Album } from '../../dal/dto/album'
 
 @Injectable()
-export class AlbumsFacadeService {
+export class OnlineAlbumsFacadeService {
   public readonly albums$ = this.store.pipe(select(getAlbums))
   public readonly albumsStatus$ = this.store.pipe(select(getAlbumsStatus))
   public readonly emptyAlbumsPending$ = this.store.pipe(select(getEmptyAlbumsPending))
@@ -23,11 +23,11 @@ export class AlbumsFacadeService {
   constructor(private readonly store: Store<AlbumsAppState>) {}
 
   public getAlbums(): void {
-    this.store.dispatch(new GetAlbumsAction())
+    this.store.dispatch(new GetOnlineAlbumsAction())
   }
 
   public getAlbum(albumId: number): void {
-    this.store.dispatch(new GetAlbumAction({ albumId }))
+    this.store.dispatch(new GetOnlineAlbumAction({ albumId }))
   }
 
   public albumById$(albumId: number): Observable<Album> {

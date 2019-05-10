@@ -1,5 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store'
 import * as fromAlbums from './albums/albums.reducer'
+import * as fromOnlineAlbums from './albums/online-albums/online-albums.reducer'
 import * as fromDownloadAlbum from './download-album/download-album.reducer'
 import { ActionStatus } from 'utils/ngrx/action-status'
 
@@ -15,31 +16,36 @@ export const getAlbumsState =  createFeatureSelector<AlbumsAppState, fromAlbums.
 export const getDownloadAlbumState =  createFeatureSelector<AlbumsAppState, fromDownloadAlbum.DownloadAlbumState>(DOWNLOAD_ALBUM_STATE_KEY)
 
 
-// Albums
-export const getAlbums = createSelector(
+// albums.online
+export const getOnlineAlbums = createSelector(
   getAlbumsState,
-  fromAlbums.getAllAlbums
+  state => state.online
+)
+
+export const getAlbums = createSelector(
+  getOnlineAlbums,
+  fromOnlineAlbums.getAllAlbums
 )
 
 export const getAlbumEntities = createSelector(
-  getAlbumsState,
-  fromAlbums.getAlbumEntities
+  getOnlineAlbums,
+  fromOnlineAlbums.getAlbumEntities
 )
 
 export const getAlbumsStatus = createSelector(
-  getAlbumsState,
+  getOnlineAlbums,
   ({ albumsStatus }) => albumsStatus
 )
 
 export const getEmptyAlbumsPending = createSelector(
-  getAlbumsState,
+  getOnlineAlbums,
   getAlbums,
   ({ albumsStatus }, albums) => albums.length === 0 && albumsStatus === ActionStatus.Pending
 )
 
 export const getSelectedAlbumId = createSelector(
-  getAlbumsState,
-  fromAlbums.getSelectedAlbumId
+  getOnlineAlbums,
+  fromOnlineAlbums.getSelectedAlbumId
 )
 
 export const getAlbum = createSelector(
@@ -49,8 +55,8 @@ export const getAlbum = createSelector(
 )
 
 export const getAlbumStatus = createSelector(
-  getAlbumsState,
-  fromAlbums.getSelectedAlbumIdStatus
+  getOnlineAlbums,
+  fromOnlineAlbums.getSelectedAlbumIdStatus
 )
 
 

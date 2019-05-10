@@ -1,11 +1,12 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
-import { AlbumsFacadeService } from './state/albums/albums.facade'
 import { map } from 'rxjs/operators'
 import { mapIsPending, mapIsError } from 'utils/ngrx/action-status'
 import { DownloadAlbumFacadeService } from './state/download-album/download-album.facade'
 import { Album } from './state/dal/dto/album'
 import { MatDialog } from '@angular/material'
 import { DownloadAlbumModalComponent } from './components/download-album-modal/download-album-modal.component'
+import { OnlineAlbumsFacadeService } from './state/albums/online-albums/online-albums.facade';
+import { OfflineAlbumsFacadeService } from './state/albums/offline-albums/offline-albums.facade';
 
 @Component({
   selector: 'app-albums',
@@ -14,14 +15,15 @@ import { DownloadAlbumModalComponent } from './components/download-album-modal/d
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AlbumsComponent implements OnInit {
-  public readonly albums$ = this.albumsFacade.albums$
+  public readonly albums$ = this.onlineAlbumsFacade.albums$
   public readonly hasAlbums$ = this.albums$.pipe(map(albums => albums.length > 0))
-  public readonly isAlbumsPending$ = this.albumsFacade.albumsStatus$.pipe(mapIsPending)
-  public readonly isEmptyAlbumsPending$ = this.albumsFacade.emptyAlbumsPending$
-  public readonly isAlbumsError$ = this.albumsFacade.albumsStatus$.pipe(mapIsError)
+  public readonly isAlbumsPending$ = this.onlineAlbumsFacade.albumsStatus$.pipe(mapIsPending)
+  public readonly isEmptyAlbumsPending$ = this.onlineAlbumsFacade.emptyAlbumsPending$
+  public readonly isAlbumsError$ = this.onlineAlbumsFacade.albumsStatus$.pipe(mapIsError)
 
   constructor(
-    private readonly albumsFacade: AlbumsFacadeService,
+    private readonly onlineAlbumsFacade: OnlineAlbumsFacadeService,
+    private readonly offlineAlbumsFacade: OfflineAlbumsFacadeService,
     private readonly downloadAlbumFacade: DownloadAlbumFacadeService,
     private readonly dialog: MatDialog,
   ) {}
@@ -31,7 +33,8 @@ export class AlbumsComponent implements OnInit {
   }
 
   public getAlbums(): void {
-    this.albumsFacade.getAlbums()
+    this.onlineAlbumsFacade.getAlbums()
+    this.offlineAlbumsFacade.getAlbums()
   }
 
   public downloadAlbum(album: Album): void {

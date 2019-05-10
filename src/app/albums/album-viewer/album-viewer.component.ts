@@ -1,6 +1,5 @@
 import { Component, OnDestroy, ViewChild } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
-import { AlbumsFacadeService } from '../state/albums/albums.facade'
 import { first, switchMap } from 'rxjs/operators'
 import { Subscription } from 'rxjs'
 import { mapIsPending, mapIsError } from 'utils/ngrx/action-status'
@@ -8,6 +7,7 @@ import { AlbumViewerParams } from './album-viewer-params'
 import { Overlay, OverlayRef } from '@angular/cdk/overlay'
 import { CdkPortal } from '@angular/cdk/portal'
 import { Picture } from '../state/dal/dto/picture'
+import { OnlineAlbumsFacadeService } from '../state/albums/online-albums/online-albums.facade';
 
 @Component({
   selector: 'app-album-viewer',
@@ -19,17 +19,17 @@ export class AlbumViewerComponent implements OnDestroy {
   private overlayRef: OverlayRef | null = null
   public selectedPictureIndex: number | null = null
 
-  public readonly isAlbumPending$ = this.albumsFacade.albumStatus$.pipe(mapIsPending)
-  public readonly isAlbumError$ = this.albumsFacade.albumStatus$.pipe(mapIsError)
+  public readonly isAlbumPending$ = this.onlineAlbumsFacade.albumStatus$.pipe(mapIsPending)
+  public readonly isAlbumError$ = this.onlineAlbumsFacade.albumStatus$.pipe(mapIsError)
   public readonly params = new AlbumViewerParams(this.router)
   public readonly album$ = this.params.albumId$.pipe(
-    switchMap(albumId => this.albumsFacade.albumById$(albumId)))
+    switchMap(albumId => this.onlineAlbumsFacade.albumById$(albumId)))
 
   private readonly getAlbumSub: Subscription = this.params.albumId$
-    .subscribe(albumId => this.albumsFacade.getAlbum(albumId))
+    .subscribe(albumId => this.onlineAlbumsFacade.getAlbum(albumId))
 
   constructor(
-    private readonly albumsFacade: AlbumsFacadeService,
+    private readonly onlineAlbumsFacade: OnlineAlbumsFacadeService,
     private readonly router: ActivatedRoute,
     private readonly overlay: Overlay,
   ) {}
@@ -41,7 +41,7 @@ export class AlbumViewerComponent implements OnDestroy {
   public getAlbum(): void {
     this.params.albumId$
       .pipe(first())
-      .subscribe(albumId => this.albumsFacade.getAlbum(albumId))
+      .subscribe(albumId => this.onlineAlbumsFacade.getAlbum(albumId))
   }
 
   public trackById(index: number, picture: Picture) {
