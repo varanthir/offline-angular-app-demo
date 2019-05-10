@@ -22,13 +22,13 @@ import {
   DownloadPicturesSuccessAction,
   DownloadAlbumSuccessAction,
 } from './download-album.actions'
-import { AlbumsDaoService } from '../dao/albums.dao'
+import { AlbumsDaoService } from '../dal/dao/albums.dao'
 import { trackProgress } from 'utils/rxjs/track-progress'
 import { toArrayBufferBlob } from 'utils/rxjs/to-array-buffer-blob'
-import { AlbumsStorageService } from '../dao/albums.storage'
-import { AlbumsFinishedStorageService } from '../dao/albums-finished.storage'
-import { PicturesStorageService } from '../dao/pictures.storage'
-import { ThumbnailsStorageService } from '../dao/thumbnails.storage'
+import { AlbumsStorageService } from '../dal/dao/albums.storage'
+import { AlbumsFinishedStorageService } from '../dal/dao/albums-finished.storage'
+import { PicturesStorageService } from '../dal/dao/pictures.storage'
+import { ThumbnailsStorageService } from '../dal/dao/thumbnails.storage'
 
 @Injectable()
 export class DownloadAlbumEffects {

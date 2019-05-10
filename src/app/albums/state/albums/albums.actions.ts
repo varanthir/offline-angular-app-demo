@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store'
-import { Album } from '../dto/album'
+import { Album } from '../dal/dto/album'
 import { checkTypes } from 'utils/ngrx/check-types'
 
 export enum AlbumsActionsTypes {

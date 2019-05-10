@@ -11,7 +11,7 @@ import {
   GetAlbumErrorAction,
 } from './albums.actions'
 import { catchError, map, switchMap } from 'rxjs/operators'
-import { AlbumsDaoService } from '../dao/albums.dao';
+import { AlbumsDaoService } from '../dal/dao/albums.dao';
 
 @Injectable()
 export class AlbumsEffects {

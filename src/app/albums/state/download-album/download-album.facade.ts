@@ -4,7 +4,7 @@ import {
   AlbumsAppState, getDownloadAlbumStatus, getDownloadAlbumProgress, getDownloadAlbumEntity,
 } from '../index'
 import { DownloadAlbumAction, DownloadAlbumCancelAction, DownloadAlbumClearAction } from './download-album.actions'
-import { Album } from '../dto/album'
+import { Album } from '../dal/dto/album'
 
 @Injectable()
 export class DownloadAlbumFacadeService {

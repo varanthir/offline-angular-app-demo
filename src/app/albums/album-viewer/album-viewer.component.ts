@@ -7,7 +7,7 @@ import { mapIsPending, mapIsError } from 'utils/ngrx/action-status'
 import { AlbumViewerParams } from './album-viewer-params'
 import { Overlay, OverlayRef } from '@angular/cdk/overlay'
 import { CdkPortal } from '@angular/cdk/portal'
-import { Picture } from '../state/dto/picture'
+import { Picture } from '../state/dal/dto/picture'
 
 @Component({
   selector: 'app-album-viewer',

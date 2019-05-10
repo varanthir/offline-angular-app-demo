@@ -1,5 +1,5 @@
 import { createEntityAdapter, EntityState } from '@ngrx/entity'
-import { Album } from '../dto/album'
+import { Album } from '../dal/dto/album'
 import { AlbumsActionsTypes, AlbumsActions } from './albums.actions'
 import { ActionStatus } from 'utils/ngrx/action-status'
 
