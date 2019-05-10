@@ -1,15 +1,21 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store'
 import * as fromAlbums from './albums/albums.reducer'
+import * as fromDownloadAlbum from './download-album/download-album.reducer'
 import { ActionStatus } from 'utils/ngrx/action-status'
 
 export const ALBUMS_STATE_KEY = 'albums'
+export const DOWNLOAD_ALBUM_STATE_KEY = 'downloadAlbums'
 
 export type AlbumsAppState = {
   [ALBUMS_STATE_KEY]: fromAlbums.AlbumsState,
+  [DOWNLOAD_ALBUM_STATE_KEY]: fromDownloadAlbum.DownloadAlbumState,
 }
 
 export const getAlbumsState =  createFeatureSelector<AlbumsAppState, fromAlbums.AlbumsState>(ALBUMS_STATE_KEY)
+export const getDownloadAlbumState =  createFeatureSelector<AlbumsAppState, fromDownloadAlbum.DownloadAlbumState>(DOWNLOAD_ALBUM_STATE_KEY)
 
+
+// Albums
 export const getAlbums = createSelector(
   getAlbumsState,
   fromAlbums.getAllAlbums
@@ -45,4 +51,21 @@ export const getAlbum = createSelector(
 export const getAlbumStatus = createSelector(
   getAlbumsState,
   fromAlbums.getSelectedAlbumIdStatus
+)
+
+
+// downloadAlbums
+export const getDownloadAlbumEntity = createSelector(
+  getDownloadAlbumState,
+  state => state.album
+)
+
+export const getDownloadAlbumStatus = createSelector(
+  getDownloadAlbumState,
+  state => state.status
+)
+
+export const getDownloadAlbumProgress = createSelector(
+  getDownloadAlbumState,
+  fromDownloadAlbum.getDownloadAlbumProgress
 )

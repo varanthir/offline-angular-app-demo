@@ -22,6 +22,9 @@ export enum DownloadAlbumActionsTypes {
   DOWNLOAD_THUMBNAIL_SAVE = '[Download Album] DOWNLOAD_THUMBNAIL_SAVE',
   DOWNLOAD_THUMBNAIL_SUCCESS = '[Download Album] DOWNLOAD_THUMBNAIL_SUCCESS',
   DOWNLOAD_THUMBNAIL_ERROR = '[Download Album] DOWNLOAD_THUMBNAIL_ERROR',
+
+  DOWNLOAD_ALBUM_CANCEL = '[Download Album] DOWNLOAD_ALBUM_CANCEL',
+  DOWNLOAD_ALBUM_CLEAR = '[Download Album] DOWNLOAD_ALBUM_CLEAR',
 }
 
 checkTypes(DownloadAlbumActionsTypes as any)
@@ -108,6 +111,15 @@ export class DownloadThumbnailErrorAction implements Action {
 }
 
 
+export class DownloadAlbumCancelAction implements Action {
+  public readonly type = DownloadAlbumActionsTypes.DOWNLOAD_ALBUM_CANCEL
+}
+
+export class DownloadAlbumClearAction implements Action {
+  public readonly type = DownloadAlbumActionsTypes.DOWNLOAD_ALBUM_CLEAR
+}
+
+
 export type DownloadAlbumActions
   = DownloadAlbumAction
   | DownloadAlbumSuccessAction
@@ -128,3 +140,6 @@ export type DownloadAlbumActions
   | DownloadThumbnailSaveAction
   | DownloadThumbnailSuccessAction
   | DownloadThumbnailErrorAction
+
+  | DownloadAlbumCancelAction
+  | DownloadAlbumClearAction

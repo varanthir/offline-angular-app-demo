@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core'
 import { Actions, Effect, ofType } from '@ngrx/effects'
 import { Observable, of, forkJoin } from 'rxjs'
 
-import { catchError, map, mergeMap, bufferCount, tap, first, takeUntil } from 'rxjs/operators'
+import { catchError, map, mergeMap, bufferCount, first, takeUntil } from 'rxjs/operators'
 import {
   DownloadAlbumActions,
   DownloadAlbumActionsTypes,
@@ -38,6 +38,7 @@ export class DownloadAlbumEffects {
       DownloadAlbumActionsTypes.DOWNLOAD_PICTURES_ERROR,
       DownloadAlbumActionsTypes.DOWNLOAD_PICTURE_ERROR,
       DownloadAlbumActionsTypes.DOWNLOAD_THUMBNAIL_ERROR,
+      DownloadAlbumActionsTypes.DOWNLOAD_ALBUM_CANCEL,
     )
   )
 
@@ -51,7 +52,6 @@ export class DownloadAlbumEffects {
   @Effect()
   public readonly startDownloadAlbum$: Observable<Action> = this.actions$.pipe(
     ofType(DownloadAlbumActionsTypes.DOWNLOAD_ALBUM),
-    // tap(a => console.log('startDownloadAlbum$', a)),
     map(action => action.payload),
     mergeMap(({ album }) => forkJoin(
       this.albumsStorage.set(album),
@@ -67,7 +67,6 @@ export class DownloadAlbumEffects {
   @Effect()
   public readonly startDownloadPictures$: Observable<Action> = this.actions$.pipe(
     ofType(DownloadAlbumActionsTypes.DOWNLOAD_PICTURES),
-    // tap(a => console.log('startDownloadPictures$', a)),
     map(action => action.payload),
     mergeMap(({ pictureIds }) => [
       ...pictureIds.map(pictureId => new DownloadPictureAction({ pictureId })),
@@ -78,7 +77,6 @@ export class DownloadAlbumEffects {
   @Effect()
   public readonly getPicture$: Observable<Action> = this.actions$.pipe(
     ofType(DownloadAlbumActionsTypes.DOWNLOAD_PICTURE),
-    // tap(a => console.log('getPicture$', a)),
     map(action => action.payload),
     mergeMap(({ pictureId }) => this.albumsDao.getPictureFile(pictureId).pipe(
       trackProgress(),
@@ -94,7 +92,6 @@ export class DownloadAlbumEffects {
   @Effect()
   public readonly savePicture$: Observable<Action> = this.actions$.pipe(
     ofType(DownloadAlbumActionsTypes.DOWNLOAD_PICTURE_SAVE),
-    // tap(a => console.log('savePicture$', a)),
     map(action => action.payload),
     mergeMap(({ pictureId, blob }) => toArrayBufferBlob(blob).pipe(
       mergeMap(arrayBufferBlob => this.picturesStorage.set(pictureId, arrayBufferBlob)),
@@ -107,7 +104,6 @@ export class DownloadAlbumEffects {
   @Effect()
   public readonly getThumbnail$: Observable<Action> = this.actions$.pipe(
     ofType(DownloadAlbumActionsTypes.DOWNLOAD_THUMBNAIL),
-    // tap(a => console.log('getThumbnail$', a)),
     map(action => action.payload),
     mergeMap(({ pictureId }) => this.albumsDao.getThumbnailFile(pictureId).pipe(
       trackProgress(),
@@ -123,7 +119,6 @@ export class DownloadAlbumEffects {
   @Effect()
   public readonly saveThumbnail$: Observable<Action> = this.actions$.pipe(
     ofType(DownloadAlbumActionsTypes.DOWNLOAD_THUMBNAIL_SAVE),
-    // tap(a => console.log('saveThumbnail$', a)),
     map(action => action.payload),
     mergeMap(({ pictureId, blob }) => toArrayBufferBlob(blob).pipe(
       mergeMap(arrayBufferBlob => this.thumbnailsStorage.set(pictureId, arrayBufferBlob)),
@@ -136,12 +131,10 @@ export class DownloadAlbumEffects {
   @Effect()
   public readonly finishDownloadPictures$: Observable<Action> = this.actions$.pipe(
     ofType(DownloadAlbumActionsTypes.DOWNLOAD_PICTURES),
-    // tap(a => console.log('finishDownloadPictures$', a)),
     map(action => action.payload),
     mergeMap(({ pictureIds }) => this.downloadPictureOrThumbnailSuccess$.pipe(
       bufferCount(pictureIds.length * 2),
       first(),
-      // tap(console.log),
       takeUntil(this.downloadErrors$)
     )),
     map(() => new DownloadPicturesSuccessAction())
@@ -150,7 +143,6 @@ export class DownloadAlbumEffects {
   @Effect()
   public readonly finishDownloadAlbum$: Observable<Action> = this.actions$.pipe(
     ofType(DownloadAlbumActionsTypes.DOWNLOAD_ALBUM),
-    // tap(a => console.log('finishDownloadAlbum$', a)),
     map(action => action.payload),
     mergeMap(({ album }) => this.actions$.pipe(
       ofType(DownloadAlbumActionsTypes.DOWNLOAD_PICTURES_SUCCESS),

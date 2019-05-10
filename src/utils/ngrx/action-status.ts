@@ -6,5 +6,13 @@ export enum ActionStatus {
   Error = 'Error',
 }
 
-export const isPending = map((status: ActionStatus | null) => status === ActionStatus.Pending)
-export const isError = map((status: ActionStatus | null) => status === ActionStatus.Error)
+export const CancelledActionStatus = 'Cancelled'
+export type CancelledActionStatus = typeof CancelledActionStatus
+
+export const isPending = (status: ActionStatus) => status === ActionStatus.Pending
+export const isError = (status: ActionStatus) => status === ActionStatus.Error
+export const isCancelled = (status: CancelledActionStatus) => status === CancelledActionStatus
+
+export const mapIsPending = map(isPending)
+export const mapIsError = map(isError)
+export const mapIsCancelled = map(isCancelled)

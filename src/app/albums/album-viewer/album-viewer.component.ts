@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router'
 import { AlbumsFacadeService } from '../state/albums/albums.facade'
 import { first, switchMap } from 'rxjs/operators'
 import { Subscription } from 'rxjs'
-import { isError, isPending } from 'utils/ngrx/action-status'
+import { mapIsPending, mapIsError } from 'utils/ngrx/action-status'
 import { Picture } from '../state/albums/dto/picture'
 import { AlbumViewerParams } from './album-viewer-params'
 import { Overlay, OverlayRef } from '@angular/cdk/overlay'
@@ -19,8 +19,8 @@ export class AlbumViewerComponent implements OnDestroy {
   private overlayRef: OverlayRef | null = null
   public selectedPictureIndex: number | null = null
 
-  public readonly isAlbumPending$ = this.albumsFacade.albumStatus$.pipe(isPending)
-  public readonly isAlbumError$ = this.albumsFacade.albumStatus$.pipe(isError)
+  public readonly isAlbumPending$ = this.albumsFacade.albumStatus$.pipe(mapIsPending)
+  public readonly isAlbumError$ = this.albumsFacade.albumStatus$.pipe(mapIsError)
   public readonly params = new AlbumViewerParams(this.router)
   public readonly album$ = this.params.albumId$.pipe(
     switchMap(albumId => this.albumsFacade.albumById$(albumId)))

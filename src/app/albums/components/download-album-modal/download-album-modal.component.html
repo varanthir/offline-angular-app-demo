@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Downloading album: {{ (album$ | async)?.name }}</h1>
+<div mat-dialog-content>
+  <mat-progress-bar [value]="progress$ | async"></mat-progress-bar>
+  <p *ngIf="showError$ | async">Something went wrong</p>
+  <p *ngIf="showCancelled$ | async">Cancelled</p>
+</div>
+<div mat-dialog-actions>
+  <button *ngIf="showCancelButton$ | async" mat-button (click)="cancel()">Cancel</button>
+  <button *ngIf="showOkButton$ | async" mat-button [mat-dialog-close]>Ok</button>
+</div>
