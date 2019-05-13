@@ -25,16 +25,6 @@ export const getOnlineAlbumsState = createSelector(
   state => state.online
 )
 
-export const getAlbums = createSelector(
-  getOnlineAlbumsState,
-  fromOnlineAlbums.selectAll
-)
-
-export const getOnlineAlbums = createSelector(
-  getOnlineAlbumsState,
-  fromOnlineAlbums.selectAll
-)
-
 export const getOnlineAlbumIds = createSelector(
   getOnlineAlbumsState,
   fromOnlineAlbums.selectIds
@@ -45,42 +35,20 @@ export const getOnlineAlbumEntities = createSelector(
   fromOnlineAlbums.selectEntities
 )
 
-export const getAlbumEntities = createSelector(
+export const getOnlineAlbums = createSelector(
   getOnlineAlbumsState,
-  fromOnlineAlbums.selectEntities
+  fromOnlineAlbums.selectAll
 )
 
-export const getAlbumsStatus = createSelector(
-  getOnlineAlbumsState,
-  ({ albumsStatus }) => albumsStatus
-)
-
-export const getEmptyAlbumsPending = createSelector(
-  getOnlineAlbumsState,
-  getAlbums,
-  ({ albumsStatus }, albums) => albums.length === 0 && albumsStatus === ActionStatus.Pending
-)
-
-export const getSelectedAlbumId = createSelector(
+export const getSelectedOnlineAlbumId = createSelector(
   getOnlineAlbumsState,
   fromOnlineAlbums.getSelectedAlbumId
 )
 
-export const getAlbum = createSelector(
-  getAlbumEntities,
-  getSelectedAlbumId,
-  (albumEntities, selectedAlbumId) => selectedAlbumId && albumEntities[selectedAlbumId] || null
-)
-
 export const getOnlineAlbum = createSelector(
-  getAlbumEntities,
-  getSelectedAlbumId,
+  getOnlineAlbumEntities,
+  getSelectedOnlineAlbumId,
   (albumEntities, selectedAlbumId) => selectedAlbumId && albumEntities[selectedAlbumId] || null
-)
-
-export const getAlbumStatus = createSelector(
-  getOnlineAlbumsState,
-  fromOnlineAlbums.getSelectedAlbumIdStatus
 )
 
 export const getOnlineAlbumStatus = createSelector(
@@ -128,7 +96,7 @@ export const getOfflineAlbumStatus = createSelector(
 
 
 // albums
-export const _getAlbums = createSelector(
+export const getAlbums = createSelector(
   getOnlineAlbumIds,
   getOfflineAlbumIds,
   getOnlineAlbumEntities,
@@ -146,6 +114,33 @@ export const _getAlbums = createSelector(
       return 0
     })
   }
+)
+
+export const getAlbumsStatus = createSelector(
+  getOnlineAlbumsState,
+  getOfflineAlbumsState,
+  (onlineAlbumsState, offlineAlbumsState) => {
+    if (onlineAlbumsState.albumsStatus === ActionStatus.Success && offlineAlbumsState.albumsStatus === ActionStatus.Success) {
+      return ActionStatus.Success
+    }
+    if (onlineAlbumsState.albumsStatus === ActionStatus.Pending || offlineAlbumsState.albumsStatus === ActionStatus.Pending) {
+      return ActionStatus.Pending
+    }
+    if (onlineAlbumsState.albumsStatus === ActionStatus.Error || offlineAlbumsState.albumsStatus === ActionStatus.Error) {
+      return ActionStatus.Error
+    }
+    return null
+  }
+)
+
+export const getEmptyAlbumsPending = createSelector(
+  getAlbumsStatus,
+  getOnlineAlbums,
+  getOfflineAlbums,
+  (albumsStatus, onlineAlbums, getOfflineAlbums) =>
+    albumsStatus === ActionStatus.Pending
+    && onlineAlbums.length === 0
+    && getOfflineAlbums.length === 0
 )
 
 

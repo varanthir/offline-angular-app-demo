@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core'
 import { Store, select } from '@ngrx/store'
 import {
   AlbumsAppState,
-  getAlbum,
   getAlbumsStatus,
   getEmptyAlbumsPending,
   getOnlineAlbumStatus,
   getOfflineAlbumStatus,
   getOfflineAlbum,
-  _getAlbums,
+  getAlbums,
+  getOnlineAlbum,
 } from '../index'
 import { GetOfflineAlbumsAction, GetOfflineAlbumAction, DeleteOfflineAlbumAction } from './offline-albums/offline-albums.actions'
 import { GetOnlineAlbumsAction, GetOnlineAlbumAction } from './online-albums/online-albums.actions';
@@ -18,7 +18,7 @@ import { Album } from '../dal/dto/album'
 
 @Injectable()
 export class AlbumsFacadeService {
-  public readonly albums$ = this.store.pipe(select(_getAlbums))
+  public readonly albums$ = this.store.pipe(select(getAlbums))
   public readonly albumsStatus$ = this.store.pipe(select(getAlbumsStatus))
   public readonly emptyAlbumsPending$ = this.store.pipe(select(getEmptyAlbumsPending))
 
@@ -45,7 +45,7 @@ export class AlbumsFacadeService {
   }
 
   public getOnlineAlbumById$(albumId: number): Observable<Album> {
-    return this.store.pipe(select(getAlbum)).pipe(
+    return this.store.pipe(select(getOnlineAlbum)).pipe(
       filter<Album>(album => album !== null && album.id === albumId),
     )
   }
