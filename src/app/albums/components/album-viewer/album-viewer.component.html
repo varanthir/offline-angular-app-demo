@@ -1,4 +1,4 @@
-<h2 class="mat-h2">{{ album.name }}</h2>
+<h2 class="mat-h2">{{ album?.name }}</h2>
 
 <p app-failed-action *ngIf="isError" (tryAgain)="tryAgain.emit()"></p>
 

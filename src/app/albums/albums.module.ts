@@ -21,6 +21,7 @@ import { DownloadAlbumModalComponent } from './components/download-album-modal/d
 import { DeleteAlbumDialogComponent } from './components/delete-album-dialog/delete-album-dialog.component';
 import { OnlineAlbumViewerComponent } from './online-album-viewer/online-album-viewer.component';
 import { AlbumViewerComponent } from './components/album-viewer/album-viewer.component';
+import { OfflineAlbumViewerComponent } from './offline-album-viewer/offline-album-viewer.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { AlbumViewerComponent } from './components/album-viewer/album-viewer.com
     DeleteAlbumDialogComponent,
     DownloadAlbumModalComponent,
     FailedActionComponent,
+    OfflineAlbumViewerComponent,
     OnlineAlbumViewerComponent,
     PictureViewerComponent,
   ],

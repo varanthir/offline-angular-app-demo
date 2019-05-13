@@ -3,23 +3,23 @@ import { ActivatedRoute } from '@angular/router'
 import { first, switchMap, map } from 'rxjs/operators'
 import { Subscription } from 'rxjs'
 import { isPending, isError } from 'utils/ngrx/action-status'
-import { OnlineAlbumViewerParams } from './online-album-viewer-params'
+import { OfflineAlbumViewerParams } from './offline-album-viewer-params'
 import { AlbumsFacadeService } from '../state/albums/albums.facade'
 
 @Component({
-  selector: 'app-online-album-viewer',
-  templateUrl: './online-album-viewer.component.html',
+  selector: 'app-offline-album-viewer',
+  templateUrl: './offline-album-viewer.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class OnlineAlbumViewerComponent implements OnDestroy {
-  public readonly isAlbumPending$ = this.albumsFacade.onlineAlbumStatus$.pipe(map(isPending))
-  public readonly isAlbumError$ = this.albumsFacade.onlineAlbumStatus$.pipe(map(isError))
-  public readonly params = new OnlineAlbumViewerParams(this.router)
+export class OfflineAlbumViewerComponent implements OnDestroy {
+  public readonly isAlbumPending$ = this.albumsFacade.offlineAlbumStatus$.pipe(map(isPending))
+  public readonly isAlbumError$ = this.albumsFacade.offlineAlbumStatus$.pipe(map(isError))
+  public readonly params = new OfflineAlbumViewerParams(this.router)
   public readonly album$ = this.params.albumId$.pipe(
-    switchMap(albumId => this.albumsFacade.getOnlineAlbumById$(albumId)))
+    switchMap(albumId => this.albumsFacade.getOfflineAlbumById$(albumId)))
 
   private readonly getAlbumSub: Subscription = this.params.albumId$
-    .subscribe(albumId => this.albumsFacade.getOnlineAlbum(albumId))
+    .subscribe(albumId => this.albumsFacade.getOfflineAlbum(albumId))
 
   constructor(
     private readonly albumsFacade: AlbumsFacadeService,
@@ -33,6 +33,6 @@ export class OnlineAlbumViewerComponent implements OnDestroy {
   public getAlbum(): void {
     this.params.albumId$
       .pipe(first())
-      .subscribe(albumId => this.albumsFacade.getOnlineAlbum(albumId))
+      .subscribe(albumId => this.albumsFacade.getOfflineAlbum(albumId))
   }
 }

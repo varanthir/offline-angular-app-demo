@@ -6,7 +6,10 @@
 
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>Name</th>
-    <td mat-cell *matCellDef="let album" class="table__cell-album-name" [routerLink]="album.id">{{ album.name }}</td>
+    <td mat-cell
+      *matCellDef="let album"
+      class="table__cell-album-name"
+      [routerLink]="album.isOffline ? 'offline/' + album.id : album.id">{{ album.name }}</td>
   </ng-container>
 
   <ng-container matColumnDef="imagesCount">

@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
 import { map, filter } from 'rxjs/operators'
-import { mapIsPending, mapIsError } from 'utils/ngrx/action-status'
+import { isPending, isError } from 'utils/ngrx/action-status'
 import { DownloadAlbumFacadeService } from './state/download-album/download-album.facade'
 import { Album } from './state/dal/dto/album'
 import { MatDialog } from '@angular/material'
@@ -17,9 +17,9 @@ import { DeleteAlbumDialogComponent } from './components/delete-album-dialog/del
 export class AlbumsComponent implements OnInit {
   public readonly albums$ = this.albumsFacade.albums$
   public readonly hasAlbums$ = this.albums$.pipe(map(albums => albums.length > 0))
-  public readonly isAlbumsPending$ = this.albumsFacade.albumsStatus$.pipe(mapIsPending)
+  public readonly isAlbumsPending$ = this.albumsFacade.albumsStatus$.pipe(map(isPending))
   public readonly isEmptyAlbumsPending$ = this.albumsFacade.emptyAlbumsPending$
-  public readonly isAlbumsError$ = this.albumsFacade.albumsStatus$.pipe(mapIsError)
+  public readonly isAlbumsError$ = this.albumsFacade.albumsStatus$.pipe(map(isError))
 
   constructor(
     private readonly albumsFacade: AlbumsFacadeService,
