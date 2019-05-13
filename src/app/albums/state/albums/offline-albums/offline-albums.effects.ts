@@ -15,6 +15,7 @@ import {
 } from './offline-albums.actions'
 import { catchError, map, switchMap } from 'rxjs/operators'
 import { AlbumsStorageService } from '../../dal/dao/albums.storage'
+import { GetOfflineFilesUrlsAction } from '../offline-files/offline-files.actions';
 
 @Injectable()
 export class OfflineAlbumsEffects {
@@ -52,6 +53,13 @@ export class OfflineAlbumsEffects {
   public readonly refreshAlbums$: Observable<Action> = this.actions$.pipe(
     ofType(OfflineAlbumsActionTypes.DELETE_OFFLINE_ALBUM_SUCCESS),
     map(() => new GetOfflineAlbumsAction())
+  )
+
+  @Effect()
+  public readonly getOfflineFiles$: Observable<Action> = this.actions$.pipe(
+    ofType(OfflineAlbumsActionTypes.GET_OFFLINE_ALBUM_SUCCESS),
+    map(action => action.payload.album.pictures.map(({ id }) => id)),
+    map(pictureIds => new GetOfflineFilesUrlsAction({ pictureIds }))
   )
 
   constructor(

@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core'
 import { AlbumViewerDbService, StoreName } from './album-viewer-db.service'
 import { from, Observable } from 'rxjs'
-import { ArrayBufferBlob } from 'utils/rxjs/to-array-buffer-blob'
+import { PictureArrayBufferBlob } from '../dto/picture-array-buffer-blob';
 
 @Injectable()
 export class PicturesStorageService {
   constructor(private readonly albumViewerDb: AlbumViewerDbService) {}
 
-  public get(pictureId: number): Observable<ArrayBufferBlob> {
+  public get(pictureId: number): Observable<PictureArrayBufferBlob> {
     return from(this.albumViewerDb.db.then(async db => {
       const album = await db.get(StoreName.Pictures, pictureId)
       if (album === undefined) {
@@ -17,7 +17,21 @@ export class PicturesStorageService {
     }))
   }
 
-  public set(pictureId: number, arrayBufferBlob: ArrayBufferBlob): Observable<number> {
+  public getMany(pictureIds: number[]): Observable<PictureArrayBufferBlob[]> {
+    return from(this.albumViewerDb.db.then(async db => {
+      const pictureArrayBufferBlobs = await db.getAll(StoreName.Pictures) // TODO: Don't get all
+      const filteredPictureArrayBufferBlobs = pictureArrayBufferBlobs
+        .filter(pictureArrayBufferBlob => pictureIds.some(pictureId => pictureArrayBufferBlob.id === pictureId))
+
+      if (pictureIds.length !== filteredPictureArrayBufferBlobs.length) {
+        throw new Error(`Can't find all pictures with specified ids in IndexedDB`)
+      }
+
+      return filteredPictureArrayBufferBlobs
+    }))
+  }
+
+  public set(pictureId: number, arrayBufferBlob: PictureArrayBufferBlob): Observable<number> {
     return from(this.albumViewerDb.db
       .then(db => db.put(StoreName.Pictures, arrayBufferBlob, pictureId)))
   }

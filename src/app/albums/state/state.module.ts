@@ -16,6 +16,7 @@ import { ThumbnailsStorageService } from './dal/dao/thumbnails.storage'
 import { OnlineAlbumsEffects } from './albums/online-albums/online-albums.effects'
 import { OfflineAlbumsEffects } from './albums/offline-albums/offline-albums.effects'
 import { AlbumsFacadeService } from './albums/albums.facade'
+import { OfflineFilesEffects } from './albums/offline-files/offline-files.effects';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { AlbumsFacadeService } from './albums/albums.facade'
     EffectsModule.forFeature([
       DownloadAlbumEffects,
       OfflineAlbumsEffects,
+      OfflineFilesEffects,
       OnlineAlbumsEffects,
     ]),
   ],

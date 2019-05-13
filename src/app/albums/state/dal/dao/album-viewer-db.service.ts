@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core'
 import { openDB, IDBPDatabase, DBSchema } from 'idb'
 import { ArrayBufferBlob } from 'utils/rxjs/to-array-buffer-blob'
 import { Album } from '../dto/album'
+import { PictureArrayBufferBlob } from '../dto/picture-array-buffer-blob';
 
 export enum StoreName {
   Albums = 'albums',
@@ -30,11 +31,11 @@ interface AlbumViewerDb extends DBSchema {
     key: number,
   },
   [StoreName.Pictures]: {
-    value: ArrayBufferBlob,
+    value: PictureArrayBufferBlob,
     key: number,
   },
   [StoreName.Thumbnails]: {
-    value: ArrayBufferBlob,
+    value: PictureArrayBufferBlob,
     key: number,
   },
 }

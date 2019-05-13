@@ -1,8 +1,8 @@
 import { Observable } from 'rxjs'
 
 export interface ArrayBufferBlob {
-  arrayBuffer: ArrayBuffer,
-  type: string,
+  readonly arrayBuffer: ArrayBuffer,
+  readonly type: string,
 }
 
 export function toArrayBufferBlob(blob: Blob): Observable<ArrayBufferBlob> {
