@@ -1,8 +1,8 @@
-<h2 class="mat-h2">{{ (album$ | async)?.name }}</h2>
+<h2 class="mat-h2">{{ album.name }}</h2>
 
-<p app-failed-action *ngIf="isAlbumError$ | async" (tryAgain)="getAlbum()"></p>
+<p app-failed-action *ngIf="isError" (tryAgain)="tryAgain.emit()"></p>
 
-<div *ngIf="album$ | async as album" class="thumbnails">
+<div *ngIf="album" class="thumbnails">
   <img
     *ngFor="let picture of album.pictures; let pictureIndex=index; trackBy: trackById"
     [src]="'/api/thumbnails/' + picture.id"
@@ -11,13 +11,13 @@
   <div *ngFor="let a of [1,2,3,4,5]" class="thumbnails__empty"></div>
 </div>
 
-<div *ngIf="(isAlbumPending$ | async) && !(album$ | async)" class="app-loader">
+<div *ngIf="isPending && !album" class="app-loader">
   <mat-spinner></mat-spinner>
 </div>
 
 <app-picture-viewer
   *cdkPortal
-  [pictures]="(album$ | async)?.pictures"
+  [pictures]="album.pictures"
   [selectedIndex]="selectedPictureIndex"
   (selectIndex)="selectedPictureIndex = $event"
   (close)="hidePictureViewer()">

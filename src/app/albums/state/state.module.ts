@@ -13,11 +13,9 @@ import { AlbumsStorageService } from './dal/dao/albums.storage'
 import { AlbumViewerDbService } from './dal/dao/album-viewer-db.service'
 import { PicturesStorageService } from './dal/dao/pictures.storage'
 import { ThumbnailsStorageService } from './dal/dao/thumbnails.storage'
-import { OnlineAlbumsEffects } from './albums/online-albums/online-albums.effects';
-import { OnlineAlbumsFacadeService } from './albums/online-albums/online-albums.facade';
-import { OfflineAlbumsFacadeService } from './albums/offline-albums/offline-albums.facade';
-import { OfflineAlbumsEffects } from './albums/offline-albums/offline-albums.effects';
-import { AlbumsFacadeService } from './albums/albums.facade';
+import { OnlineAlbumsEffects } from './albums/online-albums/online-albums.effects'
+import { OfflineAlbumsEffects } from './albums/offline-albums/offline-albums.effects'
+import { AlbumsFacadeService } from './albums/albums.facade'
 
 @NgModule({
   imports: [
@@ -37,8 +35,6 @@ import { AlbumsFacadeService } from './albums/albums.facade';
     AlbumsStorageService,
     AlbumViewerDbService,
     DownloadAlbumFacadeService,
-    OfflineAlbumsFacadeService,
-    OnlineAlbumsFacadeService,
     PicturesStorageService,
     ThumbnailsStorageService,
   ]

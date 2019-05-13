@@ -1,7 +1,7 @@
 import { ActivatedRoute } from '@angular/router'
 import { map, filter } from 'rxjs/operators'
 
-export class AlbumViewerParams {
+export class OnlineAlbumViewerParams {
   public readonly albumId$ = this.router.paramMap.pipe(
     map(paramsMap => paramsMap.get('albumId')),
     filter(albumId => albumId !== null),

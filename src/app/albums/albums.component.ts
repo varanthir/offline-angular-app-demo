@@ -5,8 +5,6 @@ import { DownloadAlbumFacadeService } from './state/download-album/download-albu
 import { Album } from './state/dal/dto/album'
 import { MatDialog } from '@angular/material'
 import { DownloadAlbumModalComponent } from './components/download-album-modal/download-album-modal.component'
-import { OnlineAlbumsFacadeService } from './state/albums/online-albums/online-albums.facade';
-import { OfflineAlbumsFacadeService } from './state/albums/offline-albums/offline-albums.facade';
 import { AlbumsFacadeService } from './state/albums/albums.facade';
 import { DeleteAlbumDialogComponent } from './components/delete-album-dialog/delete-album-dialog.component';
 
@@ -19,14 +17,12 @@ import { DeleteAlbumDialogComponent } from './components/delete-album-dialog/del
 export class AlbumsComponent implements OnInit {
   public readonly albums$ = this.albumsFacade.albums$
   public readonly hasAlbums$ = this.albums$.pipe(map(albums => albums.length > 0))
-  public readonly isAlbumsPending$ = this.onlineAlbumsFacade.albumsStatus$.pipe(mapIsPending)
-  public readonly isEmptyAlbumsPending$ = this.onlineAlbumsFacade.emptyAlbumsPending$
-  public readonly isAlbumsError$ = this.onlineAlbumsFacade.albumsStatus$.pipe(mapIsError)
+  public readonly isAlbumsPending$ = this.albumsFacade.albumsStatus$.pipe(mapIsPending)
+  public readonly isEmptyAlbumsPending$ = this.albumsFacade.emptyAlbumsPending$
+  public readonly isAlbumsError$ = this.albumsFacade.albumsStatus$.pipe(mapIsError)
 
   constructor(
     private readonly albumsFacade: AlbumsFacadeService,
-    private readonly onlineAlbumsFacade: OnlineAlbumsFacadeService,
-    private readonly offlineAlbumsFacade: OfflineAlbumsFacadeService,
     private readonly downloadAlbumFacade: DownloadAlbumFacadeService,
     private readonly dialog: MatDialog,
   ) {}
@@ -36,8 +32,7 @@ export class AlbumsComponent implements OnInit {
   }
 
   public getAlbums(): void {
-    this.onlineAlbumsFacade.getAlbums()
-    this.offlineAlbumsFacade.getAlbums()
+    this.albumsFacade.getAlbums()
   }
 
   public downloadAlbum(album: Album): void {
