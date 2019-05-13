@@ -19,12 +19,14 @@ import { OverlayModule } from '@angular/cdk/overlay'
 import { PortalModule } from '@angular/cdk/portal'
 import { FailedActionComponent } from './components/failed-action/failed-action.component'
 import { DownloadAlbumModalComponent } from './components/download-album-modal/download-album-modal.component'
+import { DeleteAlbumDialogComponent } from './components/delete-album-dialog/delete-album-dialog.component';
 
 @NgModule({
   declarations: [
     AlbumsComponent,
     AlbumsTableComponent,
     AlbumViewerComponent,
+    DeleteAlbumDialogComponent,
     DownloadAlbumModalComponent,
     FailedActionComponent,
     PictureViewerComponent,

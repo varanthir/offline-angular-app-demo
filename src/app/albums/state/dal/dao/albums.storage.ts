@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core'
 import { from, Observable } from 'rxjs'
-import { AlbumViewerDbService, StoreName } from './album-viewer-db.service'
+import { AlbumViewerDbService, StoreName, Mode } from './album-viewer-db.service'
 import { Album } from '../dto/album'
+import difference from 'lodash.difference'
 
 @Injectable()
 export class AlbumsStorageService {
@@ -29,8 +30,38 @@ export class AlbumsStorageService {
       .then(db => db.put(StoreName.Albums, offlineAlbum)))
   }
 
-  public delete(albumId: number): Observable<void> {
-    return from(this.albumViewerDb.db
-      .then(db => db.delete(StoreName.Albums, albumId)))
+  public deleteWhole(albumId: number): Observable<void> {
+    return from(this.albumViewerDb.db.then(async db => {
+      const tx = db.transaction([StoreName.Albums, StoreName.AlbumsFinished, StoreName.Pictures, StoreName.Thumbnails], Mode.ReadWrite)
+      const albumsStore = tx.objectStore(StoreName.Albums)
+      const albumsFinishedStore = tx.objectStore(StoreName.AlbumsFinished)
+      const picturesStore = tx.objectStore(StoreName.Pictures)
+      const thumbnailsStore = tx.objectStore(StoreName.Thumbnails)
+
+      const album = await albumsStore.get(albumId)
+      if (!album) {
+        return tx.abort()
+      }
+      const albums = await albumsStore.getAll()
+      this.pictureIdstoDelete(album, albums.filter(album => album.id !== albumId))
+        .forEach(pictureId => {
+          picturesStore.delete(pictureId)
+          thumbnailsStore.delete(pictureId)
+        })
+
+      albumsStore.delete(albumId)
+      albumsFinishedStore.delete(albumId)
+
+      return tx.done
+    }))
+  }
+
+  private pictureIdstoDelete(albumToDelete: Album, albumsToKeep: Album[]): number[] {
+    const pictureIdsToDelete = albumToDelete.pictures.map(picture => picture.id)
+    const pictureIdsToKeep = albumsToKeep
+      .map(albumToKeep => albumToKeep.pictures.map(picture => picture.id))
+      .reduce((acc, curr) => [...acc, ...curr], [])
+
+    return difference(pictureIdsToDelete, pictureIdsToKeep)
   }
 }

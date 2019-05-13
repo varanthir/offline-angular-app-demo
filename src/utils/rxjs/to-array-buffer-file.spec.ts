@@ -16,6 +16,7 @@ describe('toArrayBufferFile()', () => {
   })
 
   it('should not finish if interrupted', () => {
+    // TODO: Fix
     const testArrayBuffer = new ArrayBuffer(1024 * 10)
     const blob = new File([testArrayBuffer], 'test10kb.file2', { type: '' })
 

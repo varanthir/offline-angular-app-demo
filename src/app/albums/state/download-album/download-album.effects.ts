@@ -29,6 +29,7 @@ import { AlbumsStorageService } from '../dal/dao/albums.storage'
 import { AlbumsFinishedStorageService } from '../dal/dao/albums-finished.storage'
 import { PicturesStorageService } from '../dal/dao/pictures.storage'
 import { ThumbnailsStorageService } from '../dal/dao/thumbnails.storage'
+import { GetOfflineAlbumsAction } from '../albums/offline-albums/offline-albums.actions';
 
 @Injectable()
 export class DownloadAlbumEffects {
@@ -152,6 +153,12 @@ export class DownloadAlbumEffects {
       catchError((error: Error) => of(new DownloadAlbumErrorAction(error))),
       takeUntil(this.downloadErrors$)
     )),
+  )
+
+  @Effect()
+  public readonly refreshAlbums$: Observable<Action> = this.actions$.pipe(
+    ofType(DownloadAlbumActionsTypes.DOWNLOAD_ALBUM_SUCCESS),
+    map(() => new GetOfflineAlbumsAction())
   )
 
   constructor(

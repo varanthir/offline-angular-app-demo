@@ -10,6 +10,10 @@ export enum OfflineAlbumsActionTypes {
   GET_OFFLINE_ALBUM = '[Albums/Offline] GET_OFFLINE_ALBUM',
   GET_OFFLINE_ALBUM_SUCCESS = '[Albums/Offline] GET_OFFLINE_ALBUM_SUCCESS',
   GET_OFFLINE_ALBUM_ERROR = '[Albums/Offline] GET_OFFLINE_ALBUM_ERROR',
+
+  DELETE_OFFLINE_ALBUM = '[Albums/Offline] DELETE_OFFLINE_ALBUM',
+  DELETE_OFFLINE_ALBUM_SUCCESS = '[Albums/Offline] DELETE_OFFLINE_ALBUM_SUCCESS',
+  DELETE_OFFLINE_ALBUM_ERROR = '[Albums/Offline] DELETE_OFFLINE_ALBUM_ERROR',
 }
 
 checkTypes(OfflineAlbumsActionTypes as any)
@@ -44,6 +48,21 @@ export class GetOfflineAlbumErrorAction implements Action {
   constructor(public readonly error: Error) {}
 }
 
+
+export class DeleteOfflineAlbumAction implements Action {
+  public readonly type = OfflineAlbumsActionTypes.DELETE_OFFLINE_ALBUM
+  constructor(public readonly payload: { albumId: number }) {}
+}
+
+export class DeleteOfflineAlbumSuccessAction implements Action {
+  public readonly type = OfflineAlbumsActionTypes.DELETE_OFFLINE_ALBUM_SUCCESS
+}
+
+export class DeleteOfflineAlbumErrorAction implements Action {
+  public readonly type = OfflineAlbumsActionTypes.DELETE_OFFLINE_ALBUM_ERROR
+  constructor(public readonly error: Error) {}
+}
+
 export type OfflineAlbumsActions
   = GetOfflineAlbumsAction
   | GetOfflineAlbumsSuccessAction
@@ -52,3 +71,7 @@ export type OfflineAlbumsActions
   | GetOfflineAlbumAction
   | GetOfflineAlbumSuccessAction
   | GetOfflineAlbumErrorAction
+
+  | DeleteOfflineAlbumAction
+  | DeleteOfflineAlbumSuccessAction
+  | DeleteOfflineAlbumErrorAction

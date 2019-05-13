@@ -10,6 +10,11 @@ export enum StoreName {
   Thumbnails = 'thumbnails',
 }
 
+export enum Mode {
+  ReadWrite = 'readwrite',
+  ReadOnly = 'readonly',
+}
+
 export interface AlbumFinished {
   id: number,
   isFinished: boolean,
@@ -59,10 +64,10 @@ export class AlbumViewerDbService {
         }
       },
       blocked() {
-        console.log(`#idb: Connection to 'album-viewer' db is blocked by older versions of the db opened`)
+        console.warn(`#idb: Connection to 'album-viewer' db is blocked by older versions of the db opened`)
       },
       blocking() {
-        console.log(`#idb: Connection to 'album-viewer' db is blocking a future version of the db from opening`)
+        console.warn(`#idb: Connection to 'album-viewer' db is blocking a future version of the db from opening`)
       }
     })
   }

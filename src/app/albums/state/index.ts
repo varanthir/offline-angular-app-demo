@@ -4,6 +4,8 @@ import * as fromOnlineAlbums from './albums/online-albums/online-albums.reducer'
 import * as fromOfflineAlbums from './albums/offline-albums/offline-albums.reducer'
 import * as fromDownloadAlbum from './download-album/download-album.reducer'
 import { ActionStatus } from 'utils/ngrx/action-status'
+import difference from 'lodash.difference'
+import { Album } from './dal/dto/album'
 
 export const ALBUMS_STATE_KEY = 'albums'
 export const DOWNLOAD_ALBUM_STATE_KEY = 'downloadAlbums'
@@ -94,13 +96,18 @@ export const getOfflineAlbumsState = createSelector(
 )
 
 export const getOfflineAlbumIds = createSelector(
-  getOnlineAlbumsState,
+  getOfflineAlbumsState,
   fromOfflineAlbums.selectIds
 )
 
 export const getOfflineAlbumEntities = createSelector(
   getOfflineAlbumsState,
   fromOfflineAlbums.selectEntities
+)
+
+export const getOfflineAlbums = createSelector(
+  getOfflineAlbumsState,
+  fromOfflineAlbums.selectAll
 )
 
 export const getSelectedOfflineAlbumId = createSelector(
@@ -125,9 +132,19 @@ export const _getAlbums = createSelector(
   getOnlineAlbumIds,
   getOfflineAlbumIds,
   getOnlineAlbumEntities,
-  getOfflineAlbumEntities,
-  (onlineIds, offlineIds, onlineEntities, offlineEntities) => {
-    //
+  getOfflineAlbums,
+  (onlineIds: number[], offlineIds: number[], onlineEntities, offlineAlbums) => {
+    const onlyOnlineIds = difference<number>(onlineIds, offlineIds)
+    const onlyOnlineAlbums = onlyOnlineIds.map(id => onlineEntities[id] as Album)
+
+    return [
+      ...onlyOnlineAlbums,
+      ...offlineAlbums,
+    ].sort((a, b) => {
+      if (b.name > a.name) { return -1 }
+      if (a.name > b.name) { return 1 }
+      return 0
+    })
   }
 )
 

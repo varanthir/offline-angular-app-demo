@@ -9,6 +9,9 @@ import {
   OfflineAlbumsActions,
   GetOfflineAlbumSuccessAction,
   GetOfflineAlbumErrorAction,
+  DeleteOfflineAlbumSuccessAction,
+  DeleteOfflineAlbumErrorAction,
+  GetOfflineAlbumsAction,
 } from './offline-albums.actions'
 import { catchError, map, switchMap } from 'rxjs/operators'
 import { AlbumsStorageService } from '../../dal/dao/albums.storage'
@@ -33,6 +36,22 @@ export class OfflineAlbumsEffects {
       map(album => new GetOfflineAlbumSuccessAction({ album })),
       catchError((error: Error) => of(new GetOfflineAlbumErrorAction(error)))
     ))
+  )
+
+  @Effect()
+  public readonly deleteOfflineAlbum$: Observable<Action> = this.actions$.pipe(
+    ofType(OfflineAlbumsActionTypes.DELETE_OFFLINE_ALBUM),
+    map(action => action.payload),
+    switchMap(({ albumId }) => this.albumsStorage.deleteWhole(albumId).pipe(
+      map(() => new DeleteOfflineAlbumSuccessAction()),
+      catchError((error: Error) => of(new DeleteOfflineAlbumErrorAction(error)))
+    ))
+  )
+
+  @Effect()
+  public readonly refreshAlbums$: Observable<Action> = this.actions$.pipe(
+    ofType(OfflineAlbumsActionTypes.DELETE_OFFLINE_ALBUM_SUCCESS),
+    map(() => new GetOfflineAlbumsAction())
   )
 
   constructor(
