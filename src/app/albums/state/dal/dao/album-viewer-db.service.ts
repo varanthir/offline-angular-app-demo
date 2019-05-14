@@ -2,12 +2,18 @@ import { Injectable } from '@angular/core'
 import { openDB, IDBPDatabase, DBSchema } from 'idb'
 import { ArrayBufferBlob } from 'utils/rxjs/to-array-buffer-blob'
 import { Album } from '../dto/album'
+import { PictureArrayBufferBlob } from '../dto/picture-array-buffer-blob';
 
 export enum StoreName {
   Albums = 'albums',
   AlbumsFinished = 'albums-finished',
   Pictures = 'pictures',
   Thumbnails = 'thumbnails',
+}
+
+export enum Mode {
+  ReadWrite = 'readwrite',
+  ReadOnly = 'readonly',
 }
 
 export interface AlbumFinished {
@@ -25,11 +31,11 @@ interface AlbumViewerDb extends DBSchema {
     key: number,
   },
   [StoreName.Pictures]: {
-    value: ArrayBufferBlob,
+    value: PictureArrayBufferBlob,
     key: number,
   },
   [StoreName.Thumbnails]: {
-    value: ArrayBufferBlob,
+    value: PictureArrayBufferBlob,
     key: number,
   },
 }
@@ -54,15 +60,15 @@ export class AlbumViewerDbService {
           case 0:
             db.createObjectStore(StoreName.Albums, { keyPath: 'id' })
             db.createObjectStore(StoreName.AlbumsFinished, { keyPath: 'id' })
-            db.createObjectStore(StoreName.Pictures)
-            db.createObjectStore(StoreName.Thumbnails)
+            db.createObjectStore(StoreName.Pictures, { keyPath: 'id' })
+            db.createObjectStore(StoreName.Thumbnails, { keyPath: 'id' })
         }
       },
       blocked() {
-        console.log(`#idb: Connection to 'album-viewer' db is blocked by older versions of the db opened`)
+        console.warn(`#idb: Connection to 'album-viewer' db is blocked by older versions of the db opened`)
       },
       blocking() {
-        console.log(`#idb: Connection to 'album-viewer' db is blocking a future version of the db from opening`)
+        console.warn(`#idb: Connection to 'album-viewer' db is blocking a future version of the db from opening`)
       }
     })
   }

@@ -24,11 +24,12 @@ import {
 } from './download-album.actions'
 import { AlbumsDaoService } from '../dal/dao/albums.dao'
 import { trackProgress } from 'utils/rxjs/track-progress'
-import { toArrayBufferBlob } from 'utils/rxjs/to-array-buffer-blob'
 import { AlbumsStorageService } from '../dal/dao/albums.storage'
 import { AlbumsFinishedStorageService } from '../dal/dao/albums-finished.storage'
 import { PicturesStorageService } from '../dal/dao/pictures.storage'
 import { ThumbnailsStorageService } from '../dal/dao/thumbnails.storage'
+import { GetOfflineAlbumsAction } from '../albums/offline-albums/offline-albums.actions';
+import { PictureArrayBufferBlob } from '../dal/dto/picture-array-buffer-blob';
 
 @Injectable()
 export class DownloadAlbumEffects {
@@ -93,8 +94,8 @@ export class DownloadAlbumEffects {
   public readonly savePicture$: Observable<Action> = this.actions$.pipe(
     ofType(DownloadAlbumActionsTypes.DOWNLOAD_PICTURE_SAVE),
     map(action => action.payload),
-    mergeMap(({ pictureId, blob }) => toArrayBufferBlob(blob).pipe(
-      mergeMap(arrayBufferBlob => this.picturesStorage.set(pictureId, arrayBufferBlob)),
+    mergeMap(({ pictureId, blob }) => PictureArrayBufferBlob.fromBlob(pictureId, blob).pipe(
+      mergeMap(arrayBufferBlob => this.picturesStorage.set(arrayBufferBlob)),
       map(() => new DownloadPictureSuccessAction({ pictureId })),
       catchError((error: Error) => of(new DownloadPictureErrorAction(error))),
       takeUntil(this.downloadErrors$)
@@ -120,8 +121,8 @@ export class DownloadAlbumEffects {
   public readonly saveThumbnail$: Observable<Action> = this.actions$.pipe(
     ofType(DownloadAlbumActionsTypes.DOWNLOAD_THUMBNAIL_SAVE),
     map(action => action.payload),
-    mergeMap(({ pictureId, blob }) => toArrayBufferBlob(blob).pipe(
-      mergeMap(arrayBufferBlob => this.thumbnailsStorage.set(pictureId, arrayBufferBlob)),
+    mergeMap(({ pictureId, blob }) => PictureArrayBufferBlob.fromBlob(pictureId, blob).pipe(
+      mergeMap(arrayBufferBlob => this.thumbnailsStorage.set(arrayBufferBlob)),
       map(() => new DownloadThumbnailSuccessAction({ pictureId })),
       catchError((error: Error) => of(new DownloadThumbnailErrorAction(error))),
       takeUntil(this.downloadErrors$)
@@ -152,6 +153,12 @@ export class DownloadAlbumEffects {
       catchError((error: Error) => of(new DownloadAlbumErrorAction(error))),
       takeUntil(this.downloadErrors$)
     )),
+  )
+
+  @Effect()
+  public readonly refreshAlbums$: Observable<Action> = this.actions$.pipe(
+    ofType(DownloadAlbumActionsTypes.DOWNLOAD_ALBUM_SUCCESS),
+    map(() => new GetOfflineAlbumsAction())
   )
 
   constructor(

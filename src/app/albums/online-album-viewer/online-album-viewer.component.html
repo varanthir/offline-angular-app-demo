@@ -1,0 +1,8 @@
+<app-album-viewer
+  [album]="album$ | async"
+  [isPending]="isAlbumPending$ | async"
+  [isError]="isAlbumError$ | async"
+  [getPictureUrlFn]="getPictureUrlFn"
+  [getThumbnailUrlFn]="getThumbnailUrlFn"
+  (tryAgain)="getAlbum()">
+</app-album-viewer>

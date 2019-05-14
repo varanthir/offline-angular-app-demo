@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core'
 import { StoreModule } from '@ngrx/store'
 import { albumsReducer } from './albums/albums.reducer'
 import { EffectsModule } from '@ngrx/effects'
-import { AlbumsEffects } from './albums/albums.effects'
-import { AlbumsFacadeService } from './albums/albums.facade'
 import { HttpClientModule } from '@angular/common/http'
 import { ALBUMS_STATE_KEY, DOWNLOAD_ALBUM_STATE_KEY } from './index'
 import { AlbumsDaoService } from './dal/dao/albums.dao'
@@ -15,6 +13,10 @@ import { AlbumsStorageService } from './dal/dao/albums.storage'
 import { AlbumViewerDbService } from './dal/dao/album-viewer-db.service'
 import { PicturesStorageService } from './dal/dao/pictures.storage'
 import { ThumbnailsStorageService } from './dal/dao/thumbnails.storage'
+import { OnlineAlbumsEffects } from './albums/online-albums/online-albums.effects'
+import { OfflineAlbumsEffects } from './albums/offline-albums/offline-albums.effects'
+import { AlbumsFacadeService } from './albums/albums.facade'
+import { OfflineFilesEffects } from './albums/offline-files/offline-files.effects';
 
 @NgModule({
   imports: [
@@ -22,8 +24,10 @@ import { ThumbnailsStorageService } from './dal/dao/thumbnails.storage'
     StoreModule.forFeature(ALBUMS_STATE_KEY, albumsReducer),
     StoreModule.forFeature(DOWNLOAD_ALBUM_STATE_KEY, downloadAlbumReducer),
     EffectsModule.forFeature([
-      AlbumsEffects,
       DownloadAlbumEffects,
+      OfflineAlbumsEffects,
+      OfflineFilesEffects,
+      OnlineAlbumsEffects,
     ]),
   ],
   providers: [

@@ -27,9 +27,8 @@
     attr.data-id="{{ picture.id }}"
     class="thumbnails__thumbnail"
     [class.thumbnails__thumbnail--selected]="pictureIndex === selectedIndex"
-    [src]="'/api/thumbnails/' + picture.id"
+    [src]="getThumbnailUrlFn(picture.id)"
     [ngStyle]="thumbnailStyles"
     (click)="selectIndex.emit(pictureIndex)"
-    (load)="refreshThumbnailStyles()"
-    >
+    (load)="refreshThumbnailStyles(); scrollThumbnailIntoView(selectedIndex)">
 </div>

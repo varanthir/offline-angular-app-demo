@@ -17,6 +17,7 @@ export class AlbumsTableComponent {
   }
 
   @Output() public readonly downloadAlbum = new EventEmitter<Album>()
+  @Output() public readonly deleteAlbum = new EventEmitter<Album>()
 
   public readonly dataSource = new MatTableDataSource<Album>()
   public readonly columns$ = this.screen.isMobile$.pipe(
@@ -25,4 +26,12 @@ export class AlbumsTableComponent {
       : ['name', 'imagesCount', 'isSaved']))
 
   constructor(private readonly screen: ScreenService) {}
+
+  public saveOrDelete(album: Album): void {
+    if (album.isOffline) {
+      this.deleteAlbum.emit(album)
+    } else {
+      this.downloadAlbum.emit(album)
+    }
+  }
 }

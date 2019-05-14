@@ -6,7 +6,8 @@
   *ngIf="hasAlbums$ | async"
   [albums]="albums$ | async"
   [isPending]="isAlbumsPending$ | async"
-  (downloadAlbum)="downloadAlbum($event)">
+  (downloadAlbum)="downloadAlbum($event)"
+  (deleteAlbum)="deleteAlbum($event.id)">
 </app-albums-table>
 
 <div *ngIf="isEmptyAlbumsPending$ | async" class="app-loader">
