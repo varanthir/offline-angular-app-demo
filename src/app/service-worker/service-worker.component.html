@@ -1,16 +1,36 @@
 <h2 class="mat-h2">Service Worker</h2>
+
 <mat-card>
   <mat-card-subtitle>isStable</mat-card-subtitle>
+
   <mat-card-content>
     <button mat-stroked-button type="button" (click)="toggleIsStable()">Toggle isStable</button>
-
     <br><br>
 
     <button mat-stroked-button color="primary" type="button" (click)="setTimeoutInsideNgZone()">Run timeout inside NgZone</button>
-
     <br><br>
 
     <button mat-stroked-button color="warn" type="button" (click)="setTimeoutOutsideNgZone()">Run timeout outside NgZone</button>
+  </mat-card-content>
+</mat-card>
 
+<mat-card>
+  <mat-card-subtitle>SwUpdate</mat-card-subtitle>
+
+  <mat-card-content>
+    <p>SwUpdate.isEnabled (is Service Worker Enabled): {{ swIsEnabled }}</p>
+
+    <button mat-stroked-button type="button" (click)="checkForUpdate()">Check for update</button>
+
+    <textarea *ngIf="updateAvailable$ | async as updateAvailable" class="update-info">{{ updateAvailable }}</textarea>
+  </mat-card-content>
+</mat-card>
+
+<mat-card>
+  <mat-card-subtitle>/ngsw/state (ServiceWorker log)</mat-card-subtitle>
+
+  <mat-card-content *ngIf="swIsEnabled">
+    <button mat-stroked-button type="button" (click)="ngswLog.contentWindow.location.reload()">Refresh</button>
+    <iframe #ngswLog src="/ngsw/state" class="ngsw-log"></iframe>
   </mat-card-content>
 </mat-card>
