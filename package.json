@@ -36,6 +36,7 @@
     "core-js": "^3.0.1",
     "idb": "^4.0.3",
     "lodash.difference": "^4.5.0",
+    "material-design-icons": "^3.0.1",
     "nodemon": "^1.18.10",
     "rxjs": "~6.5.2",
     "tslib": "^1.9.0",

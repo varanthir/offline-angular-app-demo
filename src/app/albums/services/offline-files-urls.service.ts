@@ -6,8 +6,8 @@ import { map } from 'rxjs/operators';
 export class OfflineFilesUrlsService {
   public readonly getPictureUrlFn$ = this.albumsFacade.offlineFilesEntities$.pipe(
     map(offlineFiles => offlineFiles.pictures),
-    map(pictures => (pictureId: number) => {
-        const picture = pictures[pictureId]
+    map(pictures => (pictureId: number | null) => {
+        const picture = pictureId && pictures[pictureId]
         return picture
           ? picture.safeUrl
           : '/assets/image-placeholder.svg'
@@ -17,8 +17,8 @@ export class OfflineFilesUrlsService {
 
   public readonly getThumbnailsUrlFn$ = this.albumsFacade.offlineFilesEntities$.pipe(
     map(offlineFiles => offlineFiles.thumbnails),
-    map(thumbnails => (pictureId: number) => {
-        const thumbnail = thumbnails[pictureId]
+    map(thumbnails => (pictureId: number | null) => {
+        const thumbnail = pictureId && thumbnails[pictureId]
         return thumbnail
           ? thumbnail.safeUrl
           : '/assets/image-placeholder.svg'

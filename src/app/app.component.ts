@@ -16,7 +16,7 @@ export class AppComponent implements OnDestroy {
     map(isMobile => isMobile ? 'over' : 'side'))
 
   public readonly connectivityIcon$ = this.connection.isOnline$.pipe(
-    map(isOnline => isOnline ? 'wifi' : 'wifi_off'))
+    map(isOnline => isOnline ? 'wifi' : 'signal_wifi_off'))
 
   private readonly notifyConnectivitySub: Subscription = this.connection.isOnline$.pipe(
     skip(1),

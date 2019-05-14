@@ -5,7 +5,8 @@
     "types": []
   },
   "angularCompilerOptions": {
-    "enableIvy": true
+    "enableIvy": true,
+    "fullTemplateTypeCheck": false
   },
   "exclude": [
     "test.ts",
