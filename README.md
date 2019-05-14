@@ -20,12 +20,6 @@ Run: `yarn test`
 Build Assistant in production mode:
 - `yarn build --prod`
 
-<!--
-TODO:
-And overwrite SW script:
-- `yarn fix-sw`
--->
-
 Serve as static content:
 - `yarn serve-static`
 

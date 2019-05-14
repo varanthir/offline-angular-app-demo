@@ -1,9 +1,10 @@
 import { Component, ApplicationRef, OnDestroy, ChangeDetectionStrategy } from '@angular/core'
-import { map, debounceTime, skip } from 'rxjs/operators'
+import { map, skip } from 'rxjs/operators'
 import { Subscription } from 'rxjs'
 import { ScreenService } from './services/screen.service'
 import { ConnectionService } from './services/connection.service'
 import { MatSnackBar } from '@angular/material'
+import { SafeDataFacadeService } from './state/safe-data.facade';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,8 @@ export class AppComponent implements OnDestroy {
   public readonly connectivityIcon$ = this.connection.isOnline$.pipe(
     map(isOnline => isOnline ? 'wifi' : 'signal_wifi_off'))
 
+  public readonly showIsStable$ = this.safeDataFacade.showIsStable$
+
   private readonly notifyConnectivitySub: Subscription = this.connection.isOnline$.pipe(
     skip(1),
     map(isOnline => isOnline ? 'Connection is back' : 'App is offline'))
@@ -25,10 +28,10 @@ export class AppComponent implements OnDestroy {
       this.snackbar.open(message, undefined, { duration: 3000 })
     })
 
-  private readonly isStableSub: Subscription = this.appRef.isStable.pipe(
-    debounceTime(200)
-  ).subscribe(isStable => {
-    console.log('# Stable:', isStable)
+  private readonly isStableSub: Subscription = this.appRef.isStable.subscribe(isStable => {
+    try {
+      document.getElementById('is-stable-info')!.innerText = `${isStable}`
+    } catch (e) { /*noop*/ }
   })
 
   public get startOpened(): boolean {
@@ -38,6 +41,7 @@ export class AppComponent implements OnDestroy {
   constructor(
     private readonly appRef: ApplicationRef,
     private readonly connection: ConnectionService,
+    private readonly safeDataFacade: SafeDataFacadeService,
     private readonly screen: ScreenService,
     private readonly snackbar: MatSnackBar,
   ) {}

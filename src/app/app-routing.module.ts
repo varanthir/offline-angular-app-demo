@@ -5,6 +5,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component'
 const routes: Routes = [
   { path: '', redirectTo: 'albums', pathMatch: 'full' },
   { path: 'albums', loadChildren: './albums/albums.module#AlbumsModule' },
+  { path: 'service-worker', loadChildren: './service-worker/service-worker.module#ServiceWorkerModule' },
   { path: 'not-found', component: NotFoundComponent },
   { path: '**', redirectTo: 'not-found' },
 ]

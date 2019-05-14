@@ -21,3 +21,16 @@
 .mat-sidenav-content__padding-wrapper {
   padding: $main-padding;
 }
+
+.is-stable {
+  background-color: rgba(white, 0.75);
+  border-radius: $main-border-radius;
+  font-weight: 500;
+  left: 75%;
+  min-width: 120px;
+  padding: 10px;
+  position: fixed;
+  text-align: center;
+  top: 15px;
+  z-index: 9999;
+}

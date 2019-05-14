@@ -22,3 +22,7 @@
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+<div *ngIf="showIsStable$ | async" class="is-stable">
+  isStable: <span id="is-stable-info"></span>
+</div>
