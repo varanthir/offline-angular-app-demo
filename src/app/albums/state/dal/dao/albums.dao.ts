@@ -10,6 +10,9 @@ const getFileWithProgressConfig = {
   observe: 'events' as 'events',
   reportProgress: true,
   responseType: 'blob' as 'blob',
+  headers: {
+    'ngsw-bypass': 'true' // bypas Angular Service Worker to report request progress, it can have any value
+  }
 }
 
 @Injectable()

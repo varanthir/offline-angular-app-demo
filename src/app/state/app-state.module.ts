@@ -5,10 +5,12 @@ import { EffectsModule } from '@ngrx/effects'
 import { environment } from 'environments/environment'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 
+const storeDevtoolsName = 'Album Viewer'.concat(environment.production ? ' --prod' : '')
+
 @NgModule({
   imports: [
     StoreModule.forRoot(appReducer),
-    environment.production ? [] : StoreDevtoolsModule.instrument({ maxAge: 300, name: 'Album Viewer' }),
+    StoreDevtoolsModule.instrument({ maxAge: 300, name: storeDevtoolsName }),
     EffectsModule.forRoot([]),
   ],
 })
