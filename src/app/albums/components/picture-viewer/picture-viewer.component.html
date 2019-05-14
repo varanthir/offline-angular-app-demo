@@ -30,6 +30,5 @@
     [src]="'/api/thumbnails/' + picture.id"
     [ngStyle]="thumbnailStyles"
     (click)="selectIndex.emit(pictureIndex)"
-    (load)="refreshThumbnailStyles()"
-    >
+    (load)="refreshThumbnailStyles(); scrollThumbnailIntoView(selectedIndex)">
 </div>
