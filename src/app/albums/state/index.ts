@@ -163,10 +163,18 @@ export const getDownloadAlbumProgress = createSelector(
 
 
 // offlineFiles
-export const getOfflineFilesState = createSelector(
+export const getOfflineFiles = createSelector(
   getAlbumsState,
   state => ({
     pictures: fromOfflineFiles.selectAllPictures(state.offlineFiles.pictures),
     thumbnails: fromOfflineFiles.selectAllPictures(state.offlineFiles.thumbnails),
+  })
+)
+
+export const getOfflineFilesEntities = createSelector(
+  getAlbumsState,
+  state => ({
+    pictures: fromOfflineFiles.selectPictureEntities(state.offlineFiles.pictures),
+    thumbnails: fromOfflineFiles.selectThumbnailEntities(state.offlineFiles.thumbnails),
   })
 )

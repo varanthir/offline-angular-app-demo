@@ -3,6 +3,7 @@ import { Overlay, OverlayRef } from '@angular/cdk/overlay'
 import { CdkPortal } from '@angular/cdk/portal'
 import { Album } from 'app/albums/state/dal/dto/album';
 import { Picture } from 'app/albums/state/dal/dto/picture';
+import { SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-album-viewer',
@@ -14,6 +15,8 @@ export class AlbumViewerComponent {
   @Input() public album: Album
   @Input() public isPending: boolean
   @Input() public isError: boolean
+  @Input() public getPictureUrlFn: (pictureId: number | null) => SafeUrl | string
+  @Input() public getThumbnailUrlFn: (pictureId: number | null) => SafeUrl | string
 
   @Output() public readonly tryAgain = new EventEmitter<void>()
 

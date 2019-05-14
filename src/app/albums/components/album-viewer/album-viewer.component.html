@@ -5,7 +5,7 @@
 <div *ngIf="album" class="thumbnails">
   <img
     *ngFor="let picture of album.pictures; let pictureIndex=index; trackBy: trackById"
-    [src]="'/api/thumbnails/' + picture.id"
+    [src]="getThumbnailUrlFn(picture.id)"
     (click)="showPictureViewer(pictureIndex)"
     class="thumbnails__thumbnail">
   <div *ngFor="let a of [1,2,3,4,5]" class="thumbnails__empty"></div>
@@ -19,6 +19,8 @@
   *cdkPortal
   [pictures]="album.pictures"
   [selectedIndex]="selectedPictureIndex"
+  [getPictureUrlFn]="getPictureUrlFn"
+  [getThumbnailUrlFn]="getThumbnailUrlFn"
   (selectIndex)="selectedPictureIndex = $event"
   (close)="hidePictureViewer()">
 </app-picture-viewer>

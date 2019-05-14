@@ -9,7 +9,8 @@ import {
   getOfflineAlbum,
   getAlbums,
   getOnlineAlbum,
-  getOfflineFilesState,
+  getOfflineFiles,
+  getOfflineFilesEntities,
 } from '../index'
 import { GetOfflineAlbumsAction, GetOfflineAlbumAction, DeleteOfflineAlbumAction } from './offline-albums/offline-albums.actions'
 import { GetOnlineAlbumsAction, GetOnlineAlbumAction } from './online-albums/online-albums.actions';
@@ -27,7 +28,8 @@ export class AlbumsFacadeService {
   public readonly onlineAlbumStatus$ = this.store.pipe(select(getOnlineAlbumStatus))
   public readonly offlineAlbumStatus$ = this.store.pipe(select(getOfflineAlbumStatus))
 
-  public readonly offlineFiles$ = this.store.pipe(select(getOfflineFilesState))
+  public readonly offlineFiles$ = this.store.pipe(select(getOfflineFiles))
+  public readonly offlineFilesEntities$ = this.store.pipe(select(getOfflineFilesEntities))
 
   constructor(private readonly store: Store<AlbumsAppState>) {}
 

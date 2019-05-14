@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core'
 import { Picture } from 'app/albums/state/dal/dto/picture'
+import { SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-picture-viewer',
@@ -9,6 +10,8 @@ import { Picture } from 'app/albums/state/dal/dto/picture'
 })
 export class PictureViewerComponent {
   @Input() public pictures: Picture[]
+  @Input() public getPictureUrlFn: (pictureId: number | null) => SafeUrl | string
+  @Input() public getThumbnailUrlFn: (pictureId: number | null) => SafeUrl | string
 
   private _selectedIndex: number | null = null
 
@@ -30,12 +33,13 @@ export class PictureViewerComponent {
 
   public thumbnailStyles = {}
 
-  public get src(): string {
+  public get src(): SafeUrl | string {
     if (this.selectedIndex === null) {
-      return '#'
+      return this.getPictureUrlFn(null)
     }
     const pictureId = this.pictures[this.selectedIndex].id
-    return `api/pictures/${pictureId}`
+
+    return this.getPictureUrlFn(pictureId)
   }
 
   public get showPreviousButton(): boolean {

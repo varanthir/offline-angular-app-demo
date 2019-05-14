@@ -18,10 +18,11 @@ import { OverlayModule } from '@angular/cdk/overlay'
 import { PortalModule } from '@angular/cdk/portal'
 import { FailedActionComponent } from './components/failed-action/failed-action.component'
 import { DownloadAlbumModalComponent } from './components/download-album-modal/download-album-modal.component'
-import { DeleteAlbumDialogComponent } from './components/delete-album-dialog/delete-album-dialog.component';
-import { OnlineAlbumViewerComponent } from './online-album-viewer/online-album-viewer.component';
-import { AlbumViewerComponent } from './components/album-viewer/album-viewer.component';
-import { OfflineAlbumViewerComponent } from './offline-album-viewer/offline-album-viewer.component';
+import { DeleteAlbumDialogComponent } from './components/delete-album-dialog/delete-album-dialog.component'
+import { OnlineAlbumViewerComponent } from './online-album-viewer/online-album-viewer.component'
+import { AlbumViewerComponent } from './components/album-viewer/album-viewer.component'
+import { OfflineAlbumViewerComponent } from './offline-album-viewer/offline-album-viewer.component'
+import { OfflineFilesUrlsService } from './services/offline-files-urls.service'
 
 @NgModule({
   declarations: [
@@ -48,6 +49,9 @@ import { OfflineAlbumViewerComponent } from './offline-album-viewer/offline-albu
     MatTooltipModule,
     OverlayModule,
     PortalModule,
+  ],
+  providers: [
+    OfflineFilesUrlsService,
   ]
 })
 export class AlbumsModule {}
