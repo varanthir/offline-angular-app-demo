@@ -18,8 +18,8 @@ export class OnlineAlbumViewerComponent implements OnDestroy {
   public readonly album$ = this.params.albumId$.pipe(
     switchMap(albumId => this.albumsFacade.getOnlineAlbumById$(albumId)))
 
-  public readonly getPictureUrlFn = (pictureId: number) => `/api/picture/${pictureId}`
-  public readonly getThumbnailUrlFn = (pictureId: number) => `/api/thumbnail/${pictureId}`
+  public readonly getPictureUrlFn = (pictureId: number) => `/api/pictures/${pictureId}`
+  public readonly getThumbnailUrlFn = (pictureId: number) => `/api/thumbnails/${pictureId}`
 
   private readonly getAlbumSub: Subscription = this.params.albumId$
     .subscribe(albumId => this.albumsFacade.getOnlineAlbum(albumId))
