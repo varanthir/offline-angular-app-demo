@@ -28,6 +28,7 @@ export class OfflineAlbumViewerComponent implements OnDestroy {
 
   public ngOnDestroy(): void {
     this.getAlbumSub.unsubscribe()
+    this.albumsFacade.revokeOfflineFiles()
   }
 
   public getAlbum(): void {

@@ -2,6 +2,7 @@ import { createFeatureSelector, createSelector } from '@ngrx/store'
 import * as fromAlbums from './albums/albums.reducer'
 import * as fromOnlineAlbums from './albums/online-albums/online-albums.reducer'
 import * as fromOfflineAlbums from './albums/offline-albums/offline-albums.reducer'
+import * as fromOfflineFiles from './albums/offline-files/offline-files.reducer'
 import * as fromDownloadAlbum from './download-album/download-album.reducer'
 import { ActionStatus } from 'utils/ngrx/action-status'
 import difference from 'lodash.difference'
@@ -158,4 +159,14 @@ export const getDownloadAlbumStatus = createSelector(
 export const getDownloadAlbumProgress = createSelector(
   getDownloadAlbumState,
   fromDownloadAlbum.getDownloadAlbumProgress
+)
+
+
+// offlineFiles
+export const getOfflineFilesState = createSelector(
+  getAlbumsState,
+  state => ({
+    pictures: fromOfflineFiles.selectAllPictures(state.offlineFiles.pictures),
+    thumbnails: fromOfflineFiles.selectAllPictures(state.offlineFiles.thumbnails),
+  })
 )

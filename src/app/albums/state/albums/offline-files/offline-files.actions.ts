@@ -4,6 +4,7 @@ import { OfflineFileUrl } from '../../dal/dto/offline-file-url';
 
 export enum OfflineFilesActionTypes {
   REVOKE_OFFLINE_FILES_URLS = '[Albums/Offline Files] REVOKE_OFFLINE_FILES_URLS',
+  CLEAR_OFFLINE_FILES_URLS = '[Albums/Offline Files] CLEAR_OFFLINE_FILES_URLS',
 
   GET_OFFLINE_FILES = '[Albums/Offline Files] GET_OFFLINE_FILES',
   GET_OFFLINE_FILES_SUCCESS = '[Albums/Offline Files] GET_OFFLINE_FILES_SUCCESS',
@@ -14,6 +15,10 @@ checkTypes(OfflineFilesActionTypes as any)
 
 export class RevokeOfflineFilesUrlsAction implements Action {
   public readonly type = OfflineFilesActionTypes.REVOKE_OFFLINE_FILES_URLS
+}
+
+export class ClearOfflineFilesUrlsAction implements Action {
+  public readonly type = OfflineFilesActionTypes.CLEAR_OFFLINE_FILES_URLS
 }
 
 
@@ -40,6 +45,7 @@ export class GetOfflineFilesUrlsErrorAction implements Action {
 
 export type OfflineFilesActions
   = RevokeOfflineFilesUrlsAction
+  | ClearOfflineFilesUrlsAction
 
   | GetOfflineFilesUrlsAction
   | GetOfflineFilesUrlsSuccessAction

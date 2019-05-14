@@ -9,12 +9,14 @@ import {
   getOfflineAlbum,
   getAlbums,
   getOnlineAlbum,
+  getOfflineFilesState,
 } from '../index'
 import { GetOfflineAlbumsAction, GetOfflineAlbumAction, DeleteOfflineAlbumAction } from './offline-albums/offline-albums.actions'
 import { GetOnlineAlbumsAction, GetOnlineAlbumAction } from './online-albums/online-albums.actions';
 import { filter } from 'rxjs/operators'
 import { Observable } from 'rxjs'
 import { Album } from '../dal/dto/album'
+import { RevokeOfflineFilesUrlsAction } from './offline-files/offline-files.actions';
 
 @Injectable()
 export class AlbumsFacadeService {
@@ -24,6 +26,8 @@ export class AlbumsFacadeService {
 
   public readonly onlineAlbumStatus$ = this.store.pipe(select(getOnlineAlbumStatus))
   public readonly offlineAlbumStatus$ = this.store.pipe(select(getOfflineAlbumStatus))
+
+  public readonly offlineFiles$ = this.store.pipe(select(getOfflineFilesState))
 
   constructor(private readonly store: Store<AlbumsAppState>) {}
 
@@ -54,5 +58,9 @@ export class AlbumsFacadeService {
     return this.store.pipe(select(getOfflineAlbum)).pipe(
       filter<Album>(album => album !== null && album.id === albumId),
     )
+  }
+
+  public revokeOfflineFiles(): void {
+    this.store.dispatch(new RevokeOfflineFilesUrlsAction())
   }
 }

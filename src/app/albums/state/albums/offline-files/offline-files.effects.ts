@@ -7,13 +7,15 @@ import {
   OfflineFilesActionTypes,
   GetOfflineFilesUrlsSuccessAction,
   GetOfflineFilesUrlsErrorAction,
+  ClearOfflineFilesUrlsAction,
 } from './offline-files.actions'
-import { catchError, map, switchMap } from 'rxjs/operators'
+import { catchError, map, switchMap, tap, first } from 'rxjs/operators'
 import { PicturesStorageService } from '../../dal/dao/pictures.storage';
 import { ThumbnailsStorageService } from '../../dal/dao/thumbnails.storage';
 import { PictureArrayBufferBlob } from '../../dal/dto/picture-array-buffer-blob';
 import { OfflineFileUrl } from '../../dal/dto/offline-file-url';
 import { DomSanitizer } from '@angular/platform-browser';
+import { AlbumsFacadeService } from '../albums.facade';
 
 @Injectable()
 export class OfflineFilesEffects {
@@ -35,8 +37,22 @@ export class OfflineFilesEffects {
     ))
   )
 
+  @Effect()
+  public readonly revokeOfflineFilesUrls$: Observable<Action> = this.actions$.pipe(
+    ofType(OfflineFilesActionTypes.REVOKE_OFFLINE_FILES_URLS),
+    switchMap(() => this.albumsFacade.offlineFiles$.pipe(
+      first(),
+      tap(({ pictures, thumbnails }) => {
+        pictures.forEach(picture => URL.revokeObjectURL(picture.url))
+        thumbnails.map(thumbnail => URL.revokeObjectURL(thumbnail.url))
+      }),
+      map(() => new ClearOfflineFilesUrlsAction()),
+    ))
+  )
+
   constructor(
     private readonly actions$: Actions<OfflineFilesActions>,
+    private readonly albumsFacade: AlbumsFacadeService,
     private readonly domSanitizer: DomSanitizer,
     private readonly picturesStorage: PicturesStorageService,
     private readonly thumbnailsStorage: ThumbnailsStorageService,
