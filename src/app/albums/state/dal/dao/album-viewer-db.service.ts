@@ -60,8 +60,8 @@ export class AlbumViewerDbService {
           case 0:
             db.createObjectStore(StoreName.Albums, { keyPath: 'id' })
             db.createObjectStore(StoreName.AlbumsFinished, { keyPath: 'id' })
-            db.createObjectStore(StoreName.Pictures)
-            db.createObjectStore(StoreName.Thumbnails)
+            db.createObjectStore(StoreName.Pictures, { keyPath: 'id' })
+            db.createObjectStore(StoreName.Thumbnails, { keyPath: 'id' })
         }
       },
       blocked() {

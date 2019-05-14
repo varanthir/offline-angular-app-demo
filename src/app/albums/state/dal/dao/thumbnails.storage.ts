@@ -13,7 +13,7 @@ export class ThumbnailsStorageService {
       if (album === undefined) {
         throw new Error(`Thumbnail with id: ${pictureId} doesn't exist in IndexedDB`)
       }
-      return album
+      return PictureArrayBufferBlob.fromObject(album)
     }))
   }
 
@@ -27,13 +27,13 @@ export class ThumbnailsStorageService {
         throw new Error(`Can't find all thumbnails with specified ids in IndexedDB`)
       }
 
-      return filteredPictureArrayBufferBlobs
+      return filteredPictureArrayBufferBlobs.map(PictureArrayBufferBlob.fromObject)
     }))
   }
 
-  public set(pictureId: number, arrayBufferBlob: PictureArrayBufferBlob): Observable<number> {
+  public set(arrayBufferBlob: PictureArrayBufferBlob): Observable<number> {
     return from(this.albumViewerDb.db
-      .then(db => db.put(StoreName.Thumbnails, arrayBufferBlob, pictureId)))
+      .then(db => db.put(StoreName.Thumbnails, arrayBufferBlob)))
   }
 
   public delete(pictureId: number): Observable<void> {

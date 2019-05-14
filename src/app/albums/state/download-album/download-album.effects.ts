@@ -94,8 +94,8 @@ export class DownloadAlbumEffects {
   public readonly savePicture$: Observable<Action> = this.actions$.pipe(
     ofType(DownloadAlbumActionsTypes.DOWNLOAD_PICTURE_SAVE),
     map(action => action.payload),
-    mergeMap(({ pictureId, blob }) => PictureArrayBufferBlob.from(pictureId, blob).pipe(
-      mergeMap(arrayBufferBlob => this.picturesStorage.set(pictureId, arrayBufferBlob)),
+    mergeMap(({ pictureId, blob }) => PictureArrayBufferBlob.fromBlob(pictureId, blob).pipe(
+      mergeMap(arrayBufferBlob => this.picturesStorage.set(arrayBufferBlob)),
       map(() => new DownloadPictureSuccessAction({ pictureId })),
       catchError((error: Error) => of(new DownloadPictureErrorAction(error))),
       takeUntil(this.downloadErrors$)
@@ -121,8 +121,8 @@ export class DownloadAlbumEffects {
   public readonly saveThumbnail$: Observable<Action> = this.actions$.pipe(
     ofType(DownloadAlbumActionsTypes.DOWNLOAD_THUMBNAIL_SAVE),
     map(action => action.payload),
-    mergeMap(({ pictureId, blob }) => PictureArrayBufferBlob.from(pictureId, blob).pipe(
-      mergeMap(arrayBufferBlob => this.thumbnailsStorage.set(pictureId, arrayBufferBlob)),
+    mergeMap(({ pictureId, blob }) => PictureArrayBufferBlob.fromBlob(pictureId, blob).pipe(
+      mergeMap(arrayBufferBlob => this.thumbnailsStorage.set(arrayBufferBlob)),
       map(() => new DownloadThumbnailSuccessAction({ pictureId })),
       catchError((error: Error) => of(new DownloadThumbnailErrorAction(error))),
       takeUntil(this.downloadErrors$)
