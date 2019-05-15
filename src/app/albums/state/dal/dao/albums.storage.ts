@@ -62,6 +62,9 @@ export class AlbumsStorageService {
       .map(albumToKeep => albumToKeep.pictures.map(picture => picture.id))
       .reduce((acc, curr) => [...acc, ...curr], [])
 
-    return difference(pictureIdsToDelete, pictureIdsToKeep)
+    return difference(
+      pictureIdsToDelete,
+      Array.from(new Set(pictureIdsToKeep)),
+    )
   }
 }
