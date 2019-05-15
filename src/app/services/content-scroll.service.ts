@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core'
 
 @Injectable()
 export class ContentScrollService {
+  // TODO: Consider better way to scroll to the top on changing route
   private _element: HTMLElement | null = null
 
   public registerElement(element: HTMLElement): void {
