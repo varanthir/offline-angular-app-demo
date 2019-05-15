@@ -5,8 +5,9 @@ import { DownloadAlbumFacadeService } from './state/download-album/download-albu
 import { Album } from './state/dal/dto/album'
 import { MatDialog } from '@angular/material'
 import { DownloadAlbumModalComponent } from './components/download-album-modal/download-album-modal.component'
-import { AlbumsFacadeService } from './state/albums/albums.facade';
-import { DeleteAlbumDialogComponent } from './components/delete-album-dialog/delete-album-dialog.component';
+import { AlbumsFacadeService } from './state/albums/albums.facade'
+import { DeleteAlbumDialogComponent } from './components/delete-album-dialog/delete-album-dialog.component'
+import { ContentScrollService } from 'app/services/content-scroll.service'
 
 @Component({
   selector: 'app-albums',
@@ -25,9 +26,11 @@ export class AlbumsComponent implements OnInit {
     private readonly albumsFacade: AlbumsFacadeService,
     private readonly downloadAlbumFacade: DownloadAlbumFacadeService,
     private readonly dialog: MatDialog,
+    private readonly contentScroll: ContentScrollService,
   ) {}
 
   public ngOnInit(): void {
+    this.contentScroll.scrollTop()
     this.getAlbums()
   }
 

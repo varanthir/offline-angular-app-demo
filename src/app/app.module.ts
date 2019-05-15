@@ -18,6 +18,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component'
 import { AppStateModule } from './state/app-state.module'
 import { ScreenService } from './services/screen.service'
 import { ConnectionService } from './services/connection.service'
+import { ContentScrollService } from './services/content-scroll.service'
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { ConnectionService } from './services/connection.service'
   providers: [
     ConnectionService,
     ScreenService,
+    ContentScrollService,
   ],
   bootstrap: [AppComponent]
 })

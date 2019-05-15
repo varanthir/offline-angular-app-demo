@@ -26,11 +26,12 @@
   background-color: rgba(white, 0.75);
   border-radius: $main-border-radius;
   font-weight: 500;
-  left: 75%;
+  left: 50%;
   min-width: 120px;
   padding: 10px;
   position: fixed;
   text-align: center;
   top: 15px;
+  transform: translateX(-50%);
   z-index: 9999;
 }
