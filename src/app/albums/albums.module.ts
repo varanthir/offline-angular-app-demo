@@ -8,6 +8,7 @@ import {
   MatProgressSpinnerModule,
   MatTableModule,
   MatTooltipModule,
+  MatCardModule,
 } from '@angular/material'
 import { AlbumsRoutingModule } from './albums-routing.module'
 import { AlbumsComponent } from './albums.component'
@@ -41,6 +42,7 @@ import { OfflineFilesUrlsService } from './services/offline-files-urls.service'
     AlbumsStateModule,
     CommonModule,
     MatButtonModule,
+    MatCardModule,
     MatDialogModule,
     MatIconModule,
     MatProgressBarModule,

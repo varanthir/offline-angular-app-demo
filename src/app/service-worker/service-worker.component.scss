@@ -1,5 +1,7 @@
+@import "src/theme/base";
+
 .mat-card {
-  margin: 20px 0;
+  margin: $main-box-margin 0;
 }
 
 .update-info {

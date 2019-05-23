@@ -16,6 +16,7 @@ import {
 import { catchError, map, switchMap } from 'rxjs/operators'
 import { AlbumsStorageService } from '../../dal/dao/albums.storage'
 import { GetOfflineFilesUrlsAction } from '../offline-files/offline-files.actions';
+import { GetStorageEstimateAction } from '../../storage-estimate/storage-estimate.actions';
 
 @Injectable()
 export class OfflineAlbumsEffects {
@@ -60,6 +61,15 @@ export class OfflineAlbumsEffects {
     ofType(OfflineAlbumsActionTypes.GET_OFFLINE_ALBUM_SUCCESS),
     map(action => action.payload.album.pictures.map(({ id }) => id)),
     map(pictureIds => new GetOfflineFilesUrlsAction({ pictureIds }))
+  )
+
+  @Effect()
+  public readonly refresgStorageEstimate$: Observable<Action> = this.actions$.pipe(
+    ofType(
+      OfflineAlbumsActionTypes.DELETE_OFFLINE_ALBUM_SUCCESS,
+      OfflineAlbumsActionTypes.DELETE_OFFLINE_ALBUM_ERROR,
+    ),
+    map(() => new GetStorageEstimateAction())
   )
 
   constructor(

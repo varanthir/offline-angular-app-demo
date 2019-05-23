@@ -8,6 +8,8 @@ import { DownloadAlbumModalComponent } from './components/download-album-modal/d
 import { AlbumsFacadeService } from './state/albums/albums.facade'
 import { DeleteAlbumDialogComponent } from './components/delete-album-dialog/delete-album-dialog.component'
 import { ContentScrollService } from 'app/services/content-scroll.service'
+import { StorageEstimateFacadeService } from './state/storage-estimate/storage-estimate.facade'
+import { toMemoryUnit } from 'utils/to-memory-unit'
 
 @Component({
   selector: 'app-albums',
@@ -21,17 +23,24 @@ export class AlbumsComponent implements OnInit {
   public readonly isAlbumsPending$ = this.albumsFacade.albumsStatus$.pipe(map(isPending))
   public readonly isEmptyAlbumsPending$ = this.albumsFacade.emptyAlbumsPending$
   public readonly isAlbumsError$ = this.albumsFacade.albumsStatus$.pipe(map(isError))
+  public readonly storageEstimate$ = this.storageEstimateFacade.state$
 
   constructor(
     private readonly albumsFacade: AlbumsFacadeService,
     private readonly downloadAlbumFacade: DownloadAlbumFacadeService,
     private readonly dialog: MatDialog,
     private readonly contentScroll: ContentScrollService,
+    private readonly storageEstimateFacade: StorageEstimateFacadeService,
   ) {}
 
   public ngOnInit(): void {
     this.contentScroll.scrollTop()
     this.getAlbums()
+    this.getStorageEstimate()
+  }
+
+  public getStorageEstimate(): void {
+    this.storageEstimateFacade.getStorageEstimate()
   }
 
   public getAlbums(): void {
@@ -51,5 +60,19 @@ export class AlbumsComponent implements OnInit {
       .afterClosed()
       .pipe(filter(Boolean))
       .subscribe(() => this.albumsFacade.deleteOfflineAlbum(albumId))
+  }
+
+  public getFree({ usage, quota }: StorageEstimate): string {
+    return usage !== undefined && quota !== undefined
+      ? toMemoryUnit(quota - usage)
+      : 'N/A'
+  }
+
+  public getUsed({ usage }: StorageEstimate): string {
+    return usage !== undefined ? toMemoryUnit(usage) : 'N/A'
+  }
+
+  public getTotal({ quota }: StorageEstimate): string {
+    return quota !== undefined ? toMemoryUnit(quota) : 'N/A'
   }
 }

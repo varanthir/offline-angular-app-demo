@@ -7,18 +7,21 @@ import * as fromDownloadAlbum from './download-album/download-album.reducer'
 import { ActionStatus } from 'utils/ngrx/action-status'
 import difference from 'lodash.difference'
 import { Album } from './dal/dto/album'
+import { StorageEstimateState } from './storage-estimate/storage-estimate.reducer';
 
 export const ALBUMS_STATE_KEY = 'albums'
 export const DOWNLOAD_ALBUM_STATE_KEY = 'downloadAlbums'
+export const STORAGE_ESTIMATE_STATE_KEY = 'storageEstimate'
 
 export type AlbumsAppState = {
   [ALBUMS_STATE_KEY]: fromAlbums.AlbumsState,
   [DOWNLOAD_ALBUM_STATE_KEY]: fromDownloadAlbum.DownloadAlbumState,
+  [STORAGE_ESTIMATE_STATE_KEY]: StorageEstimateState,
 }
 
-export const getAlbumsState =  createFeatureSelector<AlbumsAppState, fromAlbums.AlbumsState>(ALBUMS_STATE_KEY)
-export const getDownloadAlbumState =  createFeatureSelector<AlbumsAppState, fromDownloadAlbum.DownloadAlbumState>(DOWNLOAD_ALBUM_STATE_KEY)
-
+export const getAlbumsState = createFeatureSelector<AlbumsAppState, fromAlbums.AlbumsState>(ALBUMS_STATE_KEY)
+export const getDownloadAlbumState = createFeatureSelector<AlbumsAppState, fromDownloadAlbum.DownloadAlbumState>(DOWNLOAD_ALBUM_STATE_KEY)
+export const getStorageEstimateState = createFeatureSelector<AlbumsAppState, StorageEstimateState>(STORAGE_ESTIMATE_STATE_KEY)
 
 // albums.online
 export const getOnlineAlbumsState = createSelector(

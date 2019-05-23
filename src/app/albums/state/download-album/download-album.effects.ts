@@ -28,8 +28,9 @@ import { AlbumsStorageService } from '../dal/dao/albums.storage'
 import { AlbumsFinishedStorageService } from '../dal/dao/albums-finished.storage'
 import { PicturesStorageService } from '../dal/dao/pictures.storage'
 import { ThumbnailsStorageService } from '../dal/dao/thumbnails.storage'
-import { GetOfflineAlbumsAction } from '../albums/offline-albums/offline-albums.actions';
-import { PictureArrayBufferBlob } from '../dal/dto/picture-array-buffer-blob';
+import { GetOfflineAlbumsAction } from '../albums/offline-albums/offline-albums.actions'
+import { PictureArrayBufferBlob } from '../dal/dto/picture-array-buffer-blob'
+import { GetStorageEstimateAction } from '../storage-estimate/storage-estimate.actions'
 
 @Injectable()
 export class DownloadAlbumEffects {
@@ -159,6 +160,15 @@ export class DownloadAlbumEffects {
   public readonly refreshAlbums$: Observable<Action> = this.actions$.pipe(
     ofType(DownloadAlbumActionsTypes.DOWNLOAD_ALBUM_SUCCESS),
     map(() => new GetOfflineAlbumsAction())
+  )
+
+  @Effect()
+  public readonly refresgStorageEstimate$: Observable<Action> = this.actions$.pipe(
+    ofType(
+      DownloadAlbumActionsTypes.DOWNLOAD_ALBUM_SUCCESS,
+      DownloadAlbumActionsTypes.DOWNLOAD_ALBUM_ERROR,
+    ),
+    map(() => new GetStorageEstimateAction())
   )
 
   constructor(

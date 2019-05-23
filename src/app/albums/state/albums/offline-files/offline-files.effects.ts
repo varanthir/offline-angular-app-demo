@@ -10,12 +10,12 @@ import {
   ClearOfflineFilesUrlsAction,
 } from './offline-files.actions'
 import { catchError, map, switchMap, tap, first } from 'rxjs/operators'
-import { PicturesStorageService } from '../../dal/dao/pictures.storage';
-import { ThumbnailsStorageService } from '../../dal/dao/thumbnails.storage';
-import { PictureArrayBufferBlob } from '../../dal/dto/picture-array-buffer-blob';
-import { OfflineFileUrl } from '../../dal/dto/offline-file-url';
-import { DomSanitizer } from '@angular/platform-browser';
-import { AlbumsFacadeService } from '../albums.facade';
+import { PicturesStorageService } from '../../dal/dao/pictures.storage'
+import { ThumbnailsStorageService } from '../../dal/dao/thumbnails.storage'
+import { PictureArrayBufferBlob } from '../../dal/dto/picture-array-buffer-blob'
+import { OfflineFileUrl } from '../../dal/dto/offline-file-url'
+import { DomSanitizer } from '@angular/platform-browser'
+import { AlbumsFacadeService } from '../albums.facade'
 
 @Injectable()
 export class OfflineFilesEffects {

@@ -1,5 +1,19 @@
 <h2 class="mat-h2">Albums</h2>
 
+<mat-card *ngIf="storageEstimate$ | async as storageEstimate">
+  <mat-card-subtitle>Storage space estimate</mat-card-subtitle>
+  <mat-card-content>
+    <div class="storage-space-item">Free: {{ getFree(storageEstimate) }}</div>
+    <div class="storage-space-item">Used: {{ getUsed(storageEstimate) }}</div>
+    <div class="storage-space-item">Total: {{ getTotal(storageEstimate) }}</div>
+    <div>
+      <button mat-icon-button color="primary" type="button" class="refresh-storage-space" (click)="getStorageEstimate()">
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>
+
 <p app-failed-action *ngIf="isAlbumsError$ | async" (tryAgain)="getAlbums()"></p>
 
 <app-albums-table
