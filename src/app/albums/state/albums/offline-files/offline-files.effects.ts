@@ -44,7 +44,7 @@ export class OfflineFilesEffects {
       first(),
       tap(({ pictures, thumbnails }) => {
         pictures.forEach(picture => URL.revokeObjectURL(picture.url))
-        thumbnails.map(thumbnail => URL.revokeObjectURL(thumbnail.url))
+        thumbnails.forEach(thumbnail => URL.revokeObjectURL(thumbnail.url))
       }),
       map(() => new ClearOfflineFilesUrlsAction()),
     ))
