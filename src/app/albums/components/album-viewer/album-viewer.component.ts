@@ -20,7 +20,7 @@ export class AlbumViewerComponent {
 
   @Output() public readonly tryAgain = new EventEmitter<void>()
 
-  @ViewChild(CdkPortal) private readonly cdkPortal: CdkPortal
+  @ViewChild(CdkPortal, { static: true }) private readonly cdkPortal: CdkPortal
 
   private overlayRef: OverlayRef | null = null
   public selectedPictureIndex: number | null = null

@@ -14,7 +14,7 @@ import { ContentScrollService } from './services/content-scroll.service'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnDestroy {
-  @ViewChild(MatSidenavContent) public set mainContentRef(mainContentRef: MatSidenavContent) {
+  @ViewChild(MatSidenavContent, { static: true }) public set mainContentRef(mainContentRef: MatSidenavContent) {
     this.contentScroll.registerElement(mainContentRef.getElementRef().nativeElement)
   }
 

@@ -10,7 +10,7 @@ Run:
 
 ## Development
 Run:
-- `yarn seed` - seed db
+- `yarn seed` - seed db, no worries if some fetch will fail
 - `yarn api` - start API
 - `yarn start` - start development server
 

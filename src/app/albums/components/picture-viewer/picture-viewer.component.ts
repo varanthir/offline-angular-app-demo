@@ -29,7 +29,7 @@ export class PictureViewerComponent {
   @Output() public readonly selectIndex = new EventEmitter<number>()
   @Output() public readonly close = new EventEmitter<void>()
 
-  @ViewChild('thumbnails') thumbnailsRef: ElementRef<HTMLDivElement>
+  @ViewChild('thumbnails', { static: true }) thumbnailsRef: ElementRef<HTMLDivElement>
 
   public thumbnailStyles = {}
 
