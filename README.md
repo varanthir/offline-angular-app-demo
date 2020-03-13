@@ -19,7 +19,7 @@ Run:
 - `yarn test`
 
 ## Angular Service Worker
-Build Assistant in production mode:
+Build FE app in production mode:
 - `yarn build --prod`
 
 Serve as static content:
