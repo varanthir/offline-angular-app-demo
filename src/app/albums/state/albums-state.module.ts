@@ -24,7 +24,7 @@ import { storageEstimateReducer } from './storage-estimate/storage-estimate.redu
 @NgModule({
   imports: [
     HttpClientModule,
-    // StoreModule.forFeature(ALBUMS_STATE_KEY, albumsReducer),
+    StoreModule.forFeature(ALBUMS_STATE_KEY, albumsReducer),
     StoreModule.forFeature(DOWNLOAD_ALBUM_STATE_KEY, downloadAlbumReducer),
     StoreModule.forFeature(STORAGE_ESTIMATE_STATE_KEY, storageEstimateReducer),
     EffectsModule.forFeature([

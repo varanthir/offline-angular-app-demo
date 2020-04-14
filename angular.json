@@ -149,6 +149,7 @@
     "packageManager": "yarn",
     "warnings": {
       "typescriptMismatch": false
-    }
+    },
+    "analytics": false
   }
 }
