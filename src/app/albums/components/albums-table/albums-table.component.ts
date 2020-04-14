@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core'
-import { MatTableDataSource } from '@angular/material'
+import { MatTableDataSource } from '@angular/material/table';
 import { Album } from 'app/albums/state/dal/dto/album'
 import { ScreenService } from 'app/services/screen.service'
 import { map } from 'rxjs/operators'

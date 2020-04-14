@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core'
 import { DownloadAlbumFacadeService } from 'app/albums/state/download-album/download-album.facade'
 import { isPending, isError, isCancelled } from 'utils/ngrx/action-status'
 import { not } from 'utils/rxjs/not';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { auditTime, map } from 'rxjs/operators';
 
 @Component({

@@ -3,7 +3,8 @@ import { map, skip } from 'rxjs/operators'
 import { Subscription } from 'rxjs'
 import { ScreenService } from './services/screen.service'
 import { ConnectionService } from './services/connection.service'
-import { MatSnackBar, MatSidenavContent } from '@angular/material'
+import { MatSidenavContent } from '@angular/material/sidenav';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { SafeDataFacadeService } from './state/safe-data.facade'
 import { ContentScrollService } from './services/content-scroll.service'
 

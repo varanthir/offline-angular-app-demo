@@ -3,7 +3,7 @@ import { map, filter } from 'rxjs/operators'
 import { isPending, isError } from 'utils/ngrx/action-status'
 import { DownloadAlbumFacadeService } from './state/download-album/download-album.facade'
 import { Album } from './state/dal/dto/album'
-import { MatDialog } from '@angular/material'
+import { MatDialog } from '@angular/material/dialog';
 import { DownloadAlbumModalComponent } from './components/download-album-modal/download-album-modal.component'
 import { AlbumsFacadeService } from './state/albums/albums.facade'
 import { DeleteAlbumDialogComponent } from './components/delete-album-dialog/delete-album-dialog.component'
