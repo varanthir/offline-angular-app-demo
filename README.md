@@ -1,5 +1,17 @@
 # OfflineDemo
 
+Goal of this repo was to create app that can:
+- save some data (albums witj pictures) to browser storage (IndexedDB)
+- run app when there is no internet connection
+- show some data when there is no internet connection (albums from IndexedDB)
+
+All other parts of app are experiments :) , like:
+- using Material UI
+- using @ngrx/entities
+- app structure
+- using lazy loaded modules (along with parts of NgRX/redux reducers, effects)
+- etc.
+
 ## Requirements
 - `node` tested on version 10.15.3
 - `yarn` tested on version 1.15.2
