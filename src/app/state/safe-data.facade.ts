@@ -4,7 +4,7 @@ import { Store, select } from '@ngrx/store'
 
 @Injectable()
 export class SafeDataFacadeService {
-  public readonly showIsStable$ = this.store.pipe(select(getSafeShowIsStable))
+  readonly showIsStable$ = this.store.pipe(select(getSafeShowIsStable))
 
   constructor(private readonly store: Store<ServiceWorkerAppState>) {}
 }

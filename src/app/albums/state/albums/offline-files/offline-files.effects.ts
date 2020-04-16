@@ -21,7 +21,7 @@ import { AlbumsFacadeService } from '../albums.facade'
 export class OfflineFilesEffects {
 
   @Effect()
-  public readonly getOfflineFiles$: Observable<Action> = this.actions$.pipe(
+  readonly getOfflineFiles$: Observable<Action> = this.actions$.pipe(
     ofType(OfflineFilesActionTypes.GET_OFFLINE_FILES),
     map(action => action.payload),
     switchMap(({ pictureIds }) => forkJoin([
@@ -38,7 +38,7 @@ export class OfflineFilesEffects {
   )
 
   @Effect()
-  public readonly revokeOfflineFilesUrls$: Observable<Action> = this.actions$.pipe(
+  readonly revokeOfflineFilesUrls$: Observable<Action> = this.actions$.pipe(
     ofType(OfflineFilesActionTypes.REVOKE_OFFLINE_FILES_URLS),
     switchMap(() => this.albumsFacade.offlineFiles$.pipe(
       first(),

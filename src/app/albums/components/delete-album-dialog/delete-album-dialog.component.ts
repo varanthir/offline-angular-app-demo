@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DeleteAlbumDialogComponent {
-  public static open(dialog: MatDialog) {
+  static open(dialog: MatDialog) {
     return dialog.open<DeleteAlbumDialogComponent, undefined, boolean>(DeleteAlbumDialogComponent, {
       width: '400px',
       maxWidth: '95vw',

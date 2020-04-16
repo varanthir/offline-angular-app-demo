@@ -7,5 +7,5 @@ import { Component, Output, EventEmitter, ChangeDetectionStrategy } from '@angul
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FailedActionComponent {
-  @Output() public readonly tryAgain = new EventEmitter<void>()
+  @Output() readonly tryAgain = new EventEmitter<void>()
 }

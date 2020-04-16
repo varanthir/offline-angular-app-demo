@@ -10,15 +10,15 @@ export enum ServiceWorkerActionTypes {
 checkTypes(ServiceWorkerActionTypes as any)
 
 export class ShowIsStableAction implements Action {
-  public readonly type = ServiceWorkerActionTypes.SHOW_IS_STABLE
+  readonly type = ServiceWorkerActionTypes.SHOW_IS_STABLE
 }
 
 export class HideIsStableAction implements Action {
-  public readonly type = ServiceWorkerActionTypes.HIDE_IS_STABLE
+  readonly type = ServiceWorkerActionTypes.HIDE_IS_STABLE
 }
 
 export class ToggleIsStableAction implements Action {
-  public readonly type = ServiceWorkerActionTypes.TOGGLE_IS_STABLE
+  readonly type = ServiceWorkerActionTypes.TOGGLE_IS_STABLE
 }
 
 

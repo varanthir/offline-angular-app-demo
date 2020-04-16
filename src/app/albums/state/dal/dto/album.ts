@@ -8,7 +8,7 @@ export type AlbumObject =  Readonly<{
 }>
 
 export class Album {
-  public static fromObject({ id, name, pictures, isOffline }: AlbumObject): Album {
+  static fromObject({ id, name, pictures, isOffline }: AlbumObject): Album {
     return new Album(
       id,
       name,

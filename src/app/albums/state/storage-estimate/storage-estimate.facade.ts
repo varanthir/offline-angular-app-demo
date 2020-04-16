@@ -5,11 +5,11 @@ import { GetStorageEstimateAction } from './storage-estimate.actions';
 
 @Injectable()
 export class StorageEstimateFacadeService {
-  public readonly state$ = this.store.pipe(select(getStorageEstimateState))
+  readonly state$ = this.store.pipe(select(getStorageEstimateState))
 
   constructor(private readonly store: Store<AlbumsAppState>) {}
 
-  public getStorageEstimate(): void {
+  getStorageEstimate(): void {
     this.store.dispatch(new GetStorageEstimateAction())
   }
 }

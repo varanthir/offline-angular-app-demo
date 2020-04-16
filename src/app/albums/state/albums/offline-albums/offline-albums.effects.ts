@@ -22,7 +22,7 @@ import { GetStorageEstimateAction } from '../../storage-estimate/storage-estimat
 export class OfflineAlbumsEffects {
 
   @Effect()
-  public readonly getAlbums$: Observable<Action> = this.actions$.pipe(
+  readonly getAlbums$: Observable<Action> = this.actions$.pipe(
     ofType(OfflineAlbumsActionTypes.GET_OFFLINE_ALBUMS),
     switchMap(() => this.albumsStorage.getAll().pipe(
       map(albums => new GetOfflineAlbumsSuccessAction({ albums })),
@@ -31,7 +31,7 @@ export class OfflineAlbumsEffects {
   )
 
   @Effect()
-  public readonly getAlbum$: Observable<Action> = this.actions$.pipe(
+  readonly getAlbum$: Observable<Action> = this.actions$.pipe(
     ofType(OfflineAlbumsActionTypes.GET_OFFLINE_ALBUM),
     map(action => action.payload),
     switchMap(({ albumId }) => this.albumsStorage.get(albumId).pipe(
@@ -41,7 +41,7 @@ export class OfflineAlbumsEffects {
   )
 
   @Effect()
-  public readonly deleteOfflineAlbum$: Observable<Action> = this.actions$.pipe(
+  readonly deleteOfflineAlbum$: Observable<Action> = this.actions$.pipe(
     ofType(OfflineAlbumsActionTypes.DELETE_OFFLINE_ALBUM),
     map(action => action.payload),
     switchMap(({ albumId }) => this.albumsStorage.deleteWhole(albumId).pipe(
@@ -51,20 +51,20 @@ export class OfflineAlbumsEffects {
   )
 
   @Effect()
-  public readonly refreshAlbums$: Observable<Action> = this.actions$.pipe(
+  readonly refreshAlbums$: Observable<Action> = this.actions$.pipe(
     ofType(OfflineAlbumsActionTypes.DELETE_OFFLINE_ALBUM_SUCCESS),
     map(() => new GetOfflineAlbumsAction())
   )
 
   @Effect()
-  public readonly getOfflineFiles$: Observable<Action> = this.actions$.pipe(
+  readonly getOfflineFiles$: Observable<Action> = this.actions$.pipe(
     ofType(OfflineAlbumsActionTypes.GET_OFFLINE_ALBUM_SUCCESS),
     map(action => action.payload.album.pictures.map(({ id }) => id)),
     map(pictureIds => new GetOfflineFilesUrlsAction({ pictureIds }))
   )
 
   @Effect()
-  public readonly refresgStorageEstimate$: Observable<Action> = this.actions$.pipe(
+  readonly refresgStorageEstimate$: Observable<Action> = this.actions$.pipe(
     ofType(
       OfflineAlbumsActionTypes.DELETE_OFFLINE_ALBUM_SUCCESS,
       OfflineAlbumsActionTypes.DELETE_OFFLINE_ALBUM_ERROR,

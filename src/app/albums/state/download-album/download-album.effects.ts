@@ -34,7 +34,7 @@ import { GetStorageEstimateAction } from '../storage-estimate/storage-estimate.a
 
 @Injectable()
 export class DownloadAlbumEffects {
-  public readonly downloadErrors$ = this.actions$.pipe(
+  readonly downloadErrors$ = this.actions$.pipe(
     ofType(
       DownloadAlbumActionsTypes.DOWNLOAD_ALBUM_ERROR,
       DownloadAlbumActionsTypes.DOWNLOAD_PICTURES_ERROR,
@@ -44,7 +44,7 @@ export class DownloadAlbumEffects {
     )
   )
 
-  public readonly downloadPictureOrThumbnailSuccess$ = this.actions$.pipe(
+  readonly downloadPictureOrThumbnailSuccess$ = this.actions$.pipe(
     ofType(
       DownloadAlbumActionsTypes.DOWNLOAD_PICTURE_SUCCESS,
       DownloadAlbumActionsTypes.DOWNLOAD_THUMBNAIL_SUCCESS,
@@ -52,7 +52,7 @@ export class DownloadAlbumEffects {
   )
 
   @Effect()
-  public readonly startDownloadAlbum$: Observable<Action> = this.actions$.pipe(
+  readonly startDownloadAlbum$: Observable<Action> = this.actions$.pipe(
     ofType(DownloadAlbumActionsTypes.DOWNLOAD_ALBUM),
     map(action => action.payload),
     mergeMap(({ album }) => forkJoin([
@@ -67,7 +67,7 @@ export class DownloadAlbumEffects {
   )
 
   @Effect()
-  public readonly startDownloadPictures$: Observable<Action> = this.actions$.pipe(
+  readonly startDownloadPictures$: Observable<Action> = this.actions$.pipe(
     ofType(DownloadAlbumActionsTypes.DOWNLOAD_PICTURES),
     map(action => action.payload),
     mergeMap(({ pictureIds }) => [
@@ -77,7 +77,7 @@ export class DownloadAlbumEffects {
   )
 
   @Effect()
-  public readonly getPicture$: Observable<Action> = this.actions$.pipe(
+  readonly getPicture$: Observable<Action> = this.actions$.pipe(
     ofType(DownloadAlbumActionsTypes.DOWNLOAD_PICTURE),
     map(action => action.payload),
     mergeMap(({ pictureId }) => this.albumsDao.getPictureFile(pictureId).pipe(
@@ -92,7 +92,7 @@ export class DownloadAlbumEffects {
   )
 
   @Effect()
-  public readonly savePicture$: Observable<Action> = this.actions$.pipe(
+  readonly savePicture$: Observable<Action> = this.actions$.pipe(
     ofType(DownloadAlbumActionsTypes.DOWNLOAD_PICTURE_SAVE),
     map(action => action.payload),
     mergeMap(({ pictureId, blob }) => PictureArrayBufferBlob.fromBlob(pictureId, blob).pipe(
@@ -104,7 +104,7 @@ export class DownloadAlbumEffects {
   )
 
   @Effect()
-  public readonly getThumbnail$: Observable<Action> = this.actions$.pipe(
+  readonly getThumbnail$: Observable<Action> = this.actions$.pipe(
     ofType(DownloadAlbumActionsTypes.DOWNLOAD_THUMBNAIL),
     map(action => action.payload),
     mergeMap(({ pictureId }) => this.albumsDao.getThumbnailFile(pictureId).pipe(
@@ -119,7 +119,7 @@ export class DownloadAlbumEffects {
   )
 
   @Effect()
-  public readonly saveThumbnail$: Observable<Action> = this.actions$.pipe(
+  readonly saveThumbnail$: Observable<Action> = this.actions$.pipe(
     ofType(DownloadAlbumActionsTypes.DOWNLOAD_THUMBNAIL_SAVE),
     map(action => action.payload),
     mergeMap(({ pictureId, blob }) => PictureArrayBufferBlob.fromBlob(pictureId, blob).pipe(
@@ -131,7 +131,7 @@ export class DownloadAlbumEffects {
   )
 
   @Effect()
-  public readonly finishDownloadPictures$: Observable<Action> = this.actions$.pipe(
+  readonly finishDownloadPictures$: Observable<Action> = this.actions$.pipe(
     ofType(DownloadAlbumActionsTypes.DOWNLOAD_PICTURES),
     map(action => action.payload),
     mergeMap(({ pictureIds }) => this.downloadPictureOrThumbnailSuccess$.pipe(
@@ -143,7 +143,7 @@ export class DownloadAlbumEffects {
   )
 
   @Effect()
-  public readonly finishDownloadAlbum$: Observable<Action> = this.actions$.pipe(
+  readonly finishDownloadAlbum$: Observable<Action> = this.actions$.pipe(
     ofType(DownloadAlbumActionsTypes.DOWNLOAD_ALBUM),
     map(action => action.payload),
     mergeMap(({ album }) => this.actions$.pipe(
@@ -157,13 +157,13 @@ export class DownloadAlbumEffects {
   )
 
   @Effect()
-  public readonly refreshAlbums$: Observable<Action> = this.actions$.pipe(
+  readonly refreshAlbums$: Observable<Action> = this.actions$.pipe(
     ofType(DownloadAlbumActionsTypes.DOWNLOAD_ALBUM_SUCCESS),
     map(() => new GetOfflineAlbumsAction())
   )
 
   @Effect()
-  public readonly refresgStorageEstimate$: Observable<Action> = this.actions$.pipe(
+  readonly refresgStorageEstimate$: Observable<Action> = this.actions$.pipe(
     ofType(
       DownloadAlbumActionsTypes.DOWNLOAD_ALBUM_SUCCESS,
       DownloadAlbumActionsTypes.DOWNLOAD_ALBUM_ERROR,

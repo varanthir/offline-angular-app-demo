@@ -7,7 +7,7 @@ import { PictureArrayBufferBlob } from '../dto/picture-array-buffer-blob';
 export class PicturesStorageService {
   constructor(private readonly albumViewerDb: AlbumViewerDbService) {}
 
-  public get(pictureId: number): Observable<PictureArrayBufferBlob> {
+  get(pictureId: number): Observable<PictureArrayBufferBlob> {
     return from(this.albumViewerDb.db.then(async db => {
       const album = await db.get(StoreName.Pictures, pictureId)
       if (album === undefined) {
@@ -17,7 +17,7 @@ export class PicturesStorageService {
     }))
   }
 
-  public getMany(pictureIds: number[]): Observable<PictureArrayBufferBlob[]> {
+  getMany(pictureIds: number[]): Observable<PictureArrayBufferBlob[]> {
     return from(this.albumViewerDb.db.then(async db => {
       const pictureArrayBufferBlobs = await db.getAll(StoreName.Pictures) // TODO: Don't get all
       const filteredPictureArrayBufferBlobs = pictureArrayBufferBlobs
@@ -31,12 +31,12 @@ export class PicturesStorageService {
     }))
   }
 
-  public set(arrayBufferBlob: PictureArrayBufferBlob): Observable<number> {
+  set(arrayBufferBlob: PictureArrayBufferBlob): Observable<number> {
     return from(this.albumViewerDb.db
       .then(db => db.put(StoreName.Pictures, arrayBufferBlob)))
   }
 
-  public delete(pictureId: number): Observable<void> {
+  delete(pictureId: number): Observable<void> {
     return from(this.albumViewerDb.db
       .then(db => db.delete(StoreName.Pictures, pictureId)))
   }

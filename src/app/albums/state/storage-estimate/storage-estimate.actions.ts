@@ -10,16 +10,16 @@ export enum StorageEstimateActionsTypes {
 checkTypes(StorageEstimateActionsTypes as any)
 
 export class GetStorageEstimateAction implements Action {
-  public readonly type = StorageEstimateActionsTypes.GET_STORAGE_ESTIMATE
+  readonly type = StorageEstimateActionsTypes.GET_STORAGE_ESTIMATE
 }
 
 export class GetStorageEstimateSuccessAction implements Action {
-  public readonly type = StorageEstimateActionsTypes.GET_STORAGE_ESTIMATE_SUCCESS
+  readonly type = StorageEstimateActionsTypes.GET_STORAGE_ESTIMATE_SUCCESS
   constructor(public readonly payload: { storageEstimate: StorageEstimate }) {}
 }
 
 export class GetStorageEstimateErrorAction implements Action {
-  public readonly type = StorageEstimateActionsTypes.GET_STORAGE_ESTIMATE_ERROR
+  readonly type = StorageEstimateActionsTypes.GET_STORAGE_ESTIMATE_ERROR
   constructor(public readonly error: Error) {}
 }
 

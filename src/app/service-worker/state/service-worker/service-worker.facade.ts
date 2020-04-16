@@ -7,7 +7,7 @@ import { ToggleIsStableAction } from './service-worker.actions'
 export class ServiceWorkerFacadeService {
   constructor(private readonly store: Store<ServiceWorkerAppState>) {}
 
-  public toggleShowIsStable(): void {
+  toggleShowIsStable(): void {
     this.store.dispatch(new ToggleIsStableAction())
   }
 }

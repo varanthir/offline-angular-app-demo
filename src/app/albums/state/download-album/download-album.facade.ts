@@ -8,21 +8,21 @@ import { Album } from '../dal/dto/album'
 
 @Injectable()
 export class DownloadAlbumFacadeService {
-  public readonly downloadAlbumStatus$ = this.store.pipe(select(getDownloadAlbumStatus))
-  public readonly downloadAlbumProgress$ = this.store.pipe(select(getDownloadAlbumProgress))
-  public readonly downloadAlbumEntity$ = this.store.pipe(select(getDownloadAlbumEntity))
+  readonly downloadAlbumStatus$ = this.store.pipe(select(getDownloadAlbumStatus))
+  readonly downloadAlbumProgress$ = this.store.pipe(select(getDownloadAlbumProgress))
+  readonly downloadAlbumEntity$ = this.store.pipe(select(getDownloadAlbumEntity))
 
   constructor(private readonly store: Store<AlbumsAppState>) {}
 
-  public downloadAlbum(album: Album): void {
+  downloadAlbum(album: Album): void {
     this.store.dispatch(new DownloadAlbumAction({ album }))
   }
 
-  public downloadCancel(): void {
+  downloadCancel(): void {
     this.store.dispatch(new DownloadAlbumCancelAction())
   }
 
-  public downloadClear(): void {
+  downloadClear(): void {
     this.store.dispatch(new DownloadAlbumClearAction())
   }
 }

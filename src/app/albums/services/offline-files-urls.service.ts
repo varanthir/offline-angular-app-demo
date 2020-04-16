@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class OfflineFilesUrlsService {
-  public readonly getPictureUrlFn$ = this.albumsFacade.offlineFilesEntities$.pipe(
+  readonly getPictureUrlFn$ = this.albumsFacade.offlineFilesEntities$.pipe(
     map(offlineFiles => offlineFiles.pictures),
     map(pictures => (pictureId: number | null) => {
         const picture = pictureId && pictures[pictureId]
@@ -15,7 +15,7 @@ export class OfflineFilesUrlsService {
     )
   )
 
-  public readonly getThumbnailsUrlFn$ = this.albumsFacade.offlineFilesEntities$.pipe(
+  readonly getThumbnailsUrlFn$ = this.albumsFacade.offlineFilesEntities$.pipe(
     map(offlineFiles => offlineFiles.thumbnails),
     map(thumbnails => (pictureId: number | null) => {
         const thumbnail = pictureId && thumbnails[pictureId]
