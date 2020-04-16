@@ -1,7 +1,7 @@
 # OfflineDemo
 
 Goal of this repo was to create app that can:
-- save some data (albums witj pictures) to browser storage (IndexedDB)
+- save some data (albums with pictures) to browser storage (IndexedDB)
 - run app when there is no internet connection
 - show some data when there is no internet connection (albums from IndexedDB)
 
