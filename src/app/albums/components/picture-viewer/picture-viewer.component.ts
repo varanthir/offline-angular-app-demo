@@ -9,31 +9,31 @@ import { SafeUrl } from '@angular/platform-browser';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PictureViewerComponent {
-  @Input() public pictures: Picture[]
-  @Input() public getPictureUrlFn: (pictureId: number | null) => SafeUrl | string
-  @Input() public getThumbnailUrlFn: (pictureId: number | null) => SafeUrl | string
+  @Input() pictures: Picture[]
+  @Input() getPictureUrlFn: (pictureId: number | null) => SafeUrl | string
+  @Input() getThumbnailUrlFn: (pictureId: number | null) => SafeUrl | string
 
   private _selectedIndex: number | null = null
 
-  @Input() public set selectedIndex(selectedIndex: number | null) {
+  @Input() set selectedIndex(selectedIndex: number | null) {
     this._selectedIndex = selectedIndex
-    if (selectedIndex) {
+    if (selectedIndex !== null) {
       this.scrollThumbnailIntoView(selectedIndex)
     }
   }
 
-  public get selectedIndex(): number | null {
+  get selectedIndex(): number | null {
     return this._selectedIndex
   }
 
-  @Output() public readonly selectIndex = new EventEmitter<number>()
-  @Output() public readonly close = new EventEmitter<void>()
+  @Output() readonly selectIndex = new EventEmitter<number>()
+  @Output() readonly close = new EventEmitter<void>()
 
   @ViewChild('thumbnails', { static: true }) thumbnailsRef: ElementRef<HTMLDivElement>
 
-  public thumbnailStyles = {}
+  thumbnailStyles = {}
 
-  public get src(): SafeUrl | string {
+  get src(): SafeUrl | string {
     if (this.selectedIndex === null) {
       return this.getPictureUrlFn(null)
     }
@@ -42,27 +42,27 @@ export class PictureViewerComponent {
     return this.getPictureUrlFn(pictureId)
   }
 
-  public get showPreviousButton(): boolean {
+  get showPreviousButton(): boolean {
     return this.selectedIndex !== null && this.selectedIndex > 0
   }
 
-  public get showNextButton(): boolean {
+  get showNextButton(): boolean {
     return this.selectedIndex !== null && this.selectedIndex < this.pictures.length - 1
   }
 
-  public showPreviousImage(): void {
+  showPreviousImage(): void {
     if (this.selectedIndex !== null) {
       this.selectIndex.emit(this.selectedIndex - 1)
     }
   }
 
-  public showNextImage(): void {
+  showNextImage(): void {
     if (this.selectedIndex !== null) {
       this.selectIndex.emit(this.selectedIndex + 1)
     }
   }
 
-  public refreshThumbnailStyles(): void {
+  refreshThumbnailStyles(): void {
     if (this.thumbnailsRef) {
       this.thumbnailStyles =  {
         width: `${this.thumbnailsRef.nativeElement.clientHeight * 16 / 9}px`
@@ -72,11 +72,15 @@ export class PictureViewerComponent {
     }
   }
 
-  public trackById(index: number, picture: Picture) {
+  trackById(index: number, picture: Picture) {
     return picture.id
   }
 
-  private scrollThumbnailIntoView(thumbnailIndex: number): void {
+  scrollThumbnailIntoView(thumbnailIndex: number | null): void {
+    if (thumbnailIndex === null) {
+      return
+    }
+
     const thumbnailId = this.pictures[thumbnailIndex].id
     const selector = `img.thumbnails__thumbnail[data-id='${thumbnailId}']`
     const thumbnailEl = document.querySelector(selector)

@@ -12,10 +12,10 @@ export class ScreenService {
       debounceTime(50))
   )
 
-  public readonly isMobile$: Observable<boolean> = this.windowResize$.pipe(
+  readonly isMobile$: Observable<boolean> = this.windowResize$.pipe(
     map(() => this.isMobile))
 
-  public get isMobile(): boolean {
+  get isMobile(): boolean {
     return window.innerWidth <= MOBILE_MAX_WIDTH
   }
 }

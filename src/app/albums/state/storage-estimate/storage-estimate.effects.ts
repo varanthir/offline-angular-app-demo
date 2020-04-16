@@ -14,7 +14,7 @@ import {
 export class StorageEstimateEffects {
 
   @Effect()
-  public readonly getStorageEstimate$: Observable<Action> = this.actions$.pipe(
+  readonly getStorageEstimate$: Observable<Action> = this.actions$.pipe(
     ofType(StorageEstimateActionsTypes.GET_STORAGE_ESTIMATE),
     switchMap(() => from(navigator.storage.estimate()).pipe(
       map(storageEstimate => new GetStorageEstimateSuccessAction({ storageEstimate })),

@@ -14,21 +14,21 @@ export enum OfflineFilesActionTypes {
 checkTypes(OfflineFilesActionTypes as any)
 
 export class RevokeOfflineFilesUrlsAction implements Action {
-  public readonly type = OfflineFilesActionTypes.REVOKE_OFFLINE_FILES_URLS
+  readonly type = OfflineFilesActionTypes.REVOKE_OFFLINE_FILES_URLS
 }
 
 export class ClearOfflineFilesUrlsAction implements Action {
-  public readonly type = OfflineFilesActionTypes.CLEAR_OFFLINE_FILES_URLS
+  readonly type = OfflineFilesActionTypes.CLEAR_OFFLINE_FILES_URLS
 }
 
 
 export class GetOfflineFilesUrlsAction implements Action {
-  public readonly type = OfflineFilesActionTypes.GET_OFFLINE_FILES
+  readonly type = OfflineFilesActionTypes.GET_OFFLINE_FILES
   constructor(public readonly payload: { pictureIds: number[] }) {}
 }
 
 export class GetOfflineFilesUrlsSuccessAction implements Action {
-  public readonly type = OfflineFilesActionTypes.GET_OFFLINE_FILES_SUCCESS
+  readonly type = OfflineFilesActionTypes.GET_OFFLINE_FILES_SUCCESS
   constructor(public readonly payload: {
     pictures: OfflineFileUrl[],
     thumbnails: OfflineFileUrl[],
@@ -36,7 +36,7 @@ export class GetOfflineFilesUrlsSuccessAction implements Action {
 }
 
 export class GetOfflineFilesUrlsErrorAction implements Action {
-  public readonly type = OfflineFilesActionTypes.GET_OFFLINE_FILES_ERROR
+  readonly type = OfflineFilesActionTypes.GET_OFFLINE_FILES_ERROR
   constructor(public readonly error: Error) {
     console.error(error)
   }

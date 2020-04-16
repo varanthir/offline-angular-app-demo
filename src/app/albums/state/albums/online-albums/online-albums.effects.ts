@@ -17,7 +17,7 @@ import { AlbumsDaoService } from '../../dal/dao/albums.dao';
 export class OnlineAlbumsEffects {
 
   @Effect()
-  public readonly getAlbums$: Observable<Action> = this.actions$.pipe(
+  readonly getAlbums$: Observable<Action> = this.actions$.pipe(
     ofType(OnlineAlbumsActionTypes.GET_ONLINE_ALBUMS),
     switchMap(() => this.albumsDao.getAlbums().pipe(
       map(albums => new GetOnlineAlbumsSuccessAction({ albums })),
@@ -26,7 +26,7 @@ export class OnlineAlbumsEffects {
   )
 
   @Effect()
-  public readonly getAlbum$: Observable<Action> = this.actions$.pipe(
+  readonly getAlbum$: Observable<Action> = this.actions$.pipe(
     ofType(OnlineAlbumsActionTypes.GET_ONLINE_ALBUM),
     map(action => action.payload),
     switchMap(({ albumId }) => this.albumsDao.getAlbum(albumId).pipe(

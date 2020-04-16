@@ -44,7 +44,7 @@ interface AlbumViewerDb extends DBSchema {
 export class AlbumViewerDbService {
   private _db: Promise<IDBPDatabase<AlbumViewerDb>> | null = null
 
-  public get db(): Promise<IDBPDatabase<AlbumViewerDb>> {
+  get db(): Promise<IDBPDatabase<AlbumViewerDb>> {
     if (this._db) {
       return this._db
     }

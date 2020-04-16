@@ -27,7 +27,7 @@ export function offlineAlbumsReducer(state = initialState, action: OfflineAlbums
 
     case OfflineAlbumsActionTypes.GET_OFFLINE_ALBUMS_SUCCESS:
       return {
-        ...offlineAlbumsAdapter.addAll(action.payload.albums, state),
+        ...offlineAlbumsAdapter.setAll(action.payload.albums, state),
         albumsStatus: ActionStatus.Success,
       }
 

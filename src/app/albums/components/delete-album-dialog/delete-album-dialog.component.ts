@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core'
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-delete-album-dialog',
@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DeleteAlbumDialogComponent {
-  public static open(dialog: MatDialog) {
+  static open(dialog: MatDialog) {
     return dialog.open<DeleteAlbumDialogComponent, undefined, boolean>(DeleteAlbumDialogComponent, {
       width: '400px',
       maxWidth: '95vw',

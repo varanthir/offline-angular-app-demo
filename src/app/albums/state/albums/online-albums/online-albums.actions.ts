@@ -15,32 +15,32 @@ export enum OnlineAlbumsActionTypes {
 checkTypes(OnlineAlbumsActionTypes as any)
 
 export class GetOnlineAlbumsAction implements Action {
-  public readonly type = OnlineAlbumsActionTypes.GET_ONLINE_ALBUMS
+  readonly type = OnlineAlbumsActionTypes.GET_ONLINE_ALBUMS
 }
 
 export class GetOnlineAlbumsSuccessAction implements Action {
-  public readonly type = OnlineAlbumsActionTypes.GET_ONLINE_ALBUMS_SUCCESS
+  readonly type = OnlineAlbumsActionTypes.GET_ONLINE_ALBUMS_SUCCESS
   constructor(public readonly payload: { albums: Album[] }) {}
 }
 
 export class GetOnlineAlbumsErrorAction implements Action {
-  public readonly type = OnlineAlbumsActionTypes.GET_ONLINE_ALBUMS_ERROR
+  readonly type = OnlineAlbumsActionTypes.GET_ONLINE_ALBUMS_ERROR
   constructor(public readonly error: Error) {}
 }
 
 
 export class GetOnlineAlbumAction implements Action {
-  public readonly type = OnlineAlbumsActionTypes.GET_ONLINE_ALBUM
+  readonly type = OnlineAlbumsActionTypes.GET_ONLINE_ALBUM
   constructor(public readonly payload: { albumId: number }) {}
 }
 
 export class GetOnlineAlbumSuccessAction implements Action {
-  public readonly type = OnlineAlbumsActionTypes.GET_ONLINE_ALBUM_SUCCESS
+  readonly type = OnlineAlbumsActionTypes.GET_ONLINE_ALBUM_SUCCESS
   constructor(public readonly payload: { album: Album }) {}
 }
 
 export class GetOnlineAlbumErrorAction implements Action {
-  public readonly type = OnlineAlbumsActionTypes.GET_ONLINE_ALBUM_ERROR
+  readonly type = OnlineAlbumsActionTypes.GET_ONLINE_ALBUM_ERROR
   constructor(public readonly error: Error) {}
 }
 

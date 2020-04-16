@@ -6,13 +6,13 @@ interface PictureArrayBufferBlobObject extends ArrayBufferBlob {
 }
 
 export class PictureArrayBufferBlob implements ArrayBufferBlob {
-  public static fromBlob(id: number, blob: Blob) {
+  static fromBlob(id: number, blob: Blob) {
     return toArrayBufferBlob(blob).pipe(
       map(({ arrayBuffer, type }) => new PictureArrayBufferBlob(id, arrayBuffer, type))
     )
   }
 
-  public static fromObject({ id, arrayBuffer, type }: PictureArrayBufferBlobObject): PictureArrayBufferBlob {
+  static fromObject({ id, arrayBuffer, type }: PictureArrayBufferBlobObject): PictureArrayBufferBlob {
     return new PictureArrayBufferBlob(id, arrayBuffer, type)
   }
 

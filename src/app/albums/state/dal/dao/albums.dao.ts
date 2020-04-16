@@ -21,21 +21,21 @@ export class AlbumsDaoService {
 
   constructor(private readonly http: HttpClient) {}
 
-  public getAlbums(): Observable<Album[]> {
+  getAlbums(): Observable<Album[]> {
     return this.http.get<AlbumObject[]>(`/${this.baseUrl}/albums`).pipe(
       mapArray(Album.fromObject))
   }
 
-  public getAlbum(id: number): Observable<Album> {
+  getAlbum(id: number): Observable<Album> {
     return this.http.get<AlbumObject>(`/${this.baseUrl}/albums/${id}`).pipe(
       map(Album.fromObject))
   }
 
-  public getPictureFile(pictureId: number): Observable<HttpEvent<Blob>> {
+  getPictureFile(pictureId: number): Observable<HttpEvent<Blob>> {
     return this.http.get(`/${this.baseUrl}/pictures/${pictureId}`, getFileWithProgressConfig)
   }
 
-  public getThumbnailFile(pictureId: number): Observable<HttpEvent<Blob>> {
+  getThumbnailFile(pictureId: number): Observable<HttpEvent<Blob>> {
     return this.http.get(`/${this.baseUrl}/thumbnails/${pictureId}`, getFileWithProgressConfig)
   }
 }

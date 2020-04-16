@@ -10,10 +10,10 @@ export class ConnectionService {
     fromEvent(window, 'offline')
   )
 
-  public readonly isOnline$: Observable<boolean> = this.connectivityChange$.pipe(
+  readonly isOnline$: Observable<boolean> = this.connectivityChange$.pipe(
     map(() => this.isOnline))
 
-  public get isOnline(): boolean {
+  get isOnline(): boolean {
     return navigator.onLine
   }
 }

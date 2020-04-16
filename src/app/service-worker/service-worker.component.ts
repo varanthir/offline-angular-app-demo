@@ -11,10 +11,10 @@ import { ContentScrollService } from 'app/services/content-scroll.service'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ServiceWorkerComponent implements OnInit {
-  public readonly updateAvailable$ = this.swUpdate.available.pipe(
+  readonly updateAvailable$ = this.swUpdate.available.pipe(
     map(obj => JSON.stringify(obj, null, 2)))
 
-  public get swIsEnabled(): boolean {
+  get swIsEnabled(): boolean {
     return this.swUpdate.isEnabled
   }
 
@@ -25,21 +25,21 @@ export class ServiceWorkerComponent implements OnInit {
     private readonly swUpdate: SwUpdate,
   ) {}
 
-  public ngOnInit(): void {
+  ngOnInit(): void {
     this.contentScroll.scrollTop()
   }
 
-  public toggleIsStable(): void {
+  toggleIsStable(): void {
     this.serviceWorkerFacade.toggleShowIsStable()
   }
 
-  public setTimeoutInsideNgZone(): void {
+  setTimeoutInsideNgZone(): void {
     setTimeout(() => {
       console.log('NgZone.isInAngularZone() =>', NgZone.isInAngularZone())
     }, 2000)
   }
 
-  public setTimeoutOutsideNgZone(): void {
+  setTimeoutOutsideNgZone(): void {
     this.ngZone.runOutsideAngular(() => {
       setTimeout(() => {
         console.log('NgZone.isInAngularZone() =>', NgZone.isInAngularZone())
@@ -47,7 +47,7 @@ export class ServiceWorkerComponent implements OnInit {
     })
   }
 
-  public checkForUpdate(): void {
+  checkForUpdate(): void {
     this.swUpdate.checkForUpdate().then(() => {}).catch(() => {})
   }
 }

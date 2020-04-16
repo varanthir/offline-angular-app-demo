@@ -8,12 +8,12 @@ import difference from 'lodash.difference'
 export class AlbumsStorageService {
   constructor(private readonly albumViewerDb: AlbumViewerDbService) {}
 
-  public getAll(): Observable<Album[]> {
+  getAll(): Observable<Album[]> {
     return from(this.albumViewerDb.db
       .then(db => db.getAll(StoreName.Albums)))
   }
 
-  public get(albumId: number): Observable<Album> {
+  get(albumId: number): Observable<Album> {
     return from(this.albumViewerDb.db.then(async db => {
       const album = await db.get(StoreName.Albums, albumId)
       if (album === undefined) {
@@ -23,14 +23,14 @@ export class AlbumsStorageService {
     }))
   }
 
-  public set(album: Album): Observable<number> {
+  set(album: Album): Observable<number> {
     const offlineAlbum = Album.fromObject({ ...album, isOffline: true })
 
     return from(this.albumViewerDb.db
       .then(db => db.put(StoreName.Albums, offlineAlbum)))
   }
 
-  public deleteWhole(albumId: number): Observable<void> {
+  deleteWhole(albumId: number): Observable<void> {
     return from(this.albumViewerDb.db.then(async db => {
       const tx = db.transaction([StoreName.Albums, StoreName.AlbumsFinished, StoreName.Pictures, StoreName.Thumbnails], Mode.ReadWrite)
       const albumsStore = tx.objectStore(StoreName.Albums)
@@ -43,7 +43,7 @@ export class AlbumsStorageService {
         return tx.abort()
       }
       const albums = await albumsStore.getAll()
-      this.pictureIdstoDelete(album, albums.filter(album => album.id !== albumId))
+      this.pictureIdsToDelete(album, albums.filter(a => a.id !== albumId))
         .forEach(pictureId => {
           picturesStore.delete(pictureId)
           thumbnailsStore.delete(pictureId)
@@ -56,7 +56,7 @@ export class AlbumsStorageService {
     }))
   }
 
-  private pictureIdstoDelete(albumToDelete: Album, albumsToKeep: Album[]): number[] {
+  private pictureIdsToDelete(albumToDelete: Album, albumsToKeep: Album[]): number[] {
     const pictureIdsToDelete = albumToDelete.pictures.map(picture => picture.id)
     const pictureIdsToKeep = albumsToKeep
       .map(albumToKeep => albumToKeep.pictures.map(picture => picture.id))

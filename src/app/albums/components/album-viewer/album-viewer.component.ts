@@ -12,26 +12,26 @@ import { SafeUrl } from '@angular/platform-browser';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AlbumViewerComponent {
-  @Input() public album: Album
-  @Input() public isPending: boolean
-  @Input() public isError: boolean
-  @Input() public getPictureUrlFn: (pictureId: number | null) => SafeUrl | string
-  @Input() public getThumbnailUrlFn: (pictureId: number | null) => SafeUrl | string
+  @Input() album: Album | null = null
+  @Input() isPending = false
+  @Input() isError = false
+  @Input() getPictureUrlFn: (pictureId: number | null) => SafeUrl | string
+  @Input() getThumbnailUrlFn: (pictureId: number | null) => SafeUrl | string
 
-  @Output() public readonly tryAgain = new EventEmitter<void>()
+  @Output() readonly tryAgain = new EventEmitter<void>()
 
   @ViewChild(CdkPortal, { static: true }) private readonly cdkPortal: CdkPortal
 
   private overlayRef: OverlayRef | null = null
-  public selectedPictureIndex: number | null = null
+  selectedPictureIndex: number | null = null
 
   constructor(private readonly overlay: Overlay) {}
 
-  public trackById(index: number, picture: Picture) {
+  trackById(index: number, picture: Picture) {
     return picture.id
   }
 
-  public showPictureViewer(pictureIndex: number): void {
+  showPictureViewer(pictureIndex: number): void {
     this.hidePictureViewer()
 
     this.overlayRef = this.overlay.create({
@@ -43,7 +43,7 @@ export class AlbumViewerComponent {
     this.selectedPictureIndex = pictureIndex
   }
 
-  public hidePictureViewer(): void {
+  hidePictureViewer(): void {
     if (this.overlayRef) {
       this.overlayRef.detach()
       this.overlayRef.dispose()

@@ -30,93 +30,93 @@ export enum DownloadAlbumActionsTypes {
 checkTypes(DownloadAlbumActionsTypes as any)
 
 export class DownloadAlbumAction implements Action {
-  public readonly type = DownloadAlbumActionsTypes.DOWNLOAD_ALBUM
+  readonly type = DownloadAlbumActionsTypes.DOWNLOAD_ALBUM
   constructor(public readonly payload: { album: Album }) {}
 }
 
 export class DownloadAlbumSuccessAction implements Action {
-  public readonly type = DownloadAlbumActionsTypes.DOWNLOAD_ALBUM_SUCCESS
+  readonly type = DownloadAlbumActionsTypes.DOWNLOAD_ALBUM_SUCCESS
 }
 
 export class DownloadAlbumErrorAction implements Action {
-  public readonly type = DownloadAlbumActionsTypes.DOWNLOAD_ALBUM_ERROR
+  readonly type = DownloadAlbumActionsTypes.DOWNLOAD_ALBUM_ERROR
   constructor(public readonly error: Error) {}
 }
 
 
 export class DownloadPicturesAction implements Action {
-  public readonly type = DownloadAlbumActionsTypes.DOWNLOAD_PICTURES
+  readonly type = DownloadAlbumActionsTypes.DOWNLOAD_PICTURES
   constructor(public readonly payload: { pictureIds: number[] }) {}
 }
 
 export class DownloadPicturesSuccessAction implements Action {
-  public readonly type = DownloadAlbumActionsTypes.DOWNLOAD_PICTURES_SUCCESS
+  readonly type = DownloadAlbumActionsTypes.DOWNLOAD_PICTURES_SUCCESS
 }
 
 export class DownloadPicturesErrorAction implements Action {
-  public readonly type = DownloadAlbumActionsTypes.DOWNLOAD_PICTURES_ERROR
+  readonly type = DownloadAlbumActionsTypes.DOWNLOAD_PICTURES_ERROR
   constructor(public readonly error: Error) {}
 }
 
 
 export class DownloadPictureAction implements Action {
-  public readonly type = DownloadAlbumActionsTypes.DOWNLOAD_PICTURE
+  readonly type = DownloadAlbumActionsTypes.DOWNLOAD_PICTURE
   constructor(public readonly payload: { pictureId: number }) {}
 }
 
 export class DownloadPictureProgressAction implements Action {
-  public readonly type = DownloadAlbumActionsTypes.DOWNLOAD_PICTURE_PROGRESS
+  readonly type = DownloadAlbumActionsTypes.DOWNLOAD_PICTURE_PROGRESS
   constructor(public readonly payload: { pictureId: number, progress: number }) {}
 }
 
 export class DownloadPictureSaveAction implements Action {
-  public readonly type = DownloadAlbumActionsTypes.DOWNLOAD_PICTURE_SAVE
+  readonly type = DownloadAlbumActionsTypes.DOWNLOAD_PICTURE_SAVE
   constructor(public readonly payload: { pictureId: number, blob: Blob }) {}
 }
 
 export class DownloadPictureSuccessAction implements Action {
-  public readonly type = DownloadAlbumActionsTypes.DOWNLOAD_PICTURE_SUCCESS
+  readonly type = DownloadAlbumActionsTypes.DOWNLOAD_PICTURE_SUCCESS
   constructor(public readonly payload: { pictureId: number }) {}
 }
 
 export class DownloadPictureErrorAction implements Action {
-  public readonly type = DownloadAlbumActionsTypes.DOWNLOAD_PICTURE_ERROR
+  readonly type = DownloadAlbumActionsTypes.DOWNLOAD_PICTURE_ERROR
   constructor(public readonly error: Error) {}
 }
 
 
 export class DownloadThumbnailAction implements Action {
-  public readonly type = DownloadAlbumActionsTypes.DOWNLOAD_THUMBNAIL
+  readonly type = DownloadAlbumActionsTypes.DOWNLOAD_THUMBNAIL
   constructor(public readonly payload: { pictureId: number }) {}
 }
 
 export class DownloadThumbnailProgressAction implements Action {
-  public readonly type = DownloadAlbumActionsTypes.DOWNLOAD_THUMBNAIL_PROGRESS
+  readonly type = DownloadAlbumActionsTypes.DOWNLOAD_THUMBNAIL_PROGRESS
   constructor(public readonly payload: { pictureId: number, progress: number }) {}
 }
 
 export class DownloadThumbnailSaveAction implements Action {
-  public readonly type = DownloadAlbumActionsTypes.DOWNLOAD_THUMBNAIL_SAVE
+  readonly type = DownloadAlbumActionsTypes.DOWNLOAD_THUMBNAIL_SAVE
   constructor(public readonly payload: { pictureId: number, blob: Blob }) {}
 }
 
 export class DownloadThumbnailSuccessAction implements Action {
-  public readonly type = DownloadAlbumActionsTypes.DOWNLOAD_THUMBNAIL_SUCCESS
+  readonly type = DownloadAlbumActionsTypes.DOWNLOAD_THUMBNAIL_SUCCESS
   constructor(public readonly payload: { pictureId: number }) {}
 }
 
 export class DownloadThumbnailErrorAction implements Action {
-  public readonly type = DownloadAlbumActionsTypes.DOWNLOAD_THUMBNAIL_ERROR
+  readonly type = DownloadAlbumActionsTypes.DOWNLOAD_THUMBNAIL_ERROR
   constructor(public readonly error: Error) {}
 }
 
 
 export class DownloadAlbumCancelAction implements Action {
-  public readonly type = DownloadAlbumActionsTypes.DOWNLOAD_ALBUM_CANCEL
+  readonly type = DownloadAlbumActionsTypes.DOWNLOAD_ALBUM_CANCEL
 }
 
 export class DownloadAlbumClearAction implements Action {
-  public readonly type = DownloadAlbumActionsTypes.DOWNLOAD_ALBUM_CLEAR
+  readonly type = DownloadAlbumActionsTypes.DOWNLOAD_ALBUM_CLEAR
 }
 
 

@@ -7,7 +7,7 @@ import { PictureArrayBufferBlob } from '../dto/picture-array-buffer-blob'
 export class ThumbnailsStorageService {
   constructor(private readonly albumViewerDb: AlbumViewerDbService) {}
 
-  public get(pictureId: number): Observable<PictureArrayBufferBlob> {
+  get(pictureId: number): Observable<PictureArrayBufferBlob> {
     return from(this.albumViewerDb.db.then(async db => {
       const album = await db.get(StoreName.Thumbnails, pictureId)
       if (album === undefined) {
@@ -17,7 +17,7 @@ export class ThumbnailsStorageService {
     }))
   }
 
-  public getMany(pictureIds: number[]): Observable<PictureArrayBufferBlob[]> {
+  getMany(pictureIds: number[]): Observable<PictureArrayBufferBlob[]> {
     return from(this.albumViewerDb.db.then(async db => {
       const pictureArrayBufferBlobs = await db.getAll(StoreName.Thumbnails) // TODO: Don't get all
       const filteredPictureArrayBufferBlobs = pictureArrayBufferBlobs
@@ -31,12 +31,12 @@ export class ThumbnailsStorageService {
     }))
   }
 
-  public set(arrayBufferBlob: PictureArrayBufferBlob): Observable<number> {
+  set(arrayBufferBlob: PictureArrayBufferBlob): Observable<number> {
     return from(this.albumViewerDb.db
       .then(db => db.put(StoreName.Thumbnails, arrayBufferBlob)))
   }
 
-  public delete(pictureId: number): Observable<void> {
+  delete(pictureId: number): Observable<void> {
     return from(this.albumViewerDb.db
       .then(db => db.delete(StoreName.Thumbnails, pictureId)))
   }

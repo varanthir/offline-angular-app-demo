@@ -20,8 +20,8 @@ export function offlineFilessReducer(state = initialState, action: OfflineFilesA
     case OfflineFilesActionTypes.GET_OFFLINE_FILES_SUCCESS:
       return {
         ...state,
-        pictures: offlinePicturesAdapter.addAll(action.payload.pictures, state.pictures),
-        thumbnails: offlineThumbnailsAdapter.addAll(action.payload.thumbnails, state.thumbnails),
+        pictures: offlinePicturesAdapter.setAll(action.payload.pictures, state.pictures),
+        thumbnails: offlineThumbnailsAdapter.setAll(action.payload.thumbnails, state.thumbnails),
       }
 
     case OfflineFilesActionTypes.CLEAR_OFFLINE_FILES_URLS:

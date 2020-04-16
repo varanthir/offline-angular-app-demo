@@ -19,47 +19,47 @@ export enum OfflineAlbumsActionTypes {
 checkTypes(OfflineAlbumsActionTypes as any)
 
 export class GetOfflineAlbumsAction implements Action {
-  public readonly type = OfflineAlbumsActionTypes.GET_OFFLINE_ALBUMS
+  readonly type = OfflineAlbumsActionTypes.GET_OFFLINE_ALBUMS
 }
 
 export class GetOfflineAlbumsSuccessAction implements Action {
-  public readonly type = OfflineAlbumsActionTypes.GET_OFFLINE_ALBUMS_SUCCESS
+  readonly type = OfflineAlbumsActionTypes.GET_OFFLINE_ALBUMS_SUCCESS
   constructor(public readonly payload: { albums: Album[] }) {}
 }
 
 export class GetOfflineAlbumsErrorAction implements Action {
-  public readonly type = OfflineAlbumsActionTypes.GET_OFFLINE_ALBUMS_ERROR
+  readonly type = OfflineAlbumsActionTypes.GET_OFFLINE_ALBUMS_ERROR
   constructor(public readonly error: Error) {}
 }
 
 
 export class GetOfflineAlbumAction implements Action {
-  public readonly type = OfflineAlbumsActionTypes.GET_OFFLINE_ALBUM
+  readonly type = OfflineAlbumsActionTypes.GET_OFFLINE_ALBUM
   constructor(public readonly payload: { albumId: number }) {}
 }
 
 export class GetOfflineAlbumSuccessAction implements Action {
-  public readonly type = OfflineAlbumsActionTypes.GET_OFFLINE_ALBUM_SUCCESS
+  readonly type = OfflineAlbumsActionTypes.GET_OFFLINE_ALBUM_SUCCESS
   constructor(public readonly payload: { album: Album }) {}
 }
 
 export class GetOfflineAlbumErrorAction implements Action {
-  public readonly type = OfflineAlbumsActionTypes.GET_OFFLINE_ALBUM_ERROR
+  readonly type = OfflineAlbumsActionTypes.GET_OFFLINE_ALBUM_ERROR
   constructor(public readonly error: Error) {}
 }
 
 
 export class DeleteOfflineAlbumAction implements Action {
-  public readonly type = OfflineAlbumsActionTypes.DELETE_OFFLINE_ALBUM
+  readonly type = OfflineAlbumsActionTypes.DELETE_OFFLINE_ALBUM
   constructor(public readonly payload: { albumId: number }) {}
 }
 
 export class DeleteOfflineAlbumSuccessAction implements Action {
-  public readonly type = OfflineAlbumsActionTypes.DELETE_OFFLINE_ALBUM_SUCCESS
+  readonly type = OfflineAlbumsActionTypes.DELETE_OFFLINE_ALBUM_SUCCESS
 }
 
 export class DeleteOfflineAlbumErrorAction implements Action {
-  public readonly type = OfflineAlbumsActionTypes.DELETE_OFFLINE_ALBUM_ERROR
+  readonly type = OfflineAlbumsActionTypes.DELETE_OFFLINE_ALBUM_ERROR
   constructor(public readonly error: Error) {}
 }
 

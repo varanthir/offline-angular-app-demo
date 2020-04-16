@@ -141,10 +141,10 @@ export const getEmptyAlbumsPending = createSelector(
   getAlbumsStatus,
   getOnlineAlbums,
   getOfflineAlbums,
-  (albumsStatus, onlineAlbums, getOfflineAlbums) =>
+  (albumsStatus, onlineAlbums, offlineAlbums) =>
     albumsStatus === ActionStatus.Pending
     && onlineAlbums.length === 0
-    && getOfflineAlbums.length === 0
+    && offlineAlbums.length === 0
 )
 
 

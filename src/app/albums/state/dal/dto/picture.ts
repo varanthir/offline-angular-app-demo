@@ -4,7 +4,7 @@ export type PictureObject = Readonly<{
 }>
 
 export class Picture {
-  public static fromObject({ id, name }: PictureObject): Picture {
+  static fromObject({ id, name }: PictureObject): Picture {
     return new Picture(id, name)
   }
 

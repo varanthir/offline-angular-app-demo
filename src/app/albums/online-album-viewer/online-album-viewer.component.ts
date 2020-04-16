@@ -13,17 +13,17 @@ import { ContentScrollService } from 'app/services/content-scroll.service'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OnlineAlbumViewerComponent implements OnInit, OnDestroy {
-  public readonly isAlbumPending$ = this.albumsFacade.onlineAlbumStatus$.pipe(map(isPending))
-  public readonly isAlbumError$ = this.albumsFacade.onlineAlbumStatus$.pipe(map(isError))
-  public readonly params = new OnlineAlbumViewerParams(this.router)
-  public readonly album$ = this.params.albumId$.pipe(
+  readonly isAlbumPending$ = this.albumsFacade.onlineAlbumStatus$.pipe(map(isPending))
+  readonly isAlbumError$ = this.albumsFacade.onlineAlbumStatus$.pipe(map(isError))
+  readonly params = new OnlineAlbumViewerParams(this.router)
+  readonly album$ = this.params.albumId$.pipe(
     switchMap(albumId => this.albumsFacade.getOnlineAlbumById$(albumId)))
 
-  public readonly getPictureUrlFn = (pictureId: number | null) => pictureId
+  readonly getPictureUrlFn = (pictureId: number | null) => pictureId
     ? `/api/pictures/${pictureId}`
     : '/assets/image-placeholder.svg'
-  
-  public readonly getThumbnailUrlFn = (pictureId: number | null) => pictureId
+
+  readonly getThumbnailUrlFn = (pictureId: number | null) => pictureId
     ? `/api/thumbnails/${pictureId}`
     : '/assets/image-placeholder.svg'
 
@@ -36,15 +36,15 @@ export class OnlineAlbumViewerComponent implements OnInit, OnDestroy {
     private readonly contentScroll: ContentScrollService,
   ) {}
 
-  public ngOnInit(): void {
+  ngOnInit(): void {
     this.contentScroll.scrollTop()
   }
 
-  public ngOnDestroy(): void {
+  ngOnDestroy(): void {
     this.getAlbumSub.unsubscribe()
   }
 
-  public getAlbum(): void {
+  getAlbum(): void {
     this.params.albumId$
       .pipe(first())
       .subscribe(albumId => this.albumsFacade.getOnlineAlbum(albumId))
