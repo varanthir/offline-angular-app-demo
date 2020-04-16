@@ -13,8 +13,8 @@ All other parts of app are experiments :) , like:
 - etc.
 
 ## Requirements
-- `node` tested on version 10.15.3
-- `yarn` tested on version 1.15.2
+- `node` tested on version 10.20.1
+- `yarn` tested on version 1.22.4
 
 ## Install dependencies
 Run:
