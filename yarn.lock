@@ -4239,10 +4239,10 @@ iconv-lite@0.4.24, iconv-lite@^0.4.24, iconv-lite@^0.4.4, iconv-lite@~0.4.13:
   dependencies:
     safer-buffer ">= 2.1.2 < 3"
 
-idb@^4.0.3:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/idb/-/idb-4.0.3.tgz#b454a51ba0c45038a9a7be6898ca996aa74f9a37"
-  integrity sha512-moRlNNe0Gsvp4jAwz5cJ7scjyNTVA/cESKGCobULaljfaKZ970y8NDNCseHdMY+YxNXH58Z1V+7tTyf0GZyKqw==
+idb@^5.0.2:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/idb/-/idb-5.0.2.tgz#294e5dd0f1930519dd07393a793cd4edfac93834"
+  integrity sha512-53yU1RbSPkSkQxufmNgcBkxxnbsTMGaYCv2NwQDmBP75muYj4Z75DsvCqhCCivYcC1XaXDi9tZSUOfDQFxuABA==
 
 ieee754@^1.1.4:
   version "1.1.12"

@@ -30,7 +30,7 @@
     "@ngrx/effects": "9.1.0",
     "@ngrx/entity": "9.1.0",
     "@ngrx/store": "9.1.0",
-    "idb": "^4.0.3",
+    "idb": "^5.0.2",
     "lodash.difference": "^4.5.0",
     "material-design-icons": "^3.0.1",
     "rxjs": "~6.5.5",
