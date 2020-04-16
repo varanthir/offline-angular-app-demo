@@ -36,9 +36,10 @@ export class AppComponent implements OnDestroy {
 
   private readonly isStableSub: Subscription = this.appRef.isStable.subscribe(isStable => {
     // This stream is emitting outside NgZone so normal component @Input may be not updated properly
-    try {
-      document.getElementById('is-stable-info')!.innerText = `${isStable}`
-    } catch (e) { /*noop*/ }
+    const isStableInfoEl = document.getElementById('is-stable-info')
+    if(isStableInfoEl) {
+      isStableInfoEl.innerText = `${isStable}`
+    }
   })
 
   public get startOpened(): boolean {

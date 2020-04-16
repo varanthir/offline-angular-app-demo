@@ -10,7 +10,15 @@ const storeDevtoolsName = 'Album Viewer'.concat(environment.production ? ' --pro
 
 @NgModule({
   imports: [
-    StoreModule.forRoot(appReducer),
+    StoreModule.forRoot(appReducer, {
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true,
+        // strictStateSerializability: true,
+        // strictActionSerializability: true,
+        strictActionWithinNgZone: true,
+      }
+    }),
     StoreDevtoolsModule.instrument({ maxAge: 300, name: storeDevtoolsName }),
     EffectsModule.forRoot([]),
   ],

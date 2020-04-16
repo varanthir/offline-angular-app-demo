@@ -24,10 +24,10 @@ export class OfflineFilesEffects {
   public readonly getOfflineFiles$: Observable<Action> = this.actions$.pipe(
     ofType(OfflineFilesActionTypes.GET_OFFLINE_FILES),
     map(action => action.payload),
-    switchMap(({ pictureIds }) => forkJoin(
+    switchMap(({ pictureIds }) => forkJoin([
       this.picturesStorage.getMany(pictureIds),
       this.thumbnailsStorage.getMany(pictureIds),
-    ).pipe(
+    ]).pipe(
       map(([pictures, thumbnails]) => ({
         pictures: pictures.map(picture => this.toOfflineFileUrl(picture)),
         thumbnails: thumbnails.map(thumbnail => this.toOfflineFileUrl(thumbnail)),

@@ -4,11 +4,11 @@
   </button>
   <h1 class="mat-toolbar__title">Offline Demo</h1>
   <div class="divider"></div>
-  <mat-icon>{{ connectivityIcon$ | async }}</mat-icon>
+  <mat-icon>{{ connectivityIcon$ | async2:'' }}</mat-icon>
 </mat-toolbar>
 
 <mat-sidenav-container class="mat-sidenav-container">
-  <mat-sidenav #sidenav [opened]="startOpened" [mode]="menuMode$ | async">
+  <mat-sidenav #sidenav [opened]="startOpened" [mode]="menuMode$ | async2:undefined">
     <mat-nav-list>
       <a mat-list-item routerLink="albums">Albums</a>
       <a mat-list-item routerLink="service-worker">Service Worker</a>
@@ -23,6 +23,6 @@
   </mat-sidenav-content>
 </mat-sidenav-container>
 
-<div *ngIf="showIsStable$ | async" class="is-stable">
+<div *ngIf="showIsStable$ | async2:false" class="is-stable">
   isStable: <span id="is-stable-info"></span>
 </div>

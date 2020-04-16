@@ -14,16 +14,16 @@
   </mat-card-content>
 </mat-card>
 
-<p app-failed-action *ngIf="isAlbumsError$ | async" (tryAgain)="getAlbums()"></p>
+<p app-failed-action *ngIf="isAlbumsError$ | async2:false" (tryAgain)="getAlbums()"></p>
 
 <app-albums-table
-  *ngIf="hasAlbums$ | async"
-  [albums]="albums$ | async"
-  [isPending]="isAlbumsPending$ | async"
+  *ngIf="hasAlbums$ | async2:false"
+  [albums]="albums$ | async2:[]"
+  [isPending]="isAlbumsPending$ | async2:false"
   (downloadAlbum)="downloadAlbum($event)"
   (deleteAlbum)="deleteAlbum($event.id)">
 </app-albums-table>
 
-<div *ngIf="isEmptyAlbumsPending$ | async" class="app-loader">
+<div *ngIf="isEmptyAlbumsPending$ | async2:false" class="app-loader">
   <mat-spinner></mat-spinner>
 </div>

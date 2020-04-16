@@ -1,7 +1,7 @@
-import { Injectable } from "@angular/core";
-import { Store } from '@ngrx/store';
-import { ServiceWorkerAppState } from '..';
-import { ToggleIsStableAction } from './service-worker.actions';
+import { Injectable } from '@angular/core'
+import { Store } from '@ngrx/store'
+import { ServiceWorkerAppState } from '../index'
+import { ToggleIsStableAction } from './service-worker.actions'
 
 @Injectable()
 export class ServiceWorkerFacadeService {

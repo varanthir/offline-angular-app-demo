@@ -17,6 +17,7 @@ import { AppStateModule } from './state/app-state.module'
 import { ScreenService } from './services/screen.service'
 import { ConnectionService } from './services/connection.service'
 import { ContentScrollService } from './services/content-scroll.service'
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ContentScrollService } from './services/content-scroll.service'
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
+    SharedModule,
     MatButtonModule,
     MatIconModule,
     MatListModule,

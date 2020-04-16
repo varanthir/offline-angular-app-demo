@@ -3,11 +3,27 @@ import { Routes, RouterModule } from '@angular/router'
 import { NotFoundComponent } from './components/not-found/not-found.component'
 
 const routes: Routes = [
-  { path: '', redirectTo: 'albums', pathMatch: 'full' },
-  { path: 'albums', loadChildren: './albums/albums.module#AlbumsModule' },
-  { path: 'service-worker', loadChildren: './service-worker/service-worker.module#ServiceWorkerModule' },
-  { path: 'not-found', component: NotFoundComponent },
-  { path: '**', redirectTo: 'not-found' },
+  {
+    path: '',
+    redirectTo: 'albums',
+    pathMatch: 'full'
+  },
+  {
+    path: 'albums',
+    loadChildren: () => import('./albums/albums.module').then(m => m.AlbumsModule),
+  },
+  {
+    path: 'service-worker',
+    loadChildren: () => import('./service-worker/service-worker.module').then(m => m.ServiceWorkerModule),
+  },
+  {
+    path: 'not-found',
+    component: NotFoundComponent
+  },
+  {
+    path: '**',
+    redirectTo: 'not-found'
+  },
 ]
 
 @NgModule({

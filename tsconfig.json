@@ -2,20 +2,34 @@
   "compileOnSave": false,
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
-    "baseUrl": "./src",
-    "declaration": false,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "importHelpers": true,
-    "lib": [ "es2018", "dom" ],
-    "module": "es2015",
-    "moduleResolution": "node",
+    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
-    "sourceMap": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noFallthroughCasesInSwitch": true,
     "strictNullChecks": true,
-    "target": "es5",
-    "typeRoots": [
-      "node_modules/@types"
-    ]
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2015",
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "paths": {
+      "app/*": ["src/app/*"],
+      "environments/*": ["src/environments/*"],
+      "utils/*": ["src/utils/*"],
+    }
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictTemplates": true,
+    "strictInjectionParameters": true
   }
 }

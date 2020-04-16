@@ -27,7 +27,7 @@ export function onlineAlbumsReducer(state = initialState, action: OnlineAlbumsAc
 
     case OnlineAlbumsActionTypes.GET_ONLINE_ALBUMS_SUCCESS:
       return {
-        ...onlineAlbumsAdapter.addAll(action.payload.albums, state),
+        ...onlineAlbumsAdapter.setAll(action.payload.albums, state),
         albumsStatus: ActionStatus.Success,
       }
 

@@ -4,7 +4,7 @@
 
 <div *ngIf="album" class="thumbnails">
   <img
-    *ngFor="let picture of album.pictures; let pictureIndex=index; trackBy: trackById"
+    *ngFor="let picture of album!.pictures; let pictureIndex=index; trackBy: trackById"
     [src]="getThumbnailUrlFn(picture.id)"
     (click)="showPictureViewer(pictureIndex)"
     class="thumbnails__thumbnail">
@@ -17,7 +17,7 @@
 
 <app-picture-viewer
   *cdkPortal
-  [pictures]="album.pictures"
+  [pictures]="album?.pictures || []"
   [selectedIndex]="selectedPictureIndex"
   [getPictureUrlFn]="getPictureUrlFn"
   [getThumbnailUrlFn]="getThumbnailUrlFn"

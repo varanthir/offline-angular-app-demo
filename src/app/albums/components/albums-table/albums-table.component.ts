@@ -11,23 +11,22 @@ import { map } from 'rxjs/operators'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AlbumsTableComponent {
-  @Input() public isPending = false
-  @Input() public set albums(newAlbums: Album[]) {
+  @Input() set albums(newAlbums: Album[]) {
     this.dataSource.data = newAlbums
   }
+  @Input() isPending = false
+  @Output() readonly downloadAlbum = new EventEmitter<Album>()
+  @Output() readonly deleteAlbum = new EventEmitter<Album>()
 
-  @Output() public readonly downloadAlbum = new EventEmitter<Album>()
-  @Output() public readonly deleteAlbum = new EventEmitter<Album>()
-
-  public readonly dataSource = new MatTableDataSource<Album>()
-  public readonly columns$ = this.screen.isMobile$.pipe(
+  readonly dataSource = new MatTableDataSource<Album>()
+  readonly columns$ = this.screen.isMobile$.pipe(
     map(isMobile => isMobile
       ? ['name', 'isSaved']
       : ['name', 'imagesCount', 'isSaved']))
 
   constructor(private readonly screen: ScreenService) {}
 
-  public saveOrDelete(album: Album): void {
+  saveOrDelete(album: Album): void {
     if (album.isOffline) {
       this.deleteAlbum.emit(album)
     } else {

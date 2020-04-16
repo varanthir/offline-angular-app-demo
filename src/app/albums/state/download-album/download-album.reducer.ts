@@ -40,8 +40,8 @@ export function downloadAlbumReducer(state = initialState, action: DownloadAlbum
         ...state,
         album,
         status: ActionStatus.Pending,
-        pictures: picturesAdapter.addAll(downloadPictures, picturesAdapter.getInitialState()),
-        thumbnails: picturesAdapter.addAll(downloadPictures, thumbnailsAdapter.getInitialState()),
+        pictures: picturesAdapter.setAll(downloadPictures, picturesAdapter.getInitialState()),
+        thumbnails: picturesAdapter.setAll(downloadPictures, thumbnailsAdapter.getInitialState()),
       }
     }
 

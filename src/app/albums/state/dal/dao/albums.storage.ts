@@ -43,7 +43,7 @@ export class AlbumsStorageService {
         return tx.abort()
       }
       const albums = await albumsStore.getAll()
-      this.pictureIdstoDelete(album, albums.filter(album => album.id !== albumId))
+      this.pictureIdsToDelete(album, albums.filter(a => a.id !== albumId))
         .forEach(pictureId => {
           picturesStore.delete(pictureId)
           thumbnailsStore.delete(pictureId)
@@ -56,7 +56,7 @@ export class AlbumsStorageService {
     }))
   }
 
-  private pictureIdstoDelete(albumToDelete: Album, albumsToKeep: Album[]): number[] {
+  private pictureIdsToDelete(albumToDelete: Album, albumsToKeep: Album[]): number[] {
     const pictureIdsToDelete = albumToDelete.pictures.map(picture => picture.id)
     const pictureIdsToKeep = albumsToKeep
       .map(albumToKeep => albumToKeep.pictures.map(picture => picture.id))

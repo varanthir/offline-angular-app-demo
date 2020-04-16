@@ -17,7 +17,7 @@ export class PictureViewerComponent {
 
   @Input() public set selectedIndex(selectedIndex: number | null) {
     this._selectedIndex = selectedIndex
-    if (selectedIndex) {
+    if (selectedIndex !== null) {
       this.scrollThumbnailIntoView(selectedIndex)
     }
   }
@@ -76,7 +76,11 @@ export class PictureViewerComponent {
     return picture.id
   }
 
-  private scrollThumbnailIntoView(thumbnailIndex: number): void {
+  public scrollThumbnailIntoView(thumbnailIndex: number | null): void {
+    if (thumbnailIndex === null) {
+      return
+    }
+
     const thumbnailId = this.pictures[thumbnailIndex].id
     const selector = `img.thumbnails__thumbnail[data-id='${thumbnailId}']`
     const thumbnailEl = document.querySelector(selector)

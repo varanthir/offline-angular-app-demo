@@ -55,10 +55,10 @@ export class DownloadAlbumEffects {
   public readonly startDownloadAlbum$: Observable<Action> = this.actions$.pipe(
     ofType(DownloadAlbumActionsTypes.DOWNLOAD_ALBUM),
     map(action => action.payload),
-    mergeMap(({ album }) => forkJoin(
+    mergeMap(({ album }) => forkJoin([
       this.albumsStorage.set(album),
       this.albumsFinishedStorage.set({ id: album.id, isFinished: false })
-    ).pipe(
+    ]).pipe(
       map(() => album.pictures.map(({ id }) => id)),
       map(pictureIds => new DownloadPicturesAction({ pictureIds })),
       catchError((error: Error) => of(new DownloadAlbumErrorAction(error))),

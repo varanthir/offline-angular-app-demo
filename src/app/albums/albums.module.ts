@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core'
-import { CommonModule } from '@angular/common'
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -22,6 +21,7 @@ import { OnlineAlbumViewerComponent } from './online-album-viewer/online-album-v
 import { AlbumViewerComponent } from './components/album-viewer/album-viewer.component'
 import { OfflineAlbumViewerComponent } from './offline-album-viewer/offline-album-viewer.component'
 import { OfflineFilesUrlsService } from './services/offline-files-urls.service'
+import { SharedModule } from 'app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -38,7 +38,7 @@ import { OfflineFilesUrlsService } from './services/offline-files-urls.service'
   imports: [
     AlbumsRoutingModule,
     AlbumsStateModule,
-    CommonModule,
+    SharedModule,
     MatButtonModule,
     MatCardModule,
     MatDialogModule,

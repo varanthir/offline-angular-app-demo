@@ -30,7 +30,7 @@
   <mat-card-subtitle>/ngsw/state (ServiceWorker log)</mat-card-subtitle>
 
   <mat-card-content *ngIf="swIsEnabled">
-    <button mat-stroked-button type="button" (click)="ngswLog.contentWindow.location.reload()">Refresh</button>
+    <button mat-stroked-button type="button" (click)="ngswLog.contentWindow?.location?.reload()">Refresh</button>
     <iframe #ngswLog src="/ngsw/state" class="ngsw-log"></iframe>
   </mat-card-content>
 </mat-card>

@@ -22,7 +22,7 @@ export class OnlineAlbumViewerComponent implements OnInit, OnDestroy {
   public readonly getPictureUrlFn = (pictureId: number | null) => pictureId
     ? `/api/pictures/${pictureId}`
     : '/assets/image-placeholder.svg'
-  
+
   public readonly getThumbnailUrlFn = (pictureId: number | null) => pictureId
     ? `/api/thumbnails/${pictureId}`
     : '/assets/image-placeholder.svg'
